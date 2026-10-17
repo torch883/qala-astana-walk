@@ -50,7 +50,9 @@ def public_map_context():
 
 DEMO=scenarios()[:5]
 state=st.session_state
-defaults={'preset':'Mega Silk Way','day':date(2026,10,17),'clock':15*60,'lang':'ru','mode':'walk','group':1,'accessible':False,'max_travel':20,'location':None,'last_answer':None,'last_debug':None,'last_query':'','tiles':False}
+# Start at the current Astana time on the slider's 15-minute grid; demo buttons set their own time.
+started=datetime.now(TZ)
+defaults={'preset':'Mega Silk Way','day':started.date(),'clock':(started.hour*60+started.minute)//15*15,'lang':'ru','mode':'walk','group':1,'accessible':False,'max_travel':20,'location':None,'last_answer':None,'last_debug':None,'last_query':'','tiles':False}
 for k,v in defaults.items():state.setdefault(k,v)
 
 def choose_demo(i):
@@ -206,7 +208,7 @@ with right:
             st.write('**Причины отсева**');st.json({reason_labels.get(k,k):v for k,v in debug.get('rejected_counts',{}).items()})
             if debug.get('candidates'):st.dataframe([{'место':c['name'],'категория':c['category'],'скор':c['score'],'путь, мин':c['travel_min'],'статус':c['open_status']['state']} for c in debug['candidates']],hide_index=True)
             if debug.get('rejections'):st.dataframe([{'Место':r['name'],'Причина':reason_labels.get(r['reason'],r['reason']),'Путь, мин':r['travel_min']} for r in debug['rejections']],hide_index=True)
-            st.caption('Скор = семантика + близость + категория + подтверждённые часы + популярность + проверка источника − штраф за неизвестные часы. Веса в config.yaml.')
+            st.caption('Скор = семантика + близость + подтверждённые часы + популярность (рейтинг, а без него — ссылка Wikidata/Wikipedia в OSM) + проверка источника − штраф за неизвестные часы. Категория — жёсткий фильтр, а не слагаемое. Веса в config.yaml.')
             st.write('**Техническая проверка**');st.json(debug.get('generation',{}))
             st.download_button('Скачать JSON этого ответа',answer.model_dump_json(indent=2),file_name='recommendation.json',mime='application/json',help='Скачивается по вашему нажатию. Точных координат пользователя в JSON нет.')
 

@@ -7,9 +7,16 @@ from core.geo import haversine,travel
 from core.hours import covers_visit,local_time
 from core.settings import CONFIG
 
-MIN_VISIT={'cafe':15,'restaurant':25,'museum':30,'gallery':20,'park':10,'playground':15,'viewpoint':10,'attraction':10,'cinema':90,'theatre':60,'library':20,'shopping':15,'bar':20,'nightclub':30}
-PREFERRED={'cafe':25,'restaurant':40,'museum':50,'gallery':30,'park':30,'playground':30,'viewpoint':15,'attraction':20,'cinema':100,'theatre':90,'library':30,'shopping':30,'bar':30,'nightclub':45}
-ACTIVITY={'park':'walk','attraction':'look','viewpoint':'look','cafe':'coffee','restaurant':'eat','museum':'browse','gallery':'browse','playground':'play','cinema':'show','theatre':'show','library':'read','shopping':'browse','bar':'browse','nightclub':'browse'}
+MIN_VISIT={'cafe':15,'restaurant':25,'museum':30,'gallery':20,'park':10,'playground':15,'viewpoint':10,'attraction':10,'cinema':90,'theatre':60,'library':20,'shopping':15,'bar':20,'nightclub':30,'entertainment':30,'sport':30,'culture':20}
+PREFERRED={'cafe':25,'restaurant':40,'museum':50,'gallery':30,'park':30,'playground':30,'viewpoint':15,'attraction':20,'cinema':100,'theatre':90,'library':30,'shopping':30,'bar':30,'nightclub':45,'entertainment':60,'sport':60,'culture':45}
+ACTIVITY={'park':'walk','attraction':'look','viewpoint':'look','cafe':'coffee','restaurant':'eat','museum':'browse','gallery':'browse','playground':'play','cinema':'show','theatre':'show','library':'read','shopping':'browse','bar':'browse','nightclub':'browse','entertainment':'fun','sport':'sport','culture':'browse'}
+
+def popularity(p):
+    # A real rating wins; without one, a Wikidata/Wikipedia link in OSM marks a notable place.
+    rating=p.get('rating');pop=p.get('popularity')
+    if isinstance(rating,(int,float)):return max(0,min(1,float(rating)/5))
+    if isinstance(pop,(int,float)):return max(0,min(1,float(pop)))
+    return 1.0 if p['tags'].get('wikidata') or p['tags'].get('wikipedia') else 0.0
 
 @dataclass
 class Candidate:
@@ -35,7 +42,7 @@ def filter_candidates(pois,location,now,intent:Interpretation):
         elif p['tags'].get('access') in {'private','no','customers_only'}:reason='restricted_access'
         elif p['tags'].get('disused')=='yes' or p['tags'].get('abandoned')=='yes':reason='disused'
         elif 'accessible' in intent.constraints and p.get('wheelchair')!='yes':reason='wheelchair_unconfirmed'
-        elif 'children' in intent.constraints and p['category'] in {'bar','nightclub'}:reason='children'
+        elif 'children' in intent.constraints and (p['category'] in {'bar','nightclub'} or p['tags'].get('leisure')=='sauna'):reason='children'
         elif visit<MIN_VISIT.get(p['category'],10):reason='time_budget'
         for feature in ['socket','wifi','quiet']:
             confirmed=p.get(feature) in {'yes','wlan'} or p['tags'].get(feature)=='yes'
@@ -55,15 +62,12 @@ def filter_candidates(pois,location,now,intent:Interpretation):
 
 def rank(candidates,scores,intent):
     weights=CONFIG['weights']
+    # No category term: filter_candidates already admits only requested categories.
     for c in candidates:
-        pop=c.poi.get('popularity')
-        rating=c.poi.get('rating')
-        popularity=float(rating)/5 if isinstance(rating,(int,float)) else (float(pop) if isinstance(pop,(int,float)) else 0)
         parts={'semantic':scores.get(c.poi['id'],0)*weights['semantic'],
                'distance':math.exp(-c.travel_min/15)*weights['distance'],
-               'category':weights['category'] if c.poi['category'] in intent.categories else 0,
                'open':weights['open'] if c.open_status.state=='open' and c.open_status.confidence=='high' else 0,
-               'popularity':max(0,min(1,popularity))*weights['popularity'],
+               'popularity':popularity(c.poi)*weights['popularity'],
                'gold':weights['gold'] if c.poi.get('gold_reviewed') else 0,
                'unknown':-weights['unknown_penalty'] if c.open_status.state=='unknown' else 0}
         c.score=sum(parts.values());c.score_parts={k:round(v,4) for k,v in parts.items()}
@@ -73,7 +77,9 @@ def diversify(candidates,limit=3):
     counts=Counter();selected=[]
     for c in candidates:
         if counts[c.poi['category']]>=2:continue
-        selected.append(c);counts[c.poi['category']]+=1
+        # Two identical «unnamed in OSM» labels are hard to tell apart; keep one, leave room for named places.
+        if c.poi.get('name_generated') and counts['_generated']>=1:continue
+        selected.append(c);counts[c.poi['category']]+=1;counts['_generated']+=bool(c.poi.get('name_generated'))
         if len(selected)==limit:break
     return selected
 

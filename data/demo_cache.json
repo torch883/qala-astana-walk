@@ -1,5 +1,5 @@
 {
-  "fingerprint": "d0134d1a6dbb5080130a4b973e077e964bb84945293826d357b21884c2c9ae03",
+  "fingerprint": "07cfb0d272c850b076b26586974ab22d4f2230f4432ddec49771815fe53718a1",
   "responses": {
     "fa26bb3480aa43721a756c6baec927778ae74976149ed843c69a896c0da8991e": {
       "interpretation": {
@@ -334,6 +334,45 @@
           "lon": 71.4319723
         },
         {
+          "poi_id": "way/1131138292",
+          "name": "Детская площадка (без названия в OSM)",
+          "category": "playground",
+          "distance_m": 258,
+          "walk_min": 5,
+          "travel_min": 5,
+          "why": "Подходит по запрошенному типу места для прогулки с ребёнком. Путь займёт около 5 мин; на месте — 30 мин.",
+          "visit_min": 30,
+          "what_to_do": "Выберите подходящую по возрасту игру и оставайтесь рядом с ребёнком.",
+          "open_status": {
+            "state": "unknown",
+            "confidence": "low",
+            "basis": "missing_opening_hours",
+            "next_change": null
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/way/1131138292",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: playground",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
+          "lat": 51.1541436,
+          "lon": 71.423445
+        },
+        {
           "poi_id": "way/1460700597",
           "name": "Этно-мемориальный комплекс Карта Казахстана Атамекен",
           "category": "museum",
@@ -419,7 +458,7 @@
       "generation_backend": "template",
       "retrieval_backend": "e5+lexical"
     },
-    "b3b5a8a873de67aba128494de75a7b8d6f265e7ad446e6851394e2e9c131a46f": {
+    "8c0fd89b012837d27d8003fd0d30cc6d19baded33fe75c2d1cfd841da66c2499": {
       "interpretation": {
         "intent": "discover",
         "duration_min": 60,
@@ -431,7 +470,8 @@
           "bar",
           "nightclub",
           "cinema",
-          "theatre"
+          "theatre",
+          "entertainment"
         ],
         "tags": [
           "night",

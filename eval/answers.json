@@ -332,6 +332,45 @@
         "lon": 71.4319723
       },
       {
+        "poi_id": "way/1131138292",
+        "name": "Детская площадка (без названия в OSM)",
+        "category": "playground",
+        "distance_m": 258,
+        "walk_min": 5,
+        "travel_min": 5,
+        "why": "Подходит по запрошенному типу места для прогулки с ребёнком. Путь займёт около 5 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Выберите подходящую по возрасту игру и оставайтесь рядом с ребёнком.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/1131138292",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: playground",
+          "часы OSM"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
+        "lat": 51.1541436,
+        "lon": 71.423445
+      },
+      {
         "poi_id": "way/1460700597",
         "name": "Этно-мемориальный комплекс Карта Казахстана Атамекен",
         "category": "museum",
@@ -429,7 +468,8 @@
         "bar",
         "nightclub",
         "cinema",
-        "theatre"
+        "theatre",
+        "entertainment"
       ],
       "tags": [
         "night",
@@ -707,13 +747,13 @@
         "lon": 71.4304546
       },
       {
-        "poi_id": "way/230358854",
-        "name": "Сквер",
+        "poi_id": "way/1422579155",
+        "name": "Сквер (без названия в OSM)",
         "category": "park",
-        "distance_m": 449,
-        "walk_min": 8,
-        "travel_min": 8,
-        "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 8 мин; на месте — 30 мин.",
+        "distance_m": 31,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 1 мин; на месте — 30 мин.",
         "visit_min": 30,
         "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
         "open_status": {
@@ -733,7 +773,7 @@
           "what_to_do": "generated_idea",
           "why": "generated_idea"
         },
-        "source_url": "https://www.openstreetmap.org/way/230358854",
+        "source_url": "https://www.openstreetmap.org/way/1422579155",
         "collected_at": "2026-10-17T16:30:31.002378+00:00",
         "data_used": [
           "примерная локация",
@@ -741,9 +781,9 @@
           "категория OSM: park",
           "часы OSM"
         ],
-        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
-        "lat": 51.127997,
-        "lon": 71.4235705
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1277221,
+        "lon": 71.4299382
       },
       {
         "poi_id": "way/230358847",
@@ -860,6 +900,45 @@
         "lon": 71.4304546
       },
       {
+        "poi_id": "way/1422579155",
+        "name": "Сквер (без названия в OSM)",
+        "category": "park",
+        "distance_m": 31,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 1 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/1422579155",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: park",
+          "часы OSM"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1277221,
+        "lon": 71.4299382
+      },
+      {
         "poi_id": "way/230358854",
         "name": "Сквер",
         "category": "park",
@@ -897,45 +976,6 @@
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.127997,
         "lon": 71.4235705
-      },
-      {
-        "poi_id": "way/230358847",
-        "name": "Корме",
-        "category": "gallery",
-        "distance_m": 675,
-        "walk_min": 11,
-        "travel_min": 11,
-        "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 11 мин; на месте — 30 мин.",
-        "visit_min": 30,
-        "what_to_do": "Осмотритесь внутри; условия входа и доступные пространства уточните на месте.",
-        "open_status": {
-          "state": "unknown",
-          "confidence": "low",
-          "basis": "missing_opening_hours",
-          "next_change": null
-        },
-        "source": "poi_data",
-        "idea_source": "generated_idea",
-        "field_sources": {
-          "name": "poi_data",
-          "open_status": "poi_data",
-          "distance_m": "calculated",
-          "travel_min": "calculated",
-          "visit_min": "generated_idea",
-          "what_to_do": "generated_idea",
-          "why": "generated_idea"
-        },
-        "source_url": "https://www.openstreetmap.org/way/230358847",
-        "collected_at": "2026-10-17T16:30:31.002378+00:00",
-        "data_used": [
-          "примерная локация",
-          "время Астаны",
-          "категория OSM: gallery",
-          "часы OSM"
-        ],
-        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
-        "lat": 51.1286406,
-        "lon": 71.4203796
       }
     ],
     "route": null,
@@ -1532,7 +1572,8 @@
         "bar",
         "nightclub",
         "cinema",
-        "theatre"
+        "theatre",
+        "entertainment"
       ],
       "tags": [
         "night"

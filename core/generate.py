@@ -25,6 +25,7 @@ def materialize(choices,candidates,intent,night=False):
         if choice.reason!=reason_for(c,intent):raise ValueError('unsupported_reason')
         if not MIN_VISIT.get(p['category'],10)<=choice.visit_min<=c.visit_min:raise ValueError('visit_budget')
         caveats=[tr(lang,'travel')]
+        if p.get('name_generated'):caveats.append(tr(lang,'unnamed'))
         if c.open_status.state=='unknown':caveats.append(tr(lang,'unknown_hours'))
         for constraint in ['socket','wifi','quiet','children','group']:
             if constraint in intent.constraints:

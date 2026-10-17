@@ -32,6 +32,9 @@ TEXT={
  'browse':'Осмотритесь внутри; условия входа и доступные пространства уточните на месте.',
  'show':'Уточните ближайший сеанс или представление; билет не включён в рекомендацию.',
  'read':'Уточните правила входа и проведите время за чтением.',
+ 'fun':'Уточните билеты и время работы аттракционов; выберите занятие по возрасту и интересам.',
+ 'sport':'Уточните условия разового посещения и возьмите удобную одежду.',
+ 'unnamed':'У объекта нет названия в OSM; подпись составлена по типу места.',
  'used_location':'примерная локация','used_time':'время Астаны','used_category':'категория OSM','used_hours':'часы OSM','unknown_alt':'Альтернатива требует ослабить ограничение; это не готовая рекомендация.'},
 'en':{
  'location':'Where are you now? Select a map point or a location in the sidebar.',
@@ -66,6 +69,9 @@ TEXT={
  'browse':'Look around inside; check entry conditions and available spaces on arrival.',
  'show':'Check the next screening or performance; tickets are not included.',
  'read':'Check entry rules and spend some time reading.',
+ 'fun':'Check tickets and ride hours; pick an activity that suits your age and interests.',
+ 'sport':'Check single-visit conditions and bring comfortable clothes.',
+ 'unnamed':'This place has no name in OSM; the label is based on its type.',
  'used_location':'approximate location','used_time':'Astana time','used_category':'OSM category','used_hours':'OSM hours','unknown_alt':'This alternative requires relaxing a constraint; it is not a ready recommendation.'},
 'kk':{
  'location':'Қазір қайдасыз? Картадан немесе бүйір панельден орынды таңдаңыз.',
@@ -100,6 +106,9 @@ TEXT={
  'browse':'Ішін аралаңыз; кіру шарттары мен қолжетімді кеңістіктерді нақтылаңыз.',
  'show':'Келесі сеанс не қойылымды сұраңыз; билет ұсынысқа кірмейді.',
  'read':'Кіру ережесін сұрап, кітап оқуға уақыт бөліңіз.',
+ 'fun':'Билет пен аттракциондардың жұмыс уақытын нақтылаңыз; жасыңыз бен қызығушылығыңызға сай әрекет таңдаңыз.',
+ 'sport':'Бір реттік кіру шарттарын нақтылап, ыңғайлы киім алыңыз.',
+ 'unnamed':'OSM-да бұл орынның атауы жоқ; белгі орын түріне қарай жасалды.',
  'used_location':'жуық орналасқан жер','used_time':'Астана уақыты','used_category':'OSM санаты','used_hours':'OSM жұмыс уақыты','unknown_alt':'Бұл балама үшін шектеуді жеңілдету қажет; бұл дайын ұсыныс емес.'}}
 
 def tr(lang,key): return TEXT[lang][key]

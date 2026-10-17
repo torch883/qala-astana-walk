@@ -84,7 +84,7 @@ class Answer(Strict):
 class Choice(Strict):
     poi_id: str
     reason: Literal['nearby','category','children','tourist','coffee','night','accessible','group']
-    activity: Literal['walk','look','coffee','eat','play','browse','show','read']
+    activity: Literal['walk','look','coffee','eat','play','browse','show','read','fun','sport']
     visit_min: int = Field(ge=5,le=120)
 
 class Choices(Strict):

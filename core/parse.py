@@ -10,7 +10,21 @@ def detect_language(text):
     if re.search(r'[а-яё]',text,re.I): return 'ru'
     return 'en' if re.search(r'[a-z]',text,re.I) else 'ru'
 
-def contains(t,*words): return any(w in t for w in words)
+# Stems match only at a word start: «кинотеатр» is not «театр», «поужинать» needs its own stem.
+def contains(t,*words): return any(re.search(r'(?<!\w)'+re.escape(w),t) for w in words)
+
+# Whole word forms: «парковка», «паркинг», «аквапарк», «зоопарк» are not parks.
+PARK=re.compile(r'(?<!\w)(?:парк(?:а|е|у|и|ом|ов|ам|ами|ах)?|parks?)(?!\w)')
+# Kazakh «бар ма?» means «is there?», «бару/бара» means «to go»; neither is a bar.
+BAR=re.compile(r'(?<!\w)(?:bars?|pubs?|паб\w*|бар(?:е|ы|ом|ов|ам|ами|ах|лар\w*|ға|да)?)(?!\w)(?!\s+(?:ма|ме|па|пе|ба|бе)(?!\w))')
+CLUB=re.compile(r'(?<!\w)(?:клуб(?:а|е|у|ы|ов|ом|ами|ах)?|nightclubs?)(?!\w)')
+
+def wants_bar(text,t):
+    for m in BAR.finditer(t):
+        # A bare «бар» in Kazakh text is the existential word, not a venue.
+        if m[0]=='бар' and detect_language(text)=='kk':continue
+        return True
+    return bool(CLUB.search(t))
 
 def parse_rules(text,language=None,mode=None,group_size=1,accessible=False,max_travel_min=None):
     t=text.casefold()
@@ -30,19 +44,22 @@ def parse_rules(text,language=None,mode=None,group_size=1,accessible=False,max_t
     duration=max(5,min(480,duration))
     categories=[]
     if contains(t,'коф','кафе','coffee','cafe','кофе'): categories+=['cafe']
-    if contains(t,'поесть','ужин','обед','restaurant','dinner','тамақ','мейрамхана'): categories+=['restaurant']
+    if contains(t,'поесть','ужин','поужин','обед','пообед','restaurant','dinner','тамақ','мейрамхана'): categories+=['restaurant']
     if contains(t,'музе','museum','мұражай'): categories+=['museum']
     if contains(t,'галер','gallery'): categories+=['gallery']
     if contains(t,'достопримеч','landmark','sightseeing','көрікті'): categories+=['attraction','viewpoint']
-    if contains(t,'парк','park','саябақ'): categories+=['park']
+    if PARK.search(t) or contains(t,'саябақ','сквер'): categories+=['park']
     if contains(t,'площадк','playground','ойын алаң'): categories+=['playground']
+    if contains(t,'развлеч','аттракцион','аквапарк','океанариум','аквариум','зоопарк','боулинг','квест','батут','amusement','theme park','water park','waterpark','aquarium','oceanarium','zoo','bowling','escape room','trampoline','ойын-сауық','хайуанаттар'): categories+=['entertainment']
+    if contains(t,'спорт','фитнес','бассейн','стадион','каток','сауна','баня','бани','баню','sport','gym','fitness','swimming','stadium','skating','ice rink','sauna','жүзу','монша'): categories+=['sport']
+    if contains(t,'культур','концерт','филармон','органн','цирк','culture','cultural','concert','circus','мәдени'): categories+=['culture']
     if contains(t,'библиот','library','кітапхана'): categories+=['library']
     if contains(t,'кино','cinema'): categories+=['cinema']
     if contains(t,'театр','theatre','theater'): categories+=['theatre']
     if contains(t,'торгов','шопинг','shopping','сауда'): categories+=['shopping']
-    if contains(t,'бар',' bar','клуб','nightclub'): categories+=['bar','nightclub']
+    if wants_bar(text,t): categories+=['bar','nightclub']
     constraints=[];tags=[]
-    pairs=[('children',('ребён','ребен','деть','детск','child','kid','бала')),('quiet',('тих','quiet','тыныш')),('socket',('розет','socket','power outlet','outlet','розетка')),('wifi',('wi-fi','wifi','вайфай')),('tourist',('турист','tourist','first time')),('night',('ноч','ночь','night','түн')),('accessible',('коляск','маломоб','wheelchair','accessible','арбамен','қолжетімді')),('unusual',('необыч','unusual','ерекше')),('photo',('фото','photo','сурет'))]
+    pairs=[('children',('ребён','ребен','деть','дети','детей','детям','детск','малыш','child','kid','бала')),('quiet',('тих','quiet','тыныш')),('socket',('розет','socket','power outlet','outlet','розетка')),('wifi',('wi-fi','wifi','вайфай')),('tourist',('турист','tourist','first time')),('night',('ноч','полноч','night','түн')),('accessible',('коляск','маломоб','wheelchair','accessible','арбамен','қолжетімді')),('unusual',('необыч','unusual','ерекше')),('photo',('фото','сфотограф','photo','сурет'))]
     for tag,words in pairs:
         if contains(t,*words): constraints.append(tag);tags.append(tag)
     if accessible and 'accessible' not in constraints: constraints.append('accessible')
@@ -55,7 +72,7 @@ def parse_rules(text,language=None,mode=None,group_size=1,accessible=False,max_t
             if hard in constraints: constraints.append('require_'+hard)
     if 'children' in constraints:
         categories=[c for c in categories if c not in {'bar','nightclub'}]
-        if not categories: categories=['playground','park','museum']
+        if not categories: categories=['playground','park','museum','entertainment']
     flight=contains(t,'вылет','рейс','flight','ұшу','ұшақ')
     flight_min=duration if flight and explicit_duration else (120 if flight else None)
     selected_mode=mode or ('transport' if contains(t,'транспорт','такси','taxi','by car','көлік') else 'walk')
@@ -67,7 +84,7 @@ def parse_rules(text,language=None,mode=None,group_size=1,accessible=False,max_t
     if not categories and 'night' not in constraints:
         categories=['park','attraction','viewpoint','gallery','museum']
         assumptions.append({'ru':'Для прогулки выбраны парки и достопримечательности.','en':'Parks and landmarks are preferred for a walk.','kk':'Серуенге саябақтар мен көрікті жерлер таңдалды.'}[lang])
-    if 'night' in constraints and not categories: categories=['cafe','restaurant','bar','nightclub','cinema','theatre']
+    if 'night' in constraints and not categories: categories=['cafe','restaurant','bar','nightclub','cinema','theatre','entertainment']
     return Interpretation(duration_min=duration,mode=selected_mode,max_travel_min=max(1,min(90,travel_limit)),categories=list(dict.fromkeys(categories)),tags=tags,constraints=list(dict.fromkeys(constraints)),assumptions=assumptions,language=lang,group_size=max(1,min(20,group_size)),flight_in_min=flight_min,route_requested=contains(t,'маршрут','route','бағыт'),parser='rules')
 
 def parse(text,**kwargs):

@@ -4,7 +4,7 @@ import pytest
 from core.settings import DATA,CONFIG
 from core.engine import Engine
 from core.parse import parse_rules
-from core.rank import filter_candidates,rank,diversify,candidate_pool
+from core.rank import filter_candidates,rank,diversify,candidate_pool,popularity
 from core.generate import generate
 from core.schemas import Choices,Choice
 from core.validate import validate_answer
@@ -21,6 +21,42 @@ def test_data_integrity(pois):
     assert all(p['rating'] is None for p in pois)
     assert 'way/240391776' not in {p['id'] for p in pois}
     assert 'way/240391776' in next(p for p in pois if p['id']=='way/1239171353')['duplicate_osm_ids']
+
+def test_unnamed_places_and_new_categories_are_in_snapshot(pois):
+    generated=[p for p in pois if p.get('name_generated')]
+    assert sum(p['category']=='playground' for p in pois)>=300
+    assert generated and all(p['category'] in {'playground','park'} and p['name_en'] and p['name_kk'] for p in generated)
+    assert {'entertainment','sport','culture'}<=({p['category'] for p in pois})
+    assert not any(p['category']=='leisure' for p in pois)
+
+def test_kill_an_hour_gets_recommendations(pois):
+    a,_=Engine(pois,backend='lexical').answer('Как убить час у Mega?',CONFIG['presets']['Mega Silk Way'],datetime.fromisoformat('2026-10-17T15:00:00+05:00'))
+    assert a.response_type=='recommendations' and a.recommendations
+
+def test_child_query_reaches_aquapark(pois):
+    intent=parse_rules('Куда сходить с ребёнком на 2 часа?')
+    accepted,_=filter_candidates(pois,CONFIG['presets']['Центральный парк'],datetime.fromisoformat('2026-10-17T15:00:00+05:00'),intent)
+    assert 'node/10168959440' in {c.poi['id'] for c in accepted}
+    assert not any(c.poi['tags'].get('leisure')=='sauna' for c in accepted)
+
+def test_generated_name_is_flagged_in_caveats(pois):
+    intent=parse_rules('Детская площадка рядом');at=datetime.fromisoformat('2026-10-17T15:00:00+05:00')
+    accepted,_=filter_candidates(pois,CONFIG['presets']['Центральный парк'],at,intent)
+    unnamed=[c for c in accepted if c.poi.get('name_generated')][:1]
+    assert unnamed
+    a,_=generate(unnamed,intent)
+    assert 'нет названия в OSM' in a.recommendations[0].caveats
+    # At most one «unnamed in OSM» label per answer.
+    top=diversify(rank(accepted,{},intent))
+    assert top and sum(bool(c.poi.get('name_generated')) for c in top)<=1
+
+def test_score_has_no_constant_category_term(pois):
+    intent=parse_rules('Хочу кафе');at=datetime.fromisoformat('2026-10-17T15:00:00+05:00')
+    accepted,_=filter_candidates(pois,(51.128,71.430),at,intent)
+    assert accepted and all('category' not in c.score_parts for c in rank(accepted,{},intent))
+    notable=[p for p in pois if p['tags'].get('wikidata') or p['tags'].get('wikipedia')]
+    assert notable and all(popularity(p)==1.0 for p in notable)
+    assert popularity({'rating':4.5,'tags':{'wikidata':'Q1'}})==0.9 and popularity({'tags':{}})==0.0
 
 def test_filter_rank_validate_retry(pois):
     intent=parse_rules('Хочу кафе');loc=(51.128,71.430);now=datetime.fromisoformat('2026-10-17T14:00:00+05:00')
