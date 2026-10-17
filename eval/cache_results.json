@@ -1,0 +1,37 @@
+[
+  {
+    "id": "mega_walk",
+    "cache_hit": true,
+    "backend": "demo_cache",
+    "count": 3,
+    "ms": 388.5
+  },
+  {
+    "id": "coffee_socket",
+    "cache_hit": true,
+    "backend": "demo_cache",
+    "count": 2,
+    "ms": 284.3
+  },
+  {
+    "id": "child",
+    "cache_hit": true,
+    "backend": "demo_cache",
+    "count": 2,
+    "ms": 262.3
+  },
+  {
+    "id": "airport_flight",
+    "cache_hit": false,
+    "backend": "template",
+    "count": 0,
+    "ms": 1.1
+  },
+  {
+    "id": "unusual_night",
+    "cache_hit": true,
+    "backend": "demo_cache",
+    "count": 3,
+    "ms": 162.6
+  }
+]

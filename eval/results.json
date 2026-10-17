@@ -1,0 +1,245 @@
+{
+  "metrics": {
+    "cases": 25,
+    "passed": 25,
+    "hallucination_rate_pct": 0.0,
+    "constraint_satisfaction_pct": 100.0,
+    "source_label_correct_pct": 100.0,
+    "recommendations_checked": 29,
+    "p50_ms": 94.6,
+    "p95_ms": 146.0,
+    "max_ms": 187.4,
+    "startup_sec": 8.1,
+    "retrieval_backend": "e5+lexical",
+    "llm_live_tested": false,
+    "dataset_fingerprint": "cabaf1a72091e2280e7839fefdbbdb0e546a98076655947998c6b6d1807bb062",
+    "run_at": "2026-10-17T16:59:38.831850+00:00"
+  },
+  "cases": [
+    {
+      "id": "mega_walk",
+      "passed": true,
+      "errors": [],
+      "ms": 146.0,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 3
+    },
+    {
+      "id": "coffee_socket",
+      "passed": true,
+      "errors": [],
+      "ms": 125.0,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 2
+    },
+    {
+      "id": "child",
+      "passed": true,
+      "errors": [],
+      "ms": 128.8,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 2
+    },
+    {
+      "id": "airport_flight",
+      "passed": true,
+      "errors": [],
+      "ms": 1.1,
+      "fixture": null,
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "unusual_night",
+      "passed": true,
+      "errors": [],
+      "ms": 135.7,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 3
+    },
+    {
+      "id": "missing_location",
+      "passed": true,
+      "errors": [],
+      "ms": 0.8,
+      "fixture": null,
+      "response_type": "clarification",
+      "rec_count": 0
+    },
+    {
+      "id": "outside_city",
+      "passed": true,
+      "errors": [],
+      "ms": 1.0,
+      "fixture": null,
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "empty_query",
+      "passed": true,
+      "errors": [],
+      "ms": 94.6,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 3
+    },
+    {
+      "id": "vague_query",
+      "passed": true,
+      "errors": [],
+      "ms": 110.1,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 3
+    },
+    {
+      "id": "english",
+      "passed": true,
+      "errors": [],
+      "ms": 105.1,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 2
+    },
+    {
+      "id": "kazakh",
+      "passed": true,
+      "errors": [],
+      "ms": 123.8,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 2
+    },
+    {
+      "id": "group_four",
+      "passed": true,
+      "errors": [],
+      "ms": 107.3,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 2
+    },
+    {
+      "id": "accessible",
+      "passed": true,
+      "errors": [],
+      "ms": 98.9,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 1
+    },
+    {
+      "id": "missing_hours",
+      "passed": true,
+      "errors": [],
+      "ms": 5.2,
+      "fixture": "missing_hours",
+      "response_type": "recommendations",
+      "rec_count": 1
+    },
+    {
+      "id": "all_closed",
+      "passed": true,
+      "errors": [],
+      "ms": 1.8,
+      "fixture": "all_closed",
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "injection_poi",
+      "passed": true,
+      "errors": [],
+      "ms": 4.6,
+      "fixture": "injection",
+      "response_type": "recommendations",
+      "rec_count": 1
+    },
+    {
+      "id": "harmful",
+      "passed": true,
+      "errors": [],
+      "ms": 0.5,
+      "fixture": null,
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "after_midnight",
+      "passed": true,
+      "errors": [],
+      "ms": 101.9,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 1
+    },
+    {
+      "id": "closes_on_arrival",
+      "passed": true,
+      "errors": [],
+      "ms": 2.8,
+      "fixture": "closing",
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "required_socket",
+      "passed": true,
+      "errors": [],
+      "ms": 1.8,
+      "fixture": "no_socket",
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "tiny_radius",
+      "passed": true,
+      "errors": [],
+      "ms": 131.6,
+      "fixture": null,
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "centre_flight",
+      "passed": true,
+      "errors": [],
+      "ms": 1.4,
+      "fixture": null,
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "night_park_unknown",
+      "passed": true,
+      "errors": [],
+      "ms": 2.6,
+      "fixture": "park_unknown",
+      "response_type": "refusal",
+      "rec_count": 0
+    },
+    {
+      "id": "invalid_coordinates",
+      "passed": true,
+      "errors": [],
+      "ms": 0.3,
+      "fixture": null,
+      "response_type": "clarification",
+      "rec_count": 0
+    },
+    {
+      "id": "route_three",
+      "passed": true,
+      "errors": [],
+      "ms": 187.4,
+      "fixture": null,
+      "response_type": "recommendations",
+      "rec_count": 3
+    }
+  ]
+}

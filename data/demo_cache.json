@@ -1,0 +1,582 @@
+{
+  "fingerprint": "d0134d1a6dbb5080130a4b973e077e964bb84945293826d357b21884c2c9ae03",
+  "responses": {
+    "fa26bb3480aa43721a756c6baec927778ae74976149ed843c69a896c0da8991e": {
+      "interpretation": {
+        "intent": "discover",
+        "duration_min": 60,
+        "mode": "walk",
+        "max_travel_min": 20,
+        "categories": [
+          "park",
+          "attraction",
+          "viewpoint",
+          "gallery",
+          "museum"
+        ],
+        "tags": [],
+        "constraints": [],
+        "assumptions": [
+          "В пути не более 20 минут в одну сторону.",
+          "Для прогулки выбраны парки и достопримечательности."
+        ],
+        "language": "ru",
+        "group_size": 1,
+        "flight_in_min": null,
+        "route_requested": false,
+        "parser": "rules"
+      },
+      "recommendations": [
+        {
+          "poi_id": "way/1460763574",
+          "name": "25-ти летие Независимости",
+          "category": "attraction",
+          "distance_m": 770,
+          "walk_min": 13,
+          "travel_min": 13,
+          "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 13 мин; на месте — 20 мин.",
+          "visit_min": 20,
+          "what_to_do": "Осмотрите место и выберите интересный ракурс для фотографии.",
+          "open_status": {
+            "state": "unknown",
+            "confidence": "low",
+            "basis": "missing_opening_hours",
+            "next_change": null
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/way/1460763574",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: attraction",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+          "lat": 51.0934524,
+          "lon": 71.4175645
+        },
+        {
+          "poi_id": "way/1456208624",
+          "name": "Аллея мира и согласия",
+          "category": "park",
+          "distance_m": 755,
+          "walk_min": 13,
+          "travel_min": 13,
+          "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 13 мин; на месте — 30 мин.",
+          "visit_min": 30,
+          "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
+          "open_status": {
+            "state": "unknown",
+            "confidence": "low",
+            "basis": "missing_opening_hours",
+            "next_change": null
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/way/1456208624",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: park",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+          "lat": 51.0938123,
+          "lon": 71.4169498
+        },
+        {
+          "poi_id": "way/1467797207",
+          "name": "NU Park",
+          "category": "park",
+          "distance_m": 671,
+          "walk_min": 11,
+          "travel_min": 11,
+          "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 11 мин; на месте — 30 мин.",
+          "visit_min": 30,
+          "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
+          "open_status": {
+            "state": "unknown",
+            "confidence": "low",
+            "basis": "missing_opening_hours",
+            "next_change": null
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/way/1467797207",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: park",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+          "lat": 51.0872699,
+          "lon": 71.3994394
+        }
+      ],
+      "route": null,
+      "clarifying_question": null,
+      "message": "",
+      "alternative": null,
+      "response_type": "recommendations",
+      "generation_backend": "template",
+      "retrieval_backend": "e5+lexical"
+    },
+    "cbb30ad34e3c5c3c6aed7b863f3044b704f3e4896f86e8d4c9fefd67436648b1": {
+      "interpretation": {
+        "intent": "discover",
+        "duration_min": 60,
+        "mode": "walk",
+        "max_travel_min": 20,
+        "categories": [
+          "cafe"
+        ],
+        "tags": [
+          "quiet",
+          "socket"
+        ],
+        "constraints": [
+          "quiet",
+          "socket"
+        ],
+        "assumptions": [
+          "Бюджет времени: 60 минут.",
+          "В пути не более 20 минут в одну сторону."
+        ],
+        "language": "ru",
+        "group_size": 1,
+        "flight_in_min": null,
+        "route_requested": false,
+        "parser": "rules"
+      },
+      "recommendations": [
+        {
+          "poi_id": "node/6408271985",
+          "name": "CrepeCafe",
+          "category": "cafe",
+          "distance_m": 182,
+          "walk_min": 3,
+          "travel_min": 3,
+          "why": "Это кафе поблизости для перерыва с кофе. Путь займёт около 3 мин; на месте — 25 мин.",
+          "visit_min": 25,
+          "what_to_do": "Зайдите на кофе; перед заказом уточните нужные вам удобства.",
+          "open_status": {
+            "state": "open",
+            "confidence": "high",
+            "basis": "OSM opening_hours: Mo-Fr 08:00-00:00; Sa-Su 09:00-00:00",
+            "next_change": "2026-10-18T00:00:00+05:00"
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/node/6408271985",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: cafe",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Розетки: unknown — в данных OSM подтверждения нет. Тишина: unknown — зависит от посетителей; уточните у места.",
+          "lat": 51.1293821,
+          "lon": 71.4285934
+        },
+        {
+          "poi_id": "node/10564988185",
+          "name": "Degirmen",
+          "category": "cafe",
+          "distance_m": 240,
+          "walk_min": 4,
+          "travel_min": 4,
+          "why": "Это кафе поблизости для перерыва с кофе. Путь займёт около 4 мин; на месте — 25 мин.",
+          "visit_min": 25,
+          "what_to_do": "Зайдите на кофе; перед заказом уточните нужные вам удобства.",
+          "open_status": {
+            "state": "open",
+            "confidence": "high",
+            "basis": "OSM opening_hours: Mo-Su 08:00-00:00",
+            "next_change": "2026-10-18T00:00:00+05:00"
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/node/10564988185",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: cafe",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Розетки: unknown — в данных OSM подтверждения нет. Тишина: unknown — зависит от посетителей; уточните у места.",
+          "lat": 51.1285659,
+          "lon": 71.4333254
+        }
+      ],
+      "route": null,
+      "clarifying_question": null,
+      "message": "",
+      "alternative": null,
+      "response_type": "recommendations",
+      "generation_backend": "template",
+      "retrieval_backend": "e5+lexical"
+    },
+    "d5326319932ab4e3cb73ed5a0ceb72a584b1f2413c058cc6a13f52dbc7a49090": {
+      "interpretation": {
+        "intent": "discover",
+        "duration_min": 60,
+        "mode": "walk",
+        "max_travel_min": 20,
+        "categories": [
+          "museum",
+          "playground"
+        ],
+        "tags": [
+          "children"
+        ],
+        "constraints": [
+          "children"
+        ],
+        "assumptions": [
+          "В пути не более 20 минут в одну сторону."
+        ],
+        "language": "ru",
+        "group_size": 1,
+        "flight_in_min": null,
+        "route_requested": false,
+        "parser": "rules"
+      },
+      "recommendations": [
+        {
+          "poi_id": "way/1239171353",
+          "name": "Военно-исторический музей",
+          "category": "museum",
+          "distance_m": 837,
+          "walk_min": 14,
+          "travel_min": 14,
+          "why": "Подходит по запрошенному типу места для прогулки с ребёнком. Путь займёт около 14 мин; на месте — 32 мин.",
+          "visit_min": 32,
+          "what_to_do": "Осмотритесь внутри; условия входа и доступные пространства уточните на месте.",
+          "open_status": {
+            "state": "open",
+            "confidence": "high",
+            "basis": "OSM opening_hours: Mo-Su 10:00-18:00",
+            "next_change": "2026-10-17T18:00:00+05:00"
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/way/1239171353",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: museum",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
+          "lat": 51.1554984,
+          "lon": 71.4319723
+        },
+        {
+          "poi_id": "way/1460700597",
+          "name": "Этно-мемориальный комплекс Карта Казахстана Атамекен",
+          "category": "museum",
+          "distance_m": 648,
+          "walk_min": 11,
+          "travel_min": 11,
+          "why": "Подходит по запрошенному типу места для прогулки с ребёнком. Путь займёт около 11 мин; на месте — 38 мин.",
+          "visit_min": 38,
+          "what_to_do": "Осмотритесь внутри; условия входа и доступные пространства уточните на месте.",
+          "open_status": {
+            "state": "unknown",
+            "confidence": "low",
+            "basis": "missing_opening_hours",
+            "next_change": null
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/way/1460700597",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: museum",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
+          "lat": 51.1492984,
+          "lon": 71.4180805
+        }
+      ],
+      "route": null,
+      "clarifying_question": null,
+      "message": "",
+      "alternative": null,
+      "response_type": "recommendations",
+      "generation_backend": "template",
+      "retrieval_backend": "e5+lexical"
+    },
+    "ff06c33b968bd67f6bc9212980ebede437bc87d9e5ba269125e4208f9ae34d39": {
+      "interpretation": {
+        "intent": "discover",
+        "duration_min": 120,
+        "mode": "walk",
+        "max_travel_min": 20,
+        "categories": [
+          "park",
+          "attraction",
+          "viewpoint",
+          "gallery",
+          "museum"
+        ],
+        "tags": [
+          "tourist"
+        ],
+        "constraints": [
+          "tourist"
+        ],
+        "assumptions": [
+          "В пути не более 20 минут в одну сторону.",
+          "Для прогулки выбраны парки и достопримечательности."
+        ],
+        "language": "ru",
+        "group_size": 1,
+        "flight_in_min": 120,
+        "route_requested": false,
+        "parser": "rules"
+      },
+      "recommendations": [],
+      "route": null,
+      "clarifying_question": null,
+      "message": "До вылета слишком мало времени для надёжной прогулки: заложен резерв 120 минут на процедуры в аэропорту плюс путь туда. Оставайтесь в терминале или направляйтесь в аэропорт; проверьте требования вашей авиакомпании.",
+      "alternative": null,
+      "response_type": "refusal",
+      "generation_backend": "template",
+      "retrieval_backend": "e5+lexical"
+    },
+    "b3b5a8a873de67aba128494de75a7b8d6f265e7ad446e6851394e2e9c131a46f": {
+      "interpretation": {
+        "intent": "discover",
+        "duration_min": 60,
+        "mode": "walk",
+        "max_travel_min": 20,
+        "categories": [
+          "cafe",
+          "restaurant",
+          "bar",
+          "nightclub",
+          "cinema",
+          "theatre"
+        ],
+        "tags": [
+          "night",
+          "unusual"
+        ],
+        "constraints": [
+          "night",
+          "unusual"
+        ],
+        "assumptions": [
+          "В пути не более 20 минут в одну сторону."
+        ],
+        "language": "ru",
+        "group_size": 1,
+        "flight_in_min": null,
+        "route_requested": false,
+        "parser": "rules"
+      },
+      "recommendations": [
+        {
+          "poi_id": "node/6408271985",
+          "name": "CrepeCafe",
+          "category": "cafe",
+          "distance_m": 182,
+          "walk_min": 3,
+          "travel_min": 3,
+          "why": "По расписанию OSM место открыто на время пути и визита. Путь займёт около 3 мин; на месте — 25 мин.",
+          "visit_min": 25,
+          "what_to_do": "Зайдите на кофе; перед заказом уточните нужные вам удобства.",
+          "open_status": {
+            "state": "open",
+            "confidence": "high",
+            "basis": "OSM opening_hours: Mo-Fr 08:00-00:00; Sa-Su 09:00-00:00",
+            "next_change": "2026-10-18T00:00:00+05:00"
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/node/6408271985",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: cafe",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
+          "lat": 51.1293821,
+          "lon": 71.4285934
+        },
+        {
+          "poi_id": "node/10564988185",
+          "name": "Degirmen",
+          "category": "cafe",
+          "distance_m": 240,
+          "walk_min": 4,
+          "travel_min": 4,
+          "why": "По расписанию OSM место открыто на время пути и визита. Путь займёт около 4 мин; на месте — 25 мин.",
+          "visit_min": 25,
+          "what_to_do": "Зайдите на кофе; перед заказом уточните нужные вам удобства.",
+          "open_status": {
+            "state": "open",
+            "confidence": "high",
+            "basis": "OSM opening_hours: Mo-Su 08:00-00:00",
+            "next_change": "2026-10-18T00:00:00+05:00"
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/node/10564988185",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: cafe",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
+          "lat": 51.1285659,
+          "lon": 71.4333254
+        },
+        {
+          "poi_id": "node/2826184438",
+          "name": "Лигалайф",
+          "category": "bar",
+          "distance_m": 333,
+          "walk_min": 6,
+          "travel_min": 6,
+          "why": "По расписанию OSM место открыто на время пути и визита. Путь займёт около 6 мин; на месте — 30 мин.",
+          "visit_min": 30,
+          "what_to_do": "Осмотритесь внутри; условия входа и доступные пространства уточните на месте.",
+          "open_status": {
+            "state": "open",
+            "confidence": "high",
+            "basis": "OSM opening_hours: 09:00-06:00",
+            "next_change": "2026-10-18T06:00:00+05:00"
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/node/2826184438",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: bar",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
+          "lat": 51.1296521,
+          "lon": 71.4339722
+        }
+      ],
+      "route": null,
+      "clarifying_question": null,
+      "message": "",
+      "alternative": null,
+      "response_type": "recommendations",
+      "generation_backend": "template",
+      "retrieval_backend": "e5+lexical"
+    }
+  },
+  "notice": "Only five public demo scenarios. Not user history."
+}

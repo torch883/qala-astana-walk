@@ -1,0 +1,847 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-17T16:34:36Z",
+    "timestamp_areas_base": "2026-10-17T12:31:19Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 455447665,
+  "lat": 51.1345953,
+  "lon": 71.4596617,
+  "tags": {
+    "historic": "monument",
+    "name": "Бауыржан Момышұлы",
+    "name:ru": "Бауыржану Момышулы"
+  }
+},
+{
+  "type": "node",
+  "id": 455447676,
+  "lat": 51.1513903,
+  "lon": 71.4454592,
+  "tags": {
+    "historic": "monument",
+    "name": "Жамбыл"
+  }
+},
+{
+  "type": "node",
+  "id": 560695842,
+  "lat": 51.1595910,
+  "lon": 71.4698716,
+  "tags": {
+    "historic": "monument",
+    "name": "А. С. Пушкину",
+    "name:ru": "А. С. Пушкину"
+  }
+},
+{
+  "type": "node",
+  "id": 560695850,
+  "lat": 51.1571525,
+  "lon": 71.4772186,
+  "tags": {
+    "historic": "monument",
+    "name": "Ауғанстанда қаза тапқандарға",
+    "name:ru": "Погибшим в Афганистане"
+  }
+},
+{
+  "type": "node",
+  "id": 1278114185,
+  "lat": 51.1604981,
+  "lon": 71.4240851,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Кенесары хан"
+  }
+},
+{
+  "type": "node",
+  "id": 2349679958,
+  "lat": 51.1715412,
+  "lon": 71.4239674,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "С. Сейфуллин",
+    "name:kk": "С. Сейфуллин",
+    "name:ru": "С. Сейфуллину"
+  }
+},
+{
+  "type": "node",
+  "id": 2615970237,
+  "lat": 51.2601145,
+  "lon": 71.5959145,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "communication"
+  }
+},
+{
+  "type": "node",
+  "id": 2616721347,
+  "lat": 51.1534935,
+  "lon": 71.4130319,
+  "tags": {
+    "historic": "memorial",
+    "name:ru": "памятник Курмангазы",
+    "source": "Bing Sat"
+  }
+},
+{
+  "type": "node",
+  "id": 2632246213,
+  "lat": 51.1407200,
+  "lon": 71.3254316,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "communication"
+  }
+},
+{
+  "type": "node",
+  "id": 2636792740,
+  "lat": 51.1307855,
+  "lon": 71.4345132,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "communication"
+  }
+},
+{
+  "type": "node",
+  "id": 2637268795,
+  "lat": 51.1834776,
+  "lon": 71.4113282,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "communication"
+  }
+},
+{
+  "type": "node",
+  "id": 2638985659,
+  "lat": 51.1917318,
+  "lon": 71.4110530,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "communication"
+  }
+},
+{
+  "type": "node",
+  "id": 2681623412,
+  "lat": 51.1221098,
+  "lon": 71.4698815,
+  "tags": {
+    "historic": "memorial",
+    "man_made": "obelisk",
+    "name": "Қазақ елі",
+    "name:en": "Kazak Eli Monument",
+    "name:es": "Monumento a Kazak Eli",
+    "name:kk": "Қазақ елі"
+  }
+},
+{
+  "type": "node",
+  "id": 2712544129,
+  "lat": 51.1664322,
+  "lon": 71.4169499,
+  "tags": {
+    "historic": "monument",
+    "name": "Памятник \"Жанибек и Керей хандары\"",
+    "name:kk": "Жәнібек пен Керей хандар ескерткіші"
+  }
+},
+{
+  "type": "node",
+  "id": 2957073283,
+  "lat": 51.2256877,
+  "lon": 71.2478144,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "communication"
+  }
+},
+{
+  "type": "node",
+  "id": 3197090967,
+  "lat": 51.1856822,
+  "lon": 71.4091666,
+  "tags": {
+    "historic": "monument",
+    "name": "Әлия Молдағұлова",
+    "name:kk": "Молдағұлова",
+    "name:ru": "Алие Молдагуловой"
+  }
+},
+{
+  "type": "node",
+  "id": 3203198165,
+  "lat": 51.2974720,
+  "lon": 71.3579619,
+  "tags": {
+    "communication:mobile_phone": "yes",
+    "man_made": "tower",
+    "tower:type": "communication"
+  }
+},
+{
+  "type": "node",
+  "id": 3743119878,
+  "lat": 51.1679151,
+  "lon": 71.4203580,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "А. Құнанбайұлы",
+    "name:ru": "А. Кунанбайулы"
+  }
+},
+{
+  "type": "node",
+  "id": 4109068594,
+  "lat": 51.1695299,
+  "lon": 71.4208049,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Айтеке-би, Казыбек-би и Толе-би"
+  }
+},
+{
+  "type": "node",
+  "id": 4113550330,
+  "lat": 51.1686561,
+  "lon": 71.4256941,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "sculpture",
+    "name": "Памятник жертвам голодомора"
+  }
+},
+{
+  "type": "node",
+  "id": 4209560711,
+  "lat": 51.1554129,
+  "lon": 71.4323473,
+  "tags": {
+    "fixme": "position",
+    "historic": "tank",
+    "name": "Т34-85",
+    "tourism": "attraction"
+  }
+},
+{
+  "type": "node",
+  "id": 4278779194,
+  "lat": 51.1533129,
+  "lon": 71.4139369,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 4892204728,
+  "lat": 51.1511586,
+  "lon": 71.4320358,
+  "tags": {
+    "historic": "memorial",
+    "material": "bronze",
+    "memorial": "statue",
+    "name": "Мұстафа Кемал Ататүрік",
+    "name:en": "Monument to Mustafa Kemal Ataturk",
+    "name:ru": "Мустафе Кемалю Ататюрку",
+    "start_date": "2009"
+  }
+},
+{
+  "type": "node",
+  "id": 4929123022,
+  "lat": 51.1414649,
+  "lon": 71.4486596,
+  "tags": {
+    "historic": "monument",
+    "name": "Памятник Шарлю Де Голлю"
+  }
+},
+{
+  "type": "node",
+  "id": 4955093906,
+  "lat": 51.1524523,
+  "lon": 71.4501080,
+  "tags": {
+    "historic": "monument",
+    "name": "Қызметтік борышын орындау кезінде қаза тапқан ІІМ қызметкерлеріне арналған монумент",
+    "name:ru": "Погибшим при исполнении сотрудникам МВД",
+    "start_date": "2013"
+  }
+},
+{
+  "type": "node",
+  "id": 4958412863,
+  "lat": 51.1318179,
+  "lon": 71.4077184,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Zur Sultan",
+    "name:en": "Zul Sultan"
+  }
+},
+{
+  "type": "node",
+  "id": 4959863403,
+  "lat": 51.1507834,
+  "lon": 71.4342159,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 4959863409,
+  "lat": 51.1509887,
+  "lon": 71.4385745,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 4959863526,
+  "lat": 51.1521002,
+  "lon": 71.4315826,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "stele"
+  }
+},
+{
+  "type": "node",
+  "id": 4960517245,
+  "lat": 51.1263197,
+  "lon": 71.4576183,
+  "tags": {
+    "historic": "memorial"
+  }
+},
+{
+  "type": "node",
+  "id": 4968234234,
+  "lat": 51.1564832,
+  "lon": 71.4736068,
+  "tags": {
+    "historic": "monument",
+    "name": "Чернобыль апатының құрбандарына",
+    "name:kk": "Чернобыль апатының құрбандарына",
+    "name:ru": "Жертвам Чернобыльской трагедии"
+  }
+},
+{
+  "type": "node",
+  "id": 5878503586,
+  "lat": 51.1051208,
+  "lon": 71.4242471,
+  "tags": {
+    "historic": "memorial",
+    "name": "Қазақ еліне мың алғыс"
+  }
+},
+{
+  "type": "node",
+  "id": 5918121388,
+  "lat": 51.1298506,
+  "lon": 71.4590741,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Рақымжан Қошқарбаев",
+    "name:en": "Rakhimzhan Koshkarbaev",
+    "name:ru": "Ракымжан Кошкарбаев"
+  }
+},
+{
+  "type": "node",
+  "id": 5951327485,
+  "lat": 50.8725627,
+  "lon": 71.4097936,
+  "tags": {
+    "historic": "memorial",
+    "name": "Кабанбай батыр"
+  }
+},
+{
+  "type": "node",
+  "id": 5974549291,
+  "lat": 51.1447619,
+  "lon": 71.4919680,
+  "tags": {
+    "historic": "memorial",
+    "name": "Иван Васильевич Панфилов"
+  }
+},
+{
+  "type": "node",
+  "id": 7142226485,
+  "lat": 51.1747187,
+  "lon": 71.4120391,
+  "tags": {
+    "historic": "monument",
+    "name": "М. Мәметова",
+    "name:kk": "М. Мәметова",
+    "name:ru": "М. Маметовой"
+  }
+},
+{
+  "type": "node",
+  "id": 7149180388,
+  "lat": 51.1747138,
+  "lon": 71.4106272,
+  "tags": {
+    "historic": "monument",
+    "name": "Мемориал Великой Отечественной войны"
+  }
+},
+{
+  "type": "node",
+  "id": 7684091171,
+  "lat": 51.1562423,
+  "lon": 71.4319280,
+  "tags": {
+    "fixme": "Уточнить позицию после переноса памятника",
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Н. Ә. Назарбаев",
+    "name:kk": "Н. Ә. Назарбаев",
+    "name:ru": "Н. А. Назарбаеву",
+    "start_date": "2020-05-03"
+  }
+},
+{
+  "type": "node",
+  "id": 7687750117,
+  "lat": 51.1576004,
+  "lon": 71.4807097,
+  "tags": {
+    "historic": "boundary_stone"
+  }
+},
+{
+  "type": "node",
+  "id": 7811615386,
+  "lat": 51.1237384,
+  "lon": 71.4695838,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "lighting"
+  }
+},
+{
+  "type": "node",
+  "id": 7811615387,
+  "lat": 51.1234818,
+  "lon": 71.4712930,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "lighting"
+  }
+},
+{
+  "type": "node",
+  "id": 7811615388,
+  "lat": 51.1207667,
+  "lon": 71.4684164,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "lighting"
+  }
+},
+{
+  "type": "node",
+  "id": 7811615389,
+  "lat": 51.1205160,
+  "lon": 71.4701195,
+  "tags": {
+    "man_made": "tower",
+    "tower:type": "lighting"
+  }
+},
+{
+  "type": "node",
+  "id": 8358713959,
+  "lat": 51.0216277,
+  "lon": 71.3798100,
+  "tags": {
+    "man_made": "tower"
+  }
+},
+{
+  "type": "node",
+  "id": 9879159697,
+  "lat": 51.0949722,
+  "lon": 71.4026959,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 9882729250,
+  "lat": 51.1770040,
+  "lon": 71.3517299,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 10272567876,
+  "lat": 51.0997792,
+  "lon": 71.2267351,
+  "tags": {
+    "height": "20",
+    "man_made": "tower",
+    "tower:type": "communication"
+  }
+},
+{
+  "type": "node",
+  "id": 11104886254,
+  "lat": 51.1339400,
+  "lon": 71.4378320,
+  "tags": {
+    "historic": "monument"
+  }
+},
+{
+  "type": "node",
+  "id": 11500907369,
+  "lat": 51.1533667,
+  "lon": 71.4139175,
+  "tags": {
+    "historic": "monument",
+    "name:ru": "Городские часы"
+  }
+},
+{
+  "type": "node",
+  "id": 11968737470,
+  "lat": 51.1459803,
+  "lon": 71.2702650,
+  "tags": {
+    "historic": "archaeological_site",
+    "name:ru": "Городище Бозок"
+  }
+},
+{
+  "type": "node",
+  "id": 12009143370,
+  "lat": 51.1218404,
+  "lon": 71.4717428,
+  "tags": {
+    "historic": "memorial",
+    "name:de": "Friedensdenkmal zur Schließung des nuklearen Testzentrums in Semipalatinsk",
+    "name:en": "The Wall of Peace Monument",
+    "name:es": "Monumento a la paz tras el cierre del centro de pruebas nucleares en Semipalatinsk"
+  }
+},
+{
+  "type": "node",
+  "id": 12143294302,
+  "lat": 51.1541090,
+  "lon": 71.4521622,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Иоанн Павел II",
+    "name:en": "John Paul II",
+    "subject:wikidata": "Q989",
+    "subject:wikipedia": "en:Pope John Paul II"
+  }
+},
+{
+  "type": "node",
+  "id": 12145940573,
+  "lat": 51.1747119,
+  "lon": 71.4106202,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue"
+  }
+},
+{
+  "type": "node",
+  "id": 12893538292,
+  "lat": 51.1167320,
+  "lon": 71.4057852,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "bust",
+    "name": "Асқар Забикулин",
+    "name:ru": "Аскару Забикулину"
+  }
+},
+{
+  "type": "node",
+  "id": 12896585187,
+  "lat": 51.1706983,
+  "lon": 71.4070029,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "bust"
+  }
+},
+{
+  "type": "node",
+  "id": 13088473063,
+  "lat": 51.0705424,
+  "lon": 71.3958680,
+  "tags": {
+    "historic": "monument",
+    "name": "\"Астана Жұлдызы\" Ескерткіші"
+  }
+},
+{
+  "type": "node",
+  "id": 13308087157,
+  "lat": 51.1302320,
+  "lon": 71.3934754,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "bust",
+    "name": "Михай Эминеску"
+  }
+},
+{
+  "type": "node",
+  "id": 13333409377,
+  "lat": 51.1303587,
+  "lon": 71.4010254,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Махтумкули Фраги"
+  }
+},
+{
+  "type": "node",
+  "id": 13397184827,
+  "lat": 51.1518841,
+  "lon": 71.4303536,
+  "tags": {
+    "alt_name": "Жүніс Әміре",
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Юнус Эмре",
+    "name:en": "Yunus Emre"
+  }
+},
+{
+  "type": "node",
+  "id": 13518941852,
+  "lat": 51.1539210,
+  "lon": 71.4584124,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "obelisk",
+    "name": "ҚР ІІМ Ішкі әскерлерінің 17 жауынгеріне",
+    "name:ru": "17 воинам Внутренних войск МВД РК"
+  }
+},
+{
+  "type": "node",
+  "id": 13518941853,
+  "lat": 51.1534233,
+  "lon": 71.4576795,
+  "tags": {
+    "historic": "memorial",
+    "memorial": "eternal_flame"
+  }
+},
+{
+  "type": "way",
+  "id": 215529755,
+  "center": {
+    "lat": 51.1534490,
+    "lon": 71.4577683
+  },
+  "tags": {
+    "historic": "memorial",
+    "name": "Отан Қорғаушылар",
+    "name:en": "Monument to the Defenders of the Motherland",
+    "name:ru": "Родина-Мать"
+  }
+},
+{
+  "type": "way",
+  "id": 230401645,
+  "center": {
+    "lat": 51.1282882,
+    "lon": 71.4304546
+  },
+  "tags": {
+    "access": "yes",
+    "addr:city": "Астана",
+    "addr:country": "KZ",
+    "addr:housenumber": "14",
+    "addr:street": "Нұржол желек жолы",
+    "building": "yes",
+    "building:levels": "27",
+    "historic": "monument",
+    "layer": "1",
+    "name": "Бәйтерек",
+    "name:de": "Bajterek-Turm",
+    "name:en": "Bayterek",
+    "name:ja": "バイテレック・タワー・タワー",
+    "name:kk": "Бәйтерек",
+    "name:ml": "ബൈറ്റെറെക് ടവർ",
+    "name:ru": "Байтерек",
+    "wikidata": "Q804210",
+    "wikipedia": "kk:Бәйтерек (монумент)",
+    "wikipedia:ru": "ru:Байтерек (монумент)"
+  }
+},
+{
+  "type": "way",
+  "id": 384145918,
+  "center": {
+    "lat": 51.1755361,
+    "lon": 71.4048797
+  },
+  "tags": {
+    "historic": "memorial",
+    "memorial": "statue",
+    "name": "Памятник Богенбай Батыру"
+  }
+},
+{
+  "type": "way",
+  "id": 452365416,
+  "center": {
+    "lat": 51.1560317,
+    "lon": 71.4718411
+  },
+  "tags": {
+    "historic": "monument",
+    "name": "Лев Николаевич Гумилев ескерткіші"
+  }
+},
+{
+  "type": "way",
+  "id": 506032169,
+  "center": {
+    "lat": 51.1221119,
+    "lon": 71.4698824
+  },
+  "tags": {
+    "addr:city": "Астана",
+    "addr:country": "KZ",
+    "building": "yes",
+    "height": "17",
+    "historic": "monument"
+  }
+},
+{
+  "type": "way",
+  "id": 508001040,
+  "center": {
+    "lat": 51.1533065,
+    "lon": 71.4138970
+  },
+  "tags": {
+    "addr:city": "Астана",
+    "addr:country": "KZ",
+    "building": "yes",
+    "height": "10",
+    "historic": "monument"
+  }
+},
+{
+  "type": "way",
+  "id": 548267296,
+  "center": {
+    "lat": 51.1953327,
+    "lon": 71.4072567
+  },
+  "tags": {
+    "historic": "memorial",
+    "memorial": "bust",
+    "name": "Паровоз"
+  }
+},
+{
+  "type": "way",
+  "id": 549307755,
+  "center": {
+    "lat": 51.1043034,
+    "lon": 71.4300836
+  },
+  "tags": {
+    "architect": "Сағындық Жанболатов",
+    "building": "triumphal_arch",
+    "height": "20",
+    "historic": "monument",
+    "name": "Мәңгілік Ел салтанат қақпасы",
+    "name:en": "Mäñgilik El Triumphal Arch",
+    "name:ru": "Триумфальная арка Мангилик Ел",
+    "start_date": "2011-12-16",
+    "tourism": "attraction",
+    "wikidata": "Q42422896",
+    "wikipedia": "en:Mäñgilik El Triumphal Arch"
+  }
+},
+{
+  "type": "way",
+  "id": 684508282,
+  "center": {
+    "lat": 51.1247707,
+    "lon": 71.5903624
+  },
+  "tags": {
+    "historic": "memorial",
+    "inscription": "1941-1945",
+    "memorial": "war_memorial",
+    "name": "Памятник Великой Отечественной Войне",
+    "name:en": "A Monument To The Second World War"
+  }
+},
+{
+  "type": "way",
+  "id": 1088449019,
+  "center": {
+    "lat": 51.1666620,
+    "lon": 71.4231779
+  },
+  "tags": {
+    "addr:city": "Астана",
+    "addr:country": "KZ",
+    "addr:housenumber": "28",
+    "addr:street": "Әзірбайжан Мәмбетов көшесі",
+    "building": "yes",
+    "historic": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1125189046,
+  "center": {
+    "lat": 51.1186517,
+    "lon": 71.4552132
+  },
+  "tags": {
+    "historic": "monument"
+  }
+}
+
+  ]
+}

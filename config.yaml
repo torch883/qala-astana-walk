@@ -1,0 +1,23 @@
+timezone: Asia/Almaty
+default_duration_min: 60
+default_max_travel_min: 20
+walk_m_per_min: 80
+transport_m_per_min: 350
+transport_overhead_min: 8
+detour_factor: 1.3
+airport_reserve_min: 120
+weights:
+  semantic: 0.40
+  distance: 0.25
+  category: 0.15
+  open: 0.12
+  popularity: 0.03
+  gold: 0.05
+  unknown_penalty: 0.12
+presets:
+  Mega Silk Way: [51.0895, 71.4072]
+  Экспо: [51.0905, 71.4180]
+  Байтерек: [51.1282, 71.4305]
+  Хан Шатыр: [51.1325, 71.4038]
+  Центральный парк: [51.1548, 71.4196]
+  Аэропорт: [51.0270, 71.4620]
