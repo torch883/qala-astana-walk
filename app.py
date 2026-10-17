@@ -8,7 +8,8 @@ from core.engine import Engine
 from core.settings import CONFIG,DATA,ROOT
 from core.geo import round_location
 from core.hours import TZ
-from core.i18n import tr
+from core.i18n import tr,place
+from core.weather import fetch as fetch_weather,preset as weather_preset
 from eval.run_eval import scenarios
 
 st.set_page_config(page_title='QALA · Прогулки по Астане',page_icon='◉',layout='wide',initial_sidebar_state='auto')
@@ -48,16 +49,26 @@ def public_map_context():
     p=DATA/'map_context.geojson'
     return json.loads(p.read_text(encoding='utf-8')) if p.exists() else {'type':'FeatureCollection','features':[]}
 
-DEMO=scenarios()[:5]
+@st.cache_data(show_spinner=False,ttl=1800)
+def forecast(hour_iso):return fetch_weather(datetime.fromisoformat(hour_iso))
+
+@st.cache_data(show_spinner=False)
+def hub_shapes():return json.loads((DATA/'warm_hubs.geojson').read_text(encoding='utf-8')) if (DATA/'warm_hubs.geojson').exists() else {'type':'FeatureCollection','features':[]}
+
+DEMO_IDS=['mega_walk','coffee_socket','child','airport_flight','unusual_night','layover_long','frost_walk']
+DEMO_LABELS=['🌿 Прогулка у Mega','☕ Кофе и розетка','🧸 С ребёнком','✈️ Перед вылетом','🌙 Ночная Астана','🛫 Пересадка 7 ч','🥶 Мороз −24 °C']
+DEMO={c['id']:c for c in scenarios()}
+WEATHER_LABELS={'auto':'Прогноз Open-Meteo','off':'Не учитывать','frost':'Сценарий: мороз −24 °C','blizzard':'Сценарий: метель, ветер 15 м/с','rain':'Сценарий: дождь +11 °C','heat':'Сценарий: жара +36 °C','mild':'Сценарий: тепло +18 °C'}
+WEATHER_DEFAULT=os.getenv('WEATHER','auto') if os.getenv('WEATHER','auto') in WEATHER_LABELS else 'auto'
 state=st.session_state
 # Start at the current Astana time on the slider's 15-minute grid; demo buttons set their own time.
 started=datetime.now(TZ)
-defaults={'preset':'Mega Silk Way','day':started.date(),'clock':(started.hour*60+started.minute)//15*15,'lang':'ru','mode':'walk','group':1,'accessible':False,'max_travel':20,'location':None,'last_answer':None,'last_debug':None,'last_query':'','tiles':False}
+defaults={'preset':'Mega Silk Way','day':started.date(),'clock':(started.hour*60+started.minute)//15*15,'lang':'ru','mode':'walk','group':1,'accessible':False,'max_travel':20,'location':None,'last_answer':None,'last_debug':None,'last_query':'','tiles':False,'weather':WEATHER_DEFAULT}
 for k,v in defaults.items():state.setdefault(k,v)
 
 def choose_demo(i):
-    c=DEMO[i];at=datetime.fromisoformat(c['now'])
-    state.update(preset=c['preset'],day=at.date(),clock=at.hour*60+at.minute,lang=c['language'],mode='walk',group=1,accessible=False,max_travel=20,location=None,pending_query=c['query'])
+    c=DEMO[DEMO_IDS[i]];at=datetime.fromisoformat(c['now'])
+    state.update(preset=c['preset'],day=at.date(),clock=at.hour*60+at.minute,lang=c['language'],mode='walk',group=1,accessible=False,max_travel=20,location=None,weather=c.get('weather',WEATHER_DEFAULT),pending_query=c['query'])
 
 def preset_changed():state.location=None;state.last_answer=None
 
@@ -74,8 +85,9 @@ with st.sidebar:
     with col1:st.selectbox('Язык ответа',['ru','en','kk'],format_func=lambda x:{'ru':'Русский','en':'English','kk':'Қазақша'}[x],key='lang')
     with col2:st.number_input('Человек',1,20,key='group')
     st.toggle('Доступность · wheelchair=yes',key='accessible')
+    st.selectbox('🌡 Погода',list(WEATHER_LABELS),format_func=WEATHER_LABELS.get,key='weather',help='Прогноз берётся для центра Астаны и выбранного часа; ваша точка в погодный сервис не передаётся. Сценарии нужны для демо и помечаются как сценарий.')
     st.divider()
-    st.caption('🔒 Координаты округляются до ~100 м. Живые запросы и локация не записываются на диск.')
+    st.caption('🔒 Координаты округляются до ~100 м. Живые запросы и локация не записываются на диск. Open-Meteo получает только центр города и час.')
     st.toggle('Подложка OpenStreetMap',key='tiles',help='При включении браузер запрашивает внешние тайлы карты: сервер тайлов видит IP и область просмотра. Без подложки карта показывает точки и радиус.')
     st.caption('Без подложки координаты не передаются поставщику карты. При включённом Gemini текст запроса после удаления координат и данные кандидатов отправляются в API.')
     if st.button('Очистить текущий сеанс',width='stretch'):
@@ -99,13 +111,20 @@ if engine.retriever.backend=='lexical':st.warning('Семантический и
 if os.getenv('LLM_PROVIDER','none')!='gemini':st.caption('Локальный режим: '+('семантический' if engine.retriever.backend=='e5+lexical' else 'лексический')+' поиск и проверяемые шаблонные идеи. Для LLM подключите Gemini в .env.')
 
 st.markdown('<div class="section-caption">ПОПРОБУЙТЕ ОДНИМ НАЖАТИЕМ</div>',unsafe_allow_html=True)
-cols=st.columns(5)
-for i,(label,col) in enumerate(zip(['🌿 Прогулка у Mega','☕ Кофе и розетка','🧸 С ребёнком','✈️ Перед вылетом','🌙 Ночная Астана'],cols)):
-    with col:st.button(label,key=f'demo_{i}',on_click=choose_demo,args=(i,),width='stretch')
+for row in (range(0,4),range(4,len(DEMO_IDS))):
+    for i,col in zip(row,st.columns(4)):
+        with col:st.button(DEMO_LABELS[i],key=f'demo_{i}',on_click=choose_demo,args=(i,),width='stretch')
 
 now=datetime.combine(state.day,time(state.clock//60,state.clock%60),tzinfo=TZ)
 location=state.location or round_location(*CONFIG['presets'][state.preset])
-controls=(state.preset,state.day,state.clock,state.lang,state.mode,state.group,state.accessible,state.max_travel,tuple(location),(DATA/'pois.json').stat().st_mtime)
+# Weather for the selected hour: a live forecast, an explicit demo scenario, or nothing.
+weather=forecast(now.replace(minute=0).isoformat()) if state.weather=='auto' else (weather_preset(state.weather,now) if state.weather!='off' else None)
+if weather:
+    level={'ok':'погода не мешает','caution':'места на улице ниже в списке','harsh':'суровая погода: только помещения и короткие отрезки по улице'}[weather.level]
+    source='<a href="https://open-meteo.com/" target="_blank">Weather data by Open-Meteo.com</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>' if weather.source=='open-meteo' else 'сценарий для демо, не прогноз'
+    st.markdown(f'<div class="status {"unknown" if weather.level!="ok" else ""}">🌡 {weather.temperature_c:+.0f} °C, ощущается {weather.feels_like_c:+.0f} °C · ветер {weather.wind_ms:.0f} м/с · {level} · {source}</div>',unsafe_allow_html=True)
+elif state.weather=='auto':st.caption('Прогноз Open-Meteo недоступен для выбранного часа — погода не учитывается.')
+controls=(state.preset,state.day,state.clock,state.lang,state.mode,state.group,state.accessible,state.max_travel,state.weather,tuple(location),(DATA/'pois.json').stat().st_mtime)
 if state.get('answer_controls') and controls!=state.answer_controls and 'pending_query' not in state:
     state.last_answer=None;state.last_debug=None
 
@@ -114,7 +133,7 @@ request=state.pop('pending_query',None) or typed
 if request:
     with st.spinner('Сопоставляю места, путь и часы работы…'):
         try:
-            answer,debug=engine.answer(request,location,now,language=state.lang,mode=state.mode,group_size=state.group,accessible=state.accessible,max_travel_min=state.max_travel)
+            answer,debug=engine.answer(request,location,now,language=state.lang,mode=state.mode,group_size=state.group,accessible=state.accessible,max_travel_min=state.max_travel,weather=weather)
             state.last_answer=answer;state.last_debug=debug;state.last_query=request;state.answer_controls=controls
         except Exception:
             st.error('Не удалось обработать запрос. Попробуйте быстрый сценарий. Если ошибка повторится, перезапустите приложение.');state.last_answer=None
@@ -127,6 +146,12 @@ with left:
         lang=answer.interpretation.language
         if answer.message:st.info(answer.message)
         if answer.clarifying_question and answer.clarifying_question!=answer.message:st.write(answer.clarifying_question)
+        if answer.layover:
+            L=answer.layover;hhmm=lambda s:datetime.fromisoformat(s).strftime('%H:%M')
+            labels={'ru':('В городе с','Выезд обратно до','В аэропорту к','Вылет'),'en':('In the city from','Leave the city by','At the airport by','Departure'),'kk':('Қалада','Кері шығу','Әуежайда','Ұшу')}[lang]
+            st.markdown(f'#### 🛫 {place(lang,L.anchor)}')
+            for col,label,value in zip(st.columns(4),labels,[L.arrive_city,L.leave_city_by,L.back_at_airport_by,L.departure]):col.metric(label,hhmm(value))
+            st.caption({'ru':f'Выход из аэропорта {L.exit_min} мин · такси ≈ {L.transfer_min} мин в одну сторону с запасом на пробки · резерв {L.reserve_min} мин до вылета · на город {L.city_min} мин. Все карточки и маршрут помещаются в это окно.','en':f'{L.exit_min} min to leave the airport · taxi ≈ {L.transfer_min} min each way with a traffic buffer · {L.reserve_min}-min reserve before departure · {L.city_min} min for the city. Every card and the route fit this window.','kk':f'Әуежайдан шығу {L.exit_min} мин · такси бір жаққа ≈ {L.transfer_min} мин (кептеліс қорымен) · ұшуға дейін {L.reserve_min} мин резерв · қалаға {L.city_min} мин.'}[lang])
         if answer.recommendations:
             st.caption(f'{len(answer.recommendations)} варианта · {debug.get("elapsed_ms",0)/1000:.2f} с · '+('маршрут ниже' if answer.route else 'выберите один, время рассчитано с возвращением'))
         for n,r in enumerate(answer.recommendations,1):
@@ -134,10 +159,17 @@ with left:
                 st.markdown(f'<div class="rec-name"><span class="num">{n}</span>{html.escape(r.name)}</div>',unsafe_allow_html=True)
                 mode_label={'ru':'пешком','en':'walking','kk':'жаяу'}[lang] if answer.interpretation.mode=='walk' else {'ru':'на транспорте','en':'by transport','kk':'көлікпен'}[lang]
                 distance_label={'ru':'м по прямой','en':'m straight line','kk':'м түзу қашықтық'}[lang]
+                if answer.layover:distance_label+={'ru':' от точки высадки','en':' from the drop-off','kk':' түсу нүктесінен'}[lang]
                 unit='min' if lang=='en' else 'мин'
                 st.markdown(f'<div class="rec-meta">{r.distance_m} {distance_label} &nbsp;·&nbsp; ≈ {r.travel_min} {unit} {mode_label}</div>',unsafe_allow_html=True)
                 poi_label={'ru':'Данные POI','en':'POI data','kk':'POI деректері'}[lang];idea_label={'ru':'Сгенерированная идея','en':'Generated idea','kk':'Жасалған идея'}[lang]
-                st.markdown(f'<span class="pill">📍 {poi_label}</span><span class="pill">💡 {idea_label}</span>',unsafe_allow_html=True)
+                shelter_pill=''
+                if r.shelter:shelter_pill='<span class="pill">'+({'ru':'🏠 В помещении','en':'🏠 Indoors','kk':'🏠 Ғимарат ішінде'} if r.shelter=='indoor' else {'ru':'🌳 На улице','en':'🌳 Outdoors','kk':'🌳 Ашық аспан астында'})[lang]+'</span>'
+                st.markdown(f'<span class="pill">📍 {poi_label}</span><span class="pill">💡 {idea_label}</span>{shelter_pill}',unsafe_allow_html=True)
+                if r.warm_route:
+                    w=r.warm_route;hub=html.escape(w.hub_name);a,b=w.outdoor_legs_min
+                    st.markdown('<div class="status">'+{'ru':f'🧣 Тёплый путь: {a} {unit} по улице → ТРЦ «{hub}» → {b} {unit}. Всего на улице {w.outdoor_total_min} {unit}.','en':f'🧣 Warm route: {a} {unit} outside → «{hub}» → {b} {unit}. {w.outdoor_total_min} {unit} outside in total.','kk':f'🧣 Жылы жол: көшеде {a} {unit} → «{hub}» → {b} {unit}. Көшеде барлығы {w.outdoor_total_min} {unit}.'}[lang]+'</div>',unsafe_allow_html=True)
+                elif r.outdoor_min is not None:st.caption({'ru':f'На улице ≈ {r.outdoor_min} мин','en':f'≈ {r.outdoor_min} min outside','kk':f'Көшеде ≈ {r.outdoor_min} мин'}[lang])
                 why_label={'ru':'Почему','en':'Why','kk':'Неліктен'}[lang];plan_label={'ru':'План','en':'Plan','kk':'Жоспар'}[lang]
                 st.markdown(f'<div class="rec-body"><b>{why_label}.</b> {html.escape(r.why)}<br><b>{plan_label} · {r.visit_min} {unit}.</b> {html.escape(r.what_to_do)}</div>',unsafe_allow_html=True)
                 confidence={'ru':{'high':'высокая','medium':'средняя','low':'низкая'},'en':{'high':'high','medium':'medium','low':'low'},'kk':{'high':'жоғары','medium':'орташа','low':'төмен'}}[lang][r.open_status.confidence]
@@ -167,7 +199,7 @@ with left:
         st.markdown('### Один свободный час.\nНесколько хороших вариантов.')
         st.write('Выберите сценарий выше или напишите запрос в поле внизу. Точку старта можно изменить нажатием на карту.')
         st.info('Часы и удобства известны не для каждого места. Если данных нет, покажем это прямо в карточке.')
-        st.caption('Оценка пути — расстояние по прямой × 1,3. Погода, пробки, входы и реальные переходы пока не учитываются.')
+        st.caption('Оценка пути — расстояние по прямой × 1,3. Погода учитывается по прогнозу Open-Meteo; пробки, входы и реальные переходы пока нет.')
 
 with right:
     st.markdown('### Рядом с вами')
@@ -187,11 +219,23 @@ with right:
         boundary=json.loads((DATA/'boundary.geojson').read_text(encoding='utf-8'))
         folium.GeoJson(boundary,style_function=lambda x:{'fillOpacity':0,'color':'#c9d3c9','weight':1}).add_to(m)
     if answer:
+        # A layover walk starts at the drop-off point, not at the airport.
+        origin=(answer.layover.anchor_lat,answer.layover.anchor_lon) if answer.layover else location
+        if answer.layover:
+            airport=CONFIG['presets']['Аэропорт']
+            folium.PolyLine([airport,origin],color='#7a8d9c',weight=2,dash_array='2,8',tooltip=f'Такси ≈ {answer.layover.transfer_min} мин · оценка').add_to(m)
+            folium.Marker(origin,tooltip='Точка высадки: '+html.escape(place(lang,answer.layover.anchor)),icon=folium.DivIcon(html='<div style="font-size:22px">🛬</div>')).add_to(m)
+            m.location=list(origin)
+        used={r.warm_route.hub_id for r in answer.recommendations if r.warm_route}
+        if used:
+            folium.GeoJson({'type':'FeatureCollection','features':[f for f in hub_shapes()['features'] if f['properties']['id'] in used]},style_function=lambda f:{'color':'#ce824d','fillColor':'#ce824d','fillOpacity':.25,'weight':1},tooltip=folium.GeoJsonTooltip(fields=['name'],labels=False)).add_to(m)
         for n,r in enumerate(answer.recommendations,1):
             folium.Marker([r.lat,r.lon],tooltip=html.escape(r.name),icon=folium.DivIcon(html=f'<div style="background:#0d766b;color:white;border:3px solid white;border-radius:50%;width:30px;height:30px;text-align:center;line-height:24px;font-weight:bold">{n}</div>')).add_to(m)
+            if r.warm_route and not answer.route:
+                folium.PolyLine([origin,(r.warm_route.hub_lat,r.warm_route.hub_lon),(r.lat,r.lon)],color='#ce824d',weight=3,dash_array='6,6',tooltip='Тёплый путь через '+html.escape(r.warm_route.hub_name)).add_to(m)
         if answer.route:
             byid={r.poi_id:r for r in answer.recommendations}
-            pts=[location]+[(byid[s.poi_id].lat,byid[s.poi_id].lon) for s in answer.route.stops]+[location]
+            pts=[origin]+[(byid[s.poi_id].lat,byid[s.poi_id].lon) for s in answer.route.stops]+[origin]
             folium.PolyLine(pts,color='#d48b53',weight=3,dash_array='8,8',tooltip='Схема, не пешеходная навигация').add_to(m)
     clicked=st_folium(m,height=460,width=None,use_container_width=True,returned_objects=['last_clicked'],key='map_'+str(location))
     if clicked and clicked.get('last_clicked'):
@@ -204,11 +248,12 @@ with right:
             st.write('**Разбор запроса**');st.json(answer.interpretation.model_dump())
             st.write(f'POI в базе: {debug["total_pois"]}. После фильтров: {debug.get("accepted",0)}.')
             if debug.get('cache_hit'):st.info('Ответ из кэша фиксированного демо. Ограничения и часы перепроверены.')
-            reason_labels={'travel_limit':'Дальше лимита пути','category':'Не соответствует категории','closed_now':'Закрыто в '+now.strftime('%H:%M'),'closed_on_arrival':'Закроется к прибытию','closes_during_visit':'Закроется до конца визита','night_hours_unconfirmed':'Ночью часы не подтверждены','night_lighting_unconfirmed':'Ночью освещение не подтверждено','time_budget':'Не помещается в бюджет времени','wheelchair_unconfirmed':'Доступность не подтверждена','restricted_access':'Доступ ограничен','disused':'Не используется','socket_unconfirmed':'Розетки не подтверждены','wifi_unconfirmed':'Wi-Fi не подтверждён','quiet_unconfirmed':'Тишина не подтверждена','children':'Не подходит детскому сценарию'}
+            reason_labels={'travel_limit':'Дальше лимита пути','category':'Не соответствует категории','closed_now':'Закрыто в '+now.strftime('%H:%M'),'closed_on_arrival':'Закроется к прибытию','closes_during_visit':'Закроется до конца визита','night_hours_unconfirmed':'Ночью часы не подтверждены','night_lighting_unconfirmed':'Ночью освещение не подтверждено','time_budget':'Не помещается в бюджет времени','wheelchair_unconfirmed':'Доступность не подтверждена','restricted_access':'Доступ ограничен','disused':'Не используется','socket_unconfirmed':'Розетки не подтверждены','wifi_unconfirmed':'Wi-Fi не подтверждён','quiet_unconfirmed':'Тишина не подтверждена','children':'Не подходит детскому сценарию','weather_outdoor':'На улице — не в такую погоду','weather_exposure':'Слишком долго идти по улице'}
             st.write('**Причины отсева**');st.json({reason_labels.get(k,k):v for k,v in debug.get('rejected_counts',{}).items()})
-            if debug.get('candidates'):st.dataframe([{'место':c['name'],'категория':c['category'],'скор':c['score'],'путь, мин':c['travel_min'],'статус':c['open_status']['state']} for c in debug['candidates']],hide_index=True)
+            if debug.get('candidates'):st.dataframe([{'место':c['name'],'категория':c['category'],'скор':c['score'],'путь, мин':c['travel_min'],'статус':c['open_status']['state'],'укрытие':c.get('shelter'),'на улице, мин':c.get('outdoor_min'),'тёплый узел':c.get('warm_hub')} for c in debug['candidates']],hide_index=True)
+            if debug.get('layover_windows'):st.write('**Окна пересадки по точкам высадки**');st.dataframe([{'точка':w['anchor'],'такси, мин':w['transfer_min'],'на город, мин':w['city_min'],'в городе с':w['arrive_city'][11:16],'выезд до':w['leave_city_by'][11:16]} for w in debug['layover_windows']],hide_index=True)
             if debug.get('rejections'):st.dataframe([{'Место':r['name'],'Причина':reason_labels.get(r['reason'],r['reason']),'Путь, мин':r['travel_min']} for r in debug['rejections']],hide_index=True)
-            st.caption('Скор = семантика + близость + подтверждённые часы + популярность (рейтинг, а без него — ссылка Wikidata/Wikipedia в OSM) + проверка источника − штраф за неизвестные часы. Категория — жёсткий фильтр, а не слагаемое. Веса в config.yaml.')
+            st.caption('Скор = семантика + близость + подтверждённые часы + популярность (рейтинг, а без него — ссылка Wikidata/Wikipedia в OSM) + проверка источника − штраф за неизвестные часы − штраф за место на улице в плохую погоду; для туристов и пересадки известные места получают надбавку. Категория и суровая погода — жёсткие фильтры, а не слагаемые. Веса в config.yaml.')
             st.write('**Техническая проверка**');st.json(debug.get('generation',{}))
             st.download_button('Скачать JSON этого ответа',answer.model_dump_json(indent=2),file_name='recommendation.json',mime='application/json',help='Скачивается по вашему нажатию. Точных координат пользователя в JSON нет.')
 

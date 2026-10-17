@@ -21,6 +21,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -62,7 +64,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.0934524,
-        "lon": 71.4175645
+        "lon": 71.4175645,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "way/1456208624",
@@ -101,7 +106,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.0938123,
-        "lon": 71.4169498
+        "lon": 71.4169498,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "way/1467797207",
@@ -140,7 +148,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.0872699,
-        "lon": 71.3994394
+        "lon": 71.3994394,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -149,7 +160,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "coffee_socket": {
     "interpretation": {
@@ -175,6 +188,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -216,7 +231,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Розетки: unknown — в данных OSM подтверждения нет. Тишина: unknown — зависит от посетителей; уточните у места.",
         "lat": 51.1293821,
-        "lon": 71.4285934
+        "lon": 71.4285934,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "node/10564988185",
@@ -255,7 +273,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Розетки: unknown — в данных OSM подтверждения нет. Тишина: unknown — зависит от посетителей; уточните у места.",
         "lat": 51.1285659,
-        "lon": 71.4333254
+        "lon": 71.4333254,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -264,7 +285,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "child": {
     "interpretation": {
@@ -288,6 +311,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -329,7 +354,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
         "lat": 51.1554984,
-        "lon": 71.4319723
+        "lon": 71.4319723,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "way/1131138292",
@@ -368,7 +396,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
         "lat": 51.1541436,
-        "lon": 71.423445
+        "lon": 71.423445,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "way/1460700597",
@@ -407,7 +438,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
         "lat": 51.1492984,
-        "lon": 71.4180805
+        "lon": 71.4180805,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -416,7 +450,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "airport_flight": {
     "interpretation": {
@@ -444,6 +480,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": 120,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -454,7 +492,9 @@
     "alternative": null,
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "unusual_night": {
     "interpretation": {
@@ -485,6 +525,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -526,7 +568,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
         "lat": 51.1293821,
-        "lon": 71.4285934
+        "lon": 71.4285934,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "node/10564988185",
@@ -565,7 +610,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
         "lat": 51.1285659,
-        "lon": 71.4333254
+        "lon": 71.4333254,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "node/2826184438",
@@ -604,7 +652,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
         "lat": 51.1296521,
-        "lon": 71.4339722
+        "lon": 71.4339722,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -613,7 +664,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "missing_location": {
     "interpretation": {
@@ -638,6 +691,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -648,7 +703,9 @@
     "alternative": null,
     "response_type": "clarification",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "outside_city": {
     "interpretation": {
@@ -668,6 +725,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -678,7 +737,9 @@
     "alternative": null,
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "empty_query": {
     "interpretation": {
@@ -703,6 +764,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -744,7 +807,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1282882,
-        "lon": 71.4304546
+        "lon": 71.4304546,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "way/1422579155",
@@ -783,7 +849,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1277221,
-        "lon": 71.4299382
+        "lon": 71.4299382,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "way/230358847",
@@ -822,7 +891,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1286406,
-        "lon": 71.4203796
+        "lon": 71.4203796,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -831,7 +903,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "vague_query": {
     "interpretation": {
@@ -856,6 +930,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -897,7 +973,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1282882,
-        "lon": 71.4304546
+        "lon": 71.4304546,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "way/1422579155",
@@ -936,7 +1015,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1277221,
-        "lon": 71.4299382
+        "lon": 71.4299382,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "way/230358854",
@@ -975,7 +1057,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.127997,
-        "lon": 71.4235705
+        "lon": 71.4235705,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -984,7 +1069,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "english": {
     "interpretation": {
@@ -1003,6 +1090,8 @@
       "language": "en",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1044,7 +1133,10 @@
         ],
         "caveats": "Travel is estimated from straight-line distance with a 1.3 factor; entrances, crossings and pavement accessibility are unverified.",
         "lat": 51.0891569,
-        "lon": 71.4078454
+        "lon": 71.4078454,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "node/9047331879",
@@ -1083,7 +1175,10 @@
         ],
         "caveats": "Travel is estimated from straight-line distance with a 1.3 factor; entrances, crossings and pavement accessibility are unverified.",
         "lat": 51.0890092,
-        "lon": 71.4089158
+        "lon": 71.4089158,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -1092,7 +1187,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "kazakh": {
     "interpretation": {
@@ -1115,6 +1212,8 @@
       "language": "kk",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1156,7 +1255,10 @@
         ],
         "caveats": "Жол түзу қашықтыққа 1,3 коэффициентімен есептелді; кіреберіс, өткел және тротуар қолжетімділігі тексерілмеген. Тыныштық: unknown — келушілерге байланысты; орыннан сұраңыз.",
         "lat": 51.1293821,
-        "lon": 71.4285934
+        "lon": 71.4285934,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "node/10564988185",
@@ -1195,7 +1297,10 @@
         ],
         "caveats": "Жол түзу қашықтыққа 1,3 коэффициентімен есептелді; кіреберіс, өткел және тротуар қолжетімділігі тексерілмеген. Тыныштық: unknown — келушілерге байланысты; орыннан сұраңыз.",
         "lat": 51.1285659,
-        "lon": 71.4333254
+        "lon": 71.4333254,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -1204,7 +1309,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "group_four": {
     "interpretation": {
@@ -1225,6 +1332,8 @@
       "language": "ru",
       "group_size": 4,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1266,7 +1375,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Места для всей группы и бронирование не подтверждены.",
         "lat": 51.0891569,
-        "lon": 71.4087027
+        "lon": 71.4087027,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "node/13397061026",
@@ -1305,7 +1417,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Места для всей группы и бронирование не подтверждены.",
         "lat": 51.0892714,
-        "lon": 71.4078873
+        "lon": 71.4078873,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -1314,7 +1429,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "accessible": {
     "interpretation": {
@@ -1338,6 +1455,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1379,7 +1498,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены.",
         "lat": 51.0883714,
-        "lon": 71.4094571
+        "lon": 71.4094571,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -1388,7 +1510,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "missing_hours": {
     "interpretation": {
@@ -1408,6 +1532,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1449,7 +1575,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1293821,
-        "lon": 71.4285934
+        "lon": 71.4285934,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -1458,7 +1587,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "lexical"
+    "retrieval_backend": "lexical",
+    "weather": null,
+    "layover": null
   },
   "all_closed": {
     "interpretation": {
@@ -1478,6 +1609,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1488,7 +1621,9 @@
     "alternative": null,
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "lexical"
+    "retrieval_backend": "lexical",
+    "weather": null,
+    "layover": null
   },
   "injection_poi": {
     "interpretation": {
@@ -1508,6 +1643,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1549,7 +1686,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1293821,
-        "lon": 71.4285934
+        "lon": 71.4285934,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -1558,7 +1698,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "lexical"
+    "retrieval_backend": "lexical",
+    "weather": null,
+    "layover": null
   },
   "harmful": {
     "interpretation": {
@@ -1588,6 +1730,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1598,7 +1742,9 @@
     "alternative": null,
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "after_midnight": {
     "interpretation": {
@@ -1619,6 +1765,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1660,7 +1808,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
         "lat": 51.1549277,
-        "lon": 71.4216481
+        "lon": 71.4216481,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": null,
@@ -1669,7 +1820,9 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "closes_on_arrival": {
     "interpretation": {
@@ -1689,6 +1842,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1699,7 +1854,9 @@
     "alternative": null,
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "lexical"
+    "retrieval_backend": "lexical",
+    "weather": null,
+    "layover": null
   },
   "required_socket": {
     "interpretation": {
@@ -1724,6 +1881,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1741,7 +1900,9 @@
     },
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "lexical"
+    "retrieval_backend": "lexical",
+    "weather": null,
+    "layover": null
   },
   "tiny_radius": {
     "interpretation": {
@@ -1760,6 +1921,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1777,7 +1940,9 @@
     },
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "centre_flight": {
     "interpretation": {
@@ -1805,6 +1970,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": 120,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1815,7 +1982,9 @@
     "alternative": null,
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "night_park_unknown": {
     "interpretation": {
@@ -1839,6 +2008,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1849,7 +2020,9 @@
     "alternative": null,
     "response_type": "refusal",
     "generation_backend": "template",
-    "retrieval_backend": "lexical"
+    "retrieval_backend": "lexical",
+    "weather": null,
+    "layover": null
   },
   "invalid_coordinates": {
     "interpretation": {
@@ -1874,6 +2047,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": false,
       "parser": "rules"
     },
@@ -1884,7 +2059,9 @@
     "alternative": null,
     "response_type": "clarification",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
   },
   "route_three": {
     "interpretation": {
@@ -1909,6 +2086,8 @@
       "language": "ru",
       "group_size": 1,
       "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
       "route_requested": true,
       "parser": "rules"
     },
@@ -1950,7 +2129,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены.",
         "lat": 51.1481229,
-        "lon": 71.4167693
+        "lon": 71.4167693,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "relation/15957444",
@@ -1989,7 +2171,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1548152,
-        "lon": 71.4195693
+        "lon": 71.4195693,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       },
       {
         "poi_id": "node/10148735979",
@@ -2028,7 +2213,10 @@
         ],
         "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
         "lat": 51.1540747,
-        "lon": 71.4196456
+        "lon": 71.4196456,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
       }
     ],
     "route": {
@@ -2064,6 +2252,1148 @@
     "alternative": null,
     "response_type": "recommendations",
     "generation_backend": "template",
-    "retrieval_backend": "e5+lexical"
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
+  },
+  "layover_long": {
+    "interpretation": {
+      "intent": "layover",
+      "duration_min": 171,
+      "mode": "walk",
+      "max_travel_min": 20,
+      "categories": [
+        "park",
+        "attraction",
+        "viewpoint",
+        "gallery",
+        "museum"
+      ],
+      "tags": [],
+      "constraints": [
+        "tourist"
+      ],
+      "assumptions": [
+        "В пути не более 20 минут в одну сторону.",
+        "Для прогулки выбраны парки и достопримечательности."
+      ],
+      "language": "ru",
+      "group_size": 1,
+      "flight_in_min": null,
+      "layover_min": 420,
+      "departure_clock": null,
+      "route_requested": true,
+      "parser": "rules"
+    },
+    "recommendations": [
+      {
+        "poi_id": "way/230401645",
+        "name": "Байтерек",
+        "category": "attraction",
+        "distance_m": 45,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "Можно включить в короткое знакомство с городом. Путь займёт около 1 мин; на месте — 20 мин.",
+        "visit_min": 20,
+        "what_to_do": "Осмотрите место и выберите интересный ракурс для фотографии.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/230401645",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: attraction",
+          "часы OSM"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1282882,
+        "lon": 71.4304546,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/69232075",
+        "name": "Парк Жетысу",
+        "category": "park",
+        "distance_m": 1066,
+        "walk_min": 18,
+        "travel_min": 18,
+        "why": "Можно включить в короткое знакомство с городом. Путь займёт около 18 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/69232075",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: park",
+          "часы OSM"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1359887,
+        "lon": 71.4384501,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/1422579155",
+        "name": "Сквер (без названия в OSM)",
+        "category": "park",
+        "distance_m": 31,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "Можно включить в короткое знакомство с городом. Путь займёт около 1 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/1422579155",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: park",
+          "часы OSM"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1277221,
+        "lon": 71.4299382,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      }
+    ],
+    "route": {
+      "stops": [
+        {
+          "poi_id": "way/230401645",
+          "travel_min": 1,
+          "visit_min": 20,
+          "arrival_min": 1,
+          "departure_min": 21
+        },
+        {
+          "poi_id": "way/69232075",
+          "travel_min": 17,
+          "visit_min": 30,
+          "arrival_min": 38,
+          "departure_min": 68
+        },
+        {
+          "poi_id": "way/1422579155",
+          "travel_min": 18,
+          "visit_min": 30,
+          "arrival_min": 86,
+          "departure_min": 116
+        }
+      ],
+      "total_min": 117,
+      "return_min": 1,
+      "basis": "straight_line_x1.3_estimate_including_return"
+    },
+    "clarifying_question": null,
+    "message": "План пересадки: в городе с 11:27, точка высадки — «Байтерек». Выезжайте обратно не позже 14:18: в аэропорту будете к 15:00, за 120 мин до вылета в 17:00. Выход в город зависит от визовых правил для вашего гражданства и от того, оформлен ли багаж до конечного пункта; проверьте это до паспортного контроля. Дорога из аэропорта и обратно — оценка для такси с запасом на пробки, а не расписание; при задержке рейса план меняется.",
+    "alternative": null,
+    "response_type": "recommendations",
+    "generation_backend": "template",
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": {
+      "anchor": "Байтерек",
+      "anchor_lat": 51.128,
+      "anchor_lon": 71.43,
+      "layover_min": 420,
+      "exit_min": 45,
+      "transfer_min": 42,
+      "reserve_min": 120,
+      "city_min": 171,
+      "arrive_city": "2026-10-17T11:27:00+05:00",
+      "leave_city_by": "2026-10-17T14:18:00+05:00",
+      "back_at_airport_by": "2026-10-17T15:00:00+05:00",
+      "departure": "2026-10-17T17:00:00+05:00",
+      "basis": "taxi_estimate_straight_line_x1.3_with_traffic_buffer"
+    }
+  },
+  "frost_walk": {
+    "interpretation": {
+      "intent": "discover",
+      "duration_min": 60,
+      "mode": "walk",
+      "max_travel_min": 20,
+      "categories": [
+        "park",
+        "attraction",
+        "viewpoint",
+        "gallery",
+        "museum"
+      ],
+      "tags": [],
+      "constraints": [],
+      "assumptions": [
+        "В пути не более 20 минут в одну сторону.",
+        "Для прогулки выбраны парки и достопримечательности."
+      ],
+      "language": "ru",
+      "group_size": 1,
+      "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
+      "route_requested": false,
+      "parser": "rules"
+    },
+    "recommendations": [
+      {
+        "poi_id": "way/230401645",
+        "name": "Байтерек",
+        "category": "attraction",
+        "distance_m": 45,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "В помещении — удобный выбор при такой погоде. Путь займёт около 1 мин; на месте — 20 мин.",
+        "visit_min": 20,
+        "what_to_do": "Осмотрите место и выберите интересный ракурс для фотографии.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/230401645",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: attraction",
+          "часы OSM",
+          "погода: сценарий"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом. Холодно: ощущается как -32 °C, оденьтесь теплее.",
+        "lat": 51.1282882,
+        "lon": 71.4304546,
+        "shelter": "indoor",
+        "outdoor_min": 1,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/230358847",
+        "name": "Корме",
+        "category": "gallery",
+        "distance_m": 675,
+        "walk_min": 12,
+        "travel_min": 12,
+        "why": "В помещении — удобный выбор при такой погоде. Путь займёт около 12 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Осмотритесь внутри; условия входа и доступные пространства уточните на месте.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/230358847",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: gallery",
+          "часы OSM",
+          "погода: сценарий"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом. Холодно: ощущается как -32 °C, оденьтесь теплее. Часы работы ТРЦ на пути не подтверждены; проверьте, что он открыт.",
+        "lat": 51.1286406,
+        "lon": 71.4203796,
+        "shelter": "indoor",
+        "outdoor_min": 10,
+        "warm_route": {
+          "hub_id": "way/108096984",
+          "hub_name": "Керуен",
+          "hub_lat": 51.127775,
+          "hub_lon": 71.425303,
+          "hub_source_url": "https://www.openstreetmap.org/way/108096984",
+          "outdoor_legs_min": [
+            5,
+            5
+          ],
+          "outdoor_total_min": 10,
+          "travel_min": 12,
+          "hub_hours_confirmed": false,
+          "basis": "straight_line_x1.3_via_osm_building_outline"
+        }
+      },
+      {
+        "poi_id": "node/2388707906",
+        "name": "Астана-Экспо КС",
+        "category": "gallery",
+        "distance_m": 837,
+        "walk_min": 14,
+        "travel_min": 14,
+        "why": "В помещении — удобный выбор при такой погоде. Путь займёт около 14 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Осмотритесь внутри; условия входа и доступные пространства уточните на месте.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/node/2388707906",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: gallery",
+          "часы OSM",
+          "погода: сценарий"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом. Холодно: ощущается как -32 °C, оденьтесь теплее. Часы работы ТРЦ на пути не подтверждены; проверьте, что он открыт.",
+        "lat": 51.1294931,
+        "lon": 71.4182513,
+        "shelter": "indoor",
+        "outdoor_min": 13,
+        "warm_route": {
+          "hub_id": "way/108096984",
+          "hub_name": "Керуен",
+          "hub_lat": 51.127775,
+          "hub_lon": 71.425303,
+          "hub_source_url": "https://www.openstreetmap.org/way/108096984",
+          "outdoor_legs_min": [
+            5,
+            8
+          ],
+          "outdoor_total_min": 13,
+          "travel_min": 14,
+          "hub_hours_confirmed": false,
+          "basis": "straight_line_x1.3_via_osm_building_outline"
+        }
+      }
+    ],
+    "route": null,
+    "clarifying_question": null,
+    "message": "",
+    "alternative": null,
+    "response_type": "recommendations",
+    "generation_backend": "template",
+    "retrieval_backend": "e5+lexical",
+    "weather": {
+      "at": "2026-01-15T15:00:00+05:00",
+      "temperature_c": -24.0,
+      "feels_like_c": -32.0,
+      "wind_ms": 7.0,
+      "gust_ms": 11.0,
+      "precip_mm": 0.0,
+      "code": 3,
+      "level": "harsh",
+      "reasons": [
+        "cold"
+      ],
+      "source": "manual"
+    },
+    "layover": null
+  },
+  "layover_short": {
+    "interpretation": {
+      "intent": "layover",
+      "duration_min": 240,
+      "mode": "walk",
+      "max_travel_min": 20,
+      "categories": [
+        "park",
+        "attraction",
+        "viewpoint",
+        "gallery",
+        "museum"
+      ],
+      "tags": [],
+      "constraints": [
+        "tourist"
+      ],
+      "assumptions": [
+        "В пути не более 20 минут в одну сторону.",
+        "Для прогулки выбраны парки и достопримечательности."
+      ],
+      "language": "ru",
+      "group_size": 1,
+      "flight_in_min": null,
+      "layover_min": 240,
+      "departure_clock": null,
+      "route_requested": false,
+      "parser": "rules"
+    },
+    "recommendations": [],
+    "route": null,
+    "clarifying_question": null,
+    "message": "За эту пересадку (240 мин) на город остаётся меньше 45 мин: 45 мин на выход из аэропорта, дорога туда и обратно с запасом на пробки и 120 мин резерва до вылета. Надёжнее остаться в аэропорту.",
+    "alternative": null,
+    "response_type": "refusal",
+    "generation_backend": "template",
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
+  },
+  "layover_departure_clock": {
+    "interpretation": {
+      "intent": "layover",
+      "duration_min": 240,
+      "mode": "walk",
+      "max_travel_min": 20,
+      "categories": [
+        "park",
+        "attraction",
+        "viewpoint",
+        "gallery",
+        "museum"
+      ],
+      "tags": [],
+      "constraints": [
+        "tourist"
+      ],
+      "assumptions": [
+        "В пути не более 20 минут в одну сторону.",
+        "Для прогулки выбраны парки и достопримечательности."
+      ],
+      "language": "ru",
+      "group_size": 1,
+      "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": "22:30",
+      "route_requested": true,
+      "parser": "rules"
+    },
+    "recommendations": [
+      {
+        "poi_id": "way/230401645",
+        "name": "Байтерек",
+        "category": "attraction",
+        "distance_m": 45,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "Можно включить в короткое знакомство с городом. Путь займёт около 1 мин; на месте — 20 мин.",
+        "visit_min": 20,
+        "what_to_do": "Осмотрите место и выберите интересный ракурс для фотографии.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/230401645",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: attraction",
+          "часы OSM"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1282882,
+        "lon": 71.4304546,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/69232075",
+        "name": "Парк Жетысу",
+        "category": "park",
+        "distance_m": 1066,
+        "walk_min": 18,
+        "travel_min": 18,
+        "why": "Можно включить в короткое знакомство с городом. Путь займёт около 18 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/69232075",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: park",
+          "часы OSM"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1359887,
+        "lon": 71.4384501,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/258818063",
+        "name": "Сквер (без названия в OSM)",
+        "category": "park",
+        "distance_m": 30,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "Можно включить в короткое знакомство с городом. Путь займёт около 1 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/258818063",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: park",
+          "часы OSM"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1278066,
+        "lon": 71.4297076,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      }
+    ],
+    "route": {
+      "stops": [
+        {
+          "poi_id": "way/230401645",
+          "travel_min": 1,
+          "visit_min": 20,
+          "arrival_min": 1,
+          "departure_min": 21
+        },
+        {
+          "poi_id": "way/69232075",
+          "travel_min": 17,
+          "visit_min": 30,
+          "arrival_min": 38,
+          "departure_min": 68
+        },
+        {
+          "poi_id": "way/258818063",
+          "travel_min": 18,
+          "visit_min": 30,
+          "arrival_min": 86,
+          "departure_min": 116
+        }
+      ],
+      "total_min": 117,
+      "return_min": 1,
+      "basis": "straight_line_x1.3_estimate_including_return"
+    },
+    "clarifying_question": null,
+    "message": "План пересадки: в городе с 14:27, точка высадки — «Байтерек». Выезжайте обратно не позже 19:48: в аэропорту будете к 20:30, за 120 мин до вылета в 22:30. Выход в город зависит от визовых правил для вашего гражданства и от того, оформлен ли багаж до конечного пункта; проверьте это до паспортного контроля. Дорога из аэропорта и обратно — оценка для такси с запасом на пробки, а не расписание; при задержке рейса план меняется.",
+    "alternative": null,
+    "response_type": "recommendations",
+    "generation_backend": "template",
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": {
+      "anchor": "Байтерек",
+      "anchor_lat": 51.128,
+      "anchor_lon": 71.43,
+      "layover_min": 570,
+      "exit_min": 45,
+      "transfer_min": 42,
+      "reserve_min": 120,
+      "city_min": 240,
+      "arrive_city": "2026-10-17T14:27:00+05:00",
+      "leave_city_by": "2026-10-17T19:48:00+05:00",
+      "back_at_airport_by": "2026-10-17T20:30:00+05:00",
+      "departure": "2026-10-17T22:30:00+05:00",
+      "basis": "taxi_estimate_straight_line_x1.3_with_traffic_buffer"
+    }
+  },
+  "layover_english": {
+    "interpretation": {
+      "intent": "layover",
+      "duration_min": 231,
+      "mode": "walk",
+      "max_travel_min": 20,
+      "categories": [
+        "park",
+        "attraction",
+        "viewpoint",
+        "gallery",
+        "museum"
+      ],
+      "tags": [],
+      "constraints": [
+        "tourist"
+      ],
+      "assumptions": [
+        "At most 20 minutes each way.",
+        "Parks and landmarks are preferred for a walk."
+      ],
+      "language": "en",
+      "group_size": 1,
+      "flight_in_min": null,
+      "layover_min": 480,
+      "departure_clock": null,
+      "route_requested": true,
+      "parser": "rules"
+    },
+    "recommendations": [
+      {
+        "poi_id": "way/230401645",
+        "name": "Bayterek",
+        "category": "attraction",
+        "distance_m": 45,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "An option for a short introduction to the city. About 1 min to get there, with 20 min to visit.",
+        "visit_min": 20,
+        "what_to_do": "Look around and choose a viewpoint for a photo.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/230401645",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "approximate location",
+          "Astana time",
+          "OSM category: attraction",
+          "OSM hours"
+        ],
+        "caveats": "Travel is estimated from straight-line distance with a 1.3 factor; entrances, crossings and pavement accessibility are unverified. Opening hours are unconfirmed; check before leaving.",
+        "lat": 51.1282882,
+        "lon": 71.4304546,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/69232075",
+        "name": "Zhetysu Park",
+        "category": "park",
+        "distance_m": 1066,
+        "walk_min": 18,
+        "travel_min": 18,
+        "why": "An option for a short introduction to the city. About 18 min to get there, with 30 min to visit.",
+        "visit_min": 30,
+        "what_to_do": "Walk around at your own pace and take a short break.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/69232075",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "approximate location",
+          "Astana time",
+          "OSM category: park",
+          "OSM hours"
+        ],
+        "caveats": "Travel is estimated from straight-line distance with a 1.3 factor; entrances, crossings and pavement accessibility are unverified. Opening hours are unconfirmed; check before leaving.",
+        "lat": 51.1359887,
+        "lon": 71.4384501,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/258818063",
+        "name": "Public garden (unnamed in OSM)",
+        "category": "park",
+        "distance_m": 30,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "An option for a short introduction to the city. About 1 min to get there, with 30 min to visit.",
+        "visit_min": 30,
+        "what_to_do": "Walk around at your own pace and take a short break.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/258818063",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "approximate location",
+          "Astana time",
+          "OSM category: park",
+          "OSM hours"
+        ],
+        "caveats": "Travel is estimated from straight-line distance with a 1.3 factor; entrances, crossings and pavement accessibility are unverified. This place has no name in OSM; the label is based on its type. Opening hours are unconfirmed; check before leaving.",
+        "lat": 51.1278066,
+        "lon": 71.4297076,
+        "shelter": null,
+        "outdoor_min": null,
+        "warm_route": null
+      }
+    ],
+    "route": {
+      "stops": [
+        {
+          "poi_id": "way/230401645",
+          "travel_min": 1,
+          "visit_min": 20,
+          "arrival_min": 1,
+          "departure_min": 21
+        },
+        {
+          "poi_id": "way/69232075",
+          "travel_min": 17,
+          "visit_min": 30,
+          "arrival_min": 38,
+          "departure_min": 68
+        },
+        {
+          "poi_id": "way/258818063",
+          "travel_min": 18,
+          "visit_min": 30,
+          "arrival_min": 86,
+          "departure_min": 116
+        }
+      ],
+      "total_min": 117,
+      "return_min": 1,
+      "basis": "straight_line_x1.3_estimate_including_return"
+    },
+    "clarifying_question": null,
+    "message": "Layover plan: in the city from 11:27, drop-off at «Baiterek». Head back no later than 15:18: you will be at the airport by 16:00, 120 min before your 18:00 departure. Leaving the airport depends on visa rules for your citizenship and on whether your bags are checked through; verify this before passport control. The airport transfer is a taxi estimate with a traffic buffer, not a timetable; a flight delay changes the plan.",
+    "alternative": null,
+    "response_type": "recommendations",
+    "generation_backend": "template",
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": {
+      "anchor": "Байтерек",
+      "anchor_lat": 51.128,
+      "anchor_lon": 71.43,
+      "layover_min": 480,
+      "exit_min": 45,
+      "transfer_min": 42,
+      "reserve_min": 120,
+      "city_min": 231,
+      "arrive_city": "2026-10-17T11:27:00+05:00",
+      "leave_city_by": "2026-10-17T15:18:00+05:00",
+      "back_at_airport_by": "2026-10-17T16:00:00+05:00",
+      "departure": "2026-10-17T18:00:00+05:00",
+      "basis": "taxi_estimate_straight_line_x1.3_with_traffic_buffer"
+    }
+  },
+  "layover_no_time": {
+    "interpretation": {
+      "intent": "layover",
+      "duration_min": 60,
+      "mode": "walk",
+      "max_travel_min": 20,
+      "categories": [
+        "park",
+        "attraction",
+        "viewpoint",
+        "gallery",
+        "museum"
+      ],
+      "tags": [],
+      "constraints": [
+        "tourist"
+      ],
+      "assumptions": [
+        "В пути не более 20 минут в одну сторону.",
+        "Для прогулки выбраны парки и достопримечательности."
+      ],
+      "language": "ru",
+      "group_size": 1,
+      "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
+      "route_requested": false,
+      "parser": "rules"
+    },
+    "recommendations": [],
+    "route": null,
+    "clarifying_question": "Сколько длится пересадка или во сколько вылет?",
+    "message": "Сколько длится пересадка или во сколько вылет?",
+    "alternative": null,
+    "response_type": "clarification",
+    "generation_backend": "template",
+    "retrieval_backend": "e5+lexical",
+    "weather": null,
+    "layover": null
+  },
+  "frost_park": {
+    "interpretation": {
+      "intent": "discover",
+      "duration_min": 60,
+      "mode": "walk",
+      "max_travel_min": 20,
+      "categories": [
+        "park"
+      ],
+      "tags": [],
+      "constraints": [],
+      "assumptions": [
+        "В пути не более 20 минут в одну сторону."
+      ],
+      "language": "ru",
+      "group_size": 1,
+      "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
+      "route_requested": false,
+      "parser": "rules"
+    },
+    "recommendations": [],
+    "route": null,
+    "clarifying_question": null,
+    "message": "При такой погоде подходящих мест в помещении в пределах лимита нет, а места на улице не советуем. Холодно: ощущается как -32 °C, оденьтесь теплее.",
+    "alternative": null,
+    "response_type": "refusal",
+    "generation_backend": "template",
+    "retrieval_backend": "e5+lexical",
+    "weather": {
+      "at": "2026-01-15T15:00:00+05:00",
+      "temperature_c": -24.0,
+      "feels_like_c": -32.0,
+      "wind_ms": 7.0,
+      "gust_ms": 11.0,
+      "precip_mm": 0.0,
+      "code": 3,
+      "level": "harsh",
+      "reasons": [
+        "cold"
+      ],
+      "source": "manual"
+    },
+    "layover": null
+  },
+  "rain_walk": {
+    "interpretation": {
+      "intent": "discover",
+      "duration_min": 60,
+      "mode": "walk",
+      "max_travel_min": 20,
+      "categories": [
+        "park",
+        "attraction",
+        "viewpoint",
+        "gallery",
+        "museum"
+      ],
+      "tags": [],
+      "constraints": [],
+      "assumptions": [
+        "В пути не более 20 минут в одну сторону.",
+        "Для прогулки выбраны парки и достопримечательности."
+      ],
+      "language": "ru",
+      "group_size": 1,
+      "flight_in_min": null,
+      "layover_min": null,
+      "departure_clock": null,
+      "route_requested": false,
+      "parser": "rules"
+    },
+    "recommendations": [
+      {
+        "poi_id": "way/230401645",
+        "name": "Байтерек",
+        "category": "attraction",
+        "distance_m": 45,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 1 мин; на месте — 20 мин.",
+        "visit_min": 20,
+        "what_to_do": "Осмотрите место и выберите интересный ракурс для фотографии.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/230401645",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: attraction",
+          "часы OSM",
+          "погода: сценарий"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1282882,
+        "lon": 71.4304546,
+        "shelter": "indoor",
+        "outdoor_min": null,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/230358847",
+        "name": "Корме",
+        "category": "gallery",
+        "distance_m": 675,
+        "walk_min": 11,
+        "travel_min": 11,
+        "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 11 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Осмотритесь внутри; условия входа и доступные пространства уточните на месте.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/230358847",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: gallery",
+          "часы OSM",
+          "погода: сценарий"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
+        "lat": 51.1286406,
+        "lon": 71.4203796,
+        "shelter": "indoor",
+        "outdoor_min": null,
+        "warm_route": null
+      },
+      {
+        "poi_id": "way/1422579155",
+        "name": "Сквер (без названия в OSM)",
+        "category": "park",
+        "distance_m": 31,
+        "walk_min": 1,
+        "travel_min": 1,
+        "why": "Тип места соответствует вашему запросу и лимиту пути. Путь займёт около 1 мин; на месте — 30 мин.",
+        "visit_min": 30,
+        "what_to_do": "Пройдитесь по территории в своём темпе и сделайте короткую остановку.",
+        "open_status": {
+          "state": "unknown",
+          "confidence": "low",
+          "basis": "missing_opening_hours",
+          "next_change": null
+        },
+        "source": "poi_data",
+        "idea_source": "generated_idea",
+        "field_sources": {
+          "name": "poi_data",
+          "open_status": "poi_data",
+          "distance_m": "calculated",
+          "travel_min": "calculated",
+          "visit_min": "generated_idea",
+          "what_to_do": "generated_idea",
+          "why": "generated_idea"
+        },
+        "source_url": "https://www.openstreetmap.org/way/1422579155",
+        "collected_at": "2026-10-17T16:30:31.002378+00:00",
+        "data_used": [
+          "примерная локация",
+          "время Астаны",
+          "категория OSM: park",
+          "часы OSM",
+          "погода: сценарий"
+        ],
+        "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом. Ожидаются осадки.",
+        "lat": 51.1277221,
+        "lon": 71.4299382,
+        "shelter": "outdoor",
+        "outdoor_min": null,
+        "warm_route": null
+      }
+    ],
+    "route": null,
+    "clarifying_question": null,
+    "message": "",
+    "alternative": null,
+    "response_type": "recommendations",
+    "generation_backend": "template",
+    "retrieval_backend": "e5+lexical",
+    "weather": {
+      "at": "2026-10-17T15:00:00+05:00",
+      "temperature_c": 11.0,
+      "feels_like_c": 8.0,
+      "wind_ms": 5.0,
+      "gust_ms": 9.0,
+      "precip_mm": 0.6,
+      "code": 61,
+      "level": "caution",
+      "reasons": [
+        "precip"
+      ],
+      "source": "manual"
+    },
+    "layover": null
   }
 }

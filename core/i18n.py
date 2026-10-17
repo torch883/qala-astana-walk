@@ -35,6 +35,18 @@ TEXT={
  'fun':'Уточните билеты и время работы аттракционов; выберите занятие по возрасту и интересам.',
  'sport':'Уточните условия разового посещения и возьмите удобную одежду.',
  'unnamed':'У объекта нет названия в OSM; подпись составлена по типу места.',
+ 'weather':'В помещении — удобный выбор при такой погоде.',
+ 'weather_cold':'Холодно: ощущается как {feels} °C, оденьтесь теплее.','weather_heat':'Жарко: ощущается как {feels} °C, возьмите воду и держитесь тени.','weather_wind':'Ветер до {wind} м/с.','weather_precip':'Ожидаются осадки.','weather_storm':'Возможна гроза.',
+ 'weather_none':'При такой погоде подходящих мест в помещении в пределах лимита нет, а места на улице не советуем. {advice}',
+ 'hub_hours':'Часы работы ТРЦ на пути не подтверждены; проверьте, что он открыт.',
+ 'used_weather':'погода Open-Meteo','used_weather_manual':'погода: сценарий',
+ 'layover_need_time':'Сколько длится пересадка или во сколько вылет?',
+ 'layover_short':'За эту пересадку ({layover} мин) на город остаётся меньше {min} мин: {exit} мин на выход из аэропорта, дорога туда и обратно с запасом на пробки и {reserve} мин резерва до вылета. Надёжнее остаться в аэропорту.',
+ 'layover_none':'Время на город есть, но подходящих подтверждённых мест у точек высадки не нашлось. Надёжнее остаться в аэропорту.',
+ 'layover_plan':'План пересадки: в городе с {arrive}, точка высадки — «{anchor}». Выезжайте обратно не позже {leave}: в аэропорту будете к {back}, за {reserve} мин до вылета в {departure}.',
+ 'layover_assume':'Считаем, что вы в аэропорту Астаны и выходите в город.',
+ 'layover_visa':'Выход в город зависит от визовых правил для вашего гражданства и от того, оформлен ли багаж до конечного пункта; проверьте это до паспортного контроля.',
+ 'layover_transfer':'Дорога из аэропорта и обратно — оценка для такси с запасом на пробки, а не расписание; при задержке рейса план меняется.',
  'used_location':'примерная локация','used_time':'время Астаны','used_category':'категория OSM','used_hours':'часы OSM','unknown_alt':'Альтернатива требует ослабить ограничение; это не готовая рекомендация.'},
 'en':{
  'location':'Where are you now? Select a map point or a location in the sidebar.',
@@ -72,6 +84,18 @@ TEXT={
  'fun':'Check tickets and ride hours; pick an activity that suits your age and interests.',
  'sport':'Check single-visit conditions and bring comfortable clothes.',
  'unnamed':'This place has no name in OSM; the label is based on its type.',
+ 'weather':'Indoors — a comfortable choice in this weather.',
+ 'weather_cold':'Cold: feels like {feels} °C, dress warmly.','weather_heat':'Hot: feels like {feels} °C; take water and stay in the shade.','weather_wind':'Wind up to {wind} m/s.','weather_precip':'Precipitation is expected.','weather_storm':'A thunderstorm is possible.',
+ 'weather_none':'In this weather no suitable indoor places fit the limit, and outdoor places are not suggested. {advice}',
+ 'hub_hours':'The mall\'s opening hours on the way are unconfirmed; check that it is open.',
+ 'used_weather':'Open-Meteo weather','used_weather_manual':'weather: scenario',
+ 'layover_need_time':'How long is your layover, or what time is your departure?',
+ 'layover_short':'This layover ({layover} min) leaves less than {min} min for the city: {exit} min to leave the airport, the transfer both ways with a traffic buffer and a {reserve}-min reserve before departure. Staying at the airport is safer.',
+ 'layover_none':'There is time for the city, but no suitable verified places were found near the drop-off points. Staying at the airport is safer.',
+ 'layover_plan':'Layover plan: in the city from {arrive}, drop-off at «{anchor}». Head back no later than {leave}: you will be at the airport by {back}, {reserve} min before your {departure} departure.',
+ 'layover_assume':'Assuming you are at Astana airport and going into the city.',
+ 'layover_visa':'Leaving the airport depends on visa rules for your citizenship and on whether your bags are checked through; verify this before passport control.',
+ 'layover_transfer':'The airport transfer is a taxi estimate with a traffic buffer, not a timetable; a flight delay changes the plan.',
  'used_location':'approximate location','used_time':'Astana time','used_category':'OSM category','used_hours':'OSM hours','unknown_alt':'This alternative requires relaxing a constraint; it is not a ready recommendation.'},
 'kk':{
  'location':'Қазір қайдасыз? Картадан немесе бүйір панельден орынды таңдаңыз.',
@@ -109,6 +133,23 @@ TEXT={
  'fun':'Билет пен аттракциондардың жұмыс уақытын нақтылаңыз; жасыңыз бен қызығушылығыңызға сай әрекет таңдаңыз.',
  'sport':'Бір реттік кіру шарттарын нақтылап, ыңғайлы киім алыңыз.',
  'unnamed':'OSM-да бұл орынның атауы жоқ; белгі орын түріне қарай жасалды.',
+ 'weather':'Ғимарат ішінде — мұндай ауа райында ыңғайлы таңдау.',
+ 'weather_cold':'Суық: {feels} °C сияқты сезіледі, жылы киініңіз.','weather_heat':'Ыстық: {feels} °C сияқты сезіледі; су алып, көлеңкеде жүріңіз.','weather_wind':'Жел {wind} м/с-қа дейін.','weather_precip':'Жауын-шашын күтіледі.','weather_storm':'Найзағай болуы мүмкін.',
+ 'weather_none':'Мұндай ауа райында шекке сай ғимарат ішіндегі орын табылмады, ал ашық аспан астындағы орындарды ұсынбаймыз. {advice}',
+ 'hub_hours':'Жолдағы сауда орталығының жұмыс уақыты расталмаған; ашық екенін тексеріңіз.',
+ 'used_weather':'Open-Meteo ауа райы','used_weather_manual':'ауа райы: сценарий',
+ 'layover_need_time':'Ауысып отыру қанша уақытқа созылады немесе ұшу нешеде?',
+ 'layover_short':'Бұл ауысып отыру ({layover} мин) қалаға {min} минуттан аз уақыт қалдырады: әуежайдан шығуға {exit} мин, кептеліс қорымен екі жаққа жол және ұшуға дейін {reserve} мин резерв. Әуежайда қалған сенімдірек.',
+ 'layover_none':'Қалаға уақыт бар, бірақ түсу нүктелерінің маңынан сай расталған орын табылмады. Әуежайда қалған сенімдірек.',
+ 'layover_plan':'Ауысып отыру жоспары: қалада {arrive} бастап, түсу нүктесі — «{anchor}». Кері қарай ең кеші {leave} шығыңыз: әуежайға {back} жетесіз, бұл {departure} ұшуынан {reserve} мин бұрын.',
+ 'layover_assume':'Сіз Астана әуежайындасыз және қалаға шығасыз деп есептейміз.',
+ 'layover_visa':'Қалаға шығу азаматтығыңызға арналған виза ережелеріне және багаждың соңғы пунктке дейін рәсімделгеніне байланысты; паспорттық бақылауға дейін тексеріңіз.',
+ 'layover_transfer':'Әуежайға дейінгі және кері жол — кептеліс қоры бар такси бағалауы, кесте емес; рейс кешіксе, жоспар өзгереді.',
  'used_location':'жуық орналасқан жер','used_time':'Астана уақыты','used_category':'OSM санаты','used_hours':'OSM жұмыс уақыты','unknown_alt':'Бұл балама үшін шектеуді жеңілдету қажет; бұл дайын ұсыныс емес.'}}
 
 def tr(lang,key): return TEXT[lang][key]
+
+# Public preset names shown to the user; config keys stay Russian.
+PLACES={'Байтерек':{'en':'Baiterek','kk':'Бәйтерек'},'Хан Шатыр':{'en':'Khan Shatyr'},'Экспо':{'en':'EXPO','kk':'ЭКСПО'},'Центральный парк':{'en':'Central Park','kk':'Орталық саябақ'},'Аэропорт':{'en':'Airport','kk':'Әуежай'}}
+
+def place(lang,name): return PLACES.get(name,{}).get(lang,name)

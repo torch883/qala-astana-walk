@@ -19,8 +19,50 @@ class Interpretation(Strict):
     language: Language = 'ru'
     group_size: int = Field(default=1,ge=1,le=20)
     flight_in_min: int | None = Field(default=None,ge=1,le=1440)
+    # «Астана за пересадку»: layover length, or the departure clock time when only that is given.
+    layover_min: int | None = Field(default=None,ge=1,le=1440)
+    departure_clock: str | None = Field(default=None,pattern=r'^([01]\d|2[0-3]):[0-5]\d$')
     route_requested: bool = False
     parser: Literal['rules','gemini'] = 'rules'
+
+class Weather(Strict):
+    at: str
+    temperature_c: float
+    feels_like_c: float
+    wind_ms: float
+    gust_ms: float = 0
+    precip_mm: float = 0
+    code: int = 0
+    level: Literal['ok','caution','harsh']
+    reasons: list[Literal['cold','heat','wind','precip','storm']] = Field(default_factory=list)
+    source: Literal['open-meteo','manual']
+
+class WarmRoute(Strict):
+    hub_id: str
+    hub_name: str
+    hub_lat: float
+    hub_lon: float
+    hub_source_url: str
+    outdoor_legs_min: list[int] = Field(min_length=2,max_length=2)
+    outdoor_total_min: int = Field(ge=0)
+    travel_min: int = Field(ge=0)
+    hub_hours_confirmed: bool
+    basis: str = 'straight_line_x1.3_via_osm_building_outline'
+
+class LayoverPlan(Strict):
+    anchor: str
+    anchor_lat: float
+    anchor_lon: float
+    layover_min: int
+    exit_min: int
+    transfer_min: int
+    reserve_min: int
+    city_min: int
+    arrive_city: str
+    leave_city_by: str
+    back_at_airport_by: str
+    departure: str
+    basis: str = 'taxi_estimate_straight_line_x1.3_with_traffic_buffer'
 
 class OpenStatus(Strict):
     state: Literal['open','closed','unknown']
@@ -48,6 +90,9 @@ class Recommendation(Strict):
     caveats: str
     lat: float
     lon: float
+    shelter: Literal['indoor','outdoor'] | None = None
+    outdoor_min: int | None = Field(default=None,ge=0)
+    warm_route: WarmRoute | None = None
 
 class RouteStop(Strict):
     poi_id: str
@@ -80,10 +125,12 @@ class Answer(Strict):
     response_type: Literal['recommendations','clarification','refusal'] = 'recommendations'
     generation_backend: str = 'template'
     retrieval_backend: str = 'lexical'
+    weather: Weather | None = None
+    layover: LayoverPlan | None = None
 
 class Choice(Strict):
     poi_id: str
-    reason: Literal['nearby','category','children','tourist','coffee','night','accessible','group']
+    reason: Literal['nearby','category','children','tourist','coffee','night','accessible','group','weather']
     activity: Literal['walk','look','coffee','eat','play','browse','show','read','fun','sport']
     visit_min: int = Field(ge=5,le=120)
 

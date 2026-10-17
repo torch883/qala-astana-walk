@@ -2,7 +2,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass
 from collections import Counter
-from core.schemas import Interpretation,OpenStatus
+from core.schemas import Interpretation,OpenStatus,WarmRoute
 from core.geo import haversine,travel
 from core.hours import covers_visit,local_time
 from core.settings import CONFIG
@@ -28,14 +28,28 @@ class Candidate:
     open_status: OpenStatus
     score: float=0
     score_parts: dict | None=None
+    shelter: str | None=None
+    outdoor_min: int | None=None
+    warm: WarmRoute | None=None
 
-def filter_candidates(pois,location,now,intent:Interpretation):
+def weather_check(p,location,now,intent,env,t):
+    """Harsh weather: outdoor places are excluded; a walk keeps every stretch outside short, through a mall if needed."""
+    if env.shelter[p['id']]=='outdoor':return 'weather_outdoor',t,None,None
+    if intent.mode!='walk':return '',t,None,None
+    cap=CONFIG['weather']['harsh_outdoor_leg_min'];target=(p['lat'],p['lon'])
+    outdoor=env.hubs.outdoor_min(location,target)
+    if outdoor<=cap:return '',t,outdoor,None
+    warm=env.hubs.warm_path(location,target,now,cap,intent.language)
+    if not warm:return 'weather_exposure',t,outdoor,None
+    return '',max(t,warm.travel_min),warm.outdoor_total_min,warm
+
+def filter_candidates(pois,location,now,intent:Interpretation,weather=None,env=None):
     accepted=[];rejected=[]
     night=local_time(now).hour>=22 or local_time(now).hour<6
+    harsh=weather is not None and weather.level=='harsh' and env is not None
     for p in pois:
         d=round(haversine(*location,p['lat'],p['lon']))
-        w,t=travel(d,intent.mode)
-        visit=min(PREFERRED.get(p['category'],20),intent.duration_min-2*t)
+        w,t=travel(d,intent.mode);outdoor=warm=None
         reason=''
         if t>intent.max_travel_min:reason='travel_limit'
         elif p['category'] not in intent.categories:reason='category'
@@ -43,7 +57,12 @@ def filter_candidates(pois,location,now,intent:Interpretation):
         elif p['tags'].get('disused')=='yes' or p['tags'].get('abandoned')=='yes':reason='disused'
         elif 'accessible' in intent.constraints and p.get('wheelchair')!='yes':reason='wheelchair_unconfirmed'
         elif 'children' in intent.constraints and (p['category'] in {'bar','nightclub'} or p['tags'].get('leisure')=='sauna'):reason='children'
-        elif visit<MIN_VISIT.get(p['category'],10):reason='time_budget'
+        elif harsh:
+            reason,t,outdoor,warm=weather_check(p,location,now,intent,env,t)
+            if warm:w=t
+            if not reason and t>intent.max_travel_min:reason='travel_limit'
+        visit=min(PREFERRED.get(p['category'],20),intent.duration_min-2*t)
+        if not reason and visit<MIN_VISIT.get(p['category'],10):reason='time_budget'
         for feature in ['socket','wifi','quiet']:
             confirmed=p.get(feature) in {'yes','wlan'} or p['tags'].get(feature)=='yes'
             if not reason and 'require_'+feature in intent.constraints and not confirmed:reason=feature+'_unconfirmed'
@@ -57,19 +76,24 @@ def filter_candidates(pois,location,now,intent:Interpretation):
             elif p['category'] in {'park','viewpoint','attraction','playground'} and p['tags'].get('lit')!='yes':reason='night_lighting_unconfirmed'
         if reason:
             rejected.append({'poi_id':p['id'],'name':p['name'],'reason':reason,'distance_m':d,'travel_min':t})
-        else:accepted.append(Candidate(p,d,w,t,visit,status))
+        else:accepted.append(Candidate(p,d,w,t,visit,status,shelter=env.shelter.get(p['id']) if env and weather else None,outdoor_min=outdoor,warm=warm))
     return accepted,rejected
 
-def rank(candidates,scores,intent):
+def rank(candidates,scores,intent,weather=None):
     weights=CONFIG['weights']
+    # Outdoor places drop in cold, wind, rain or heat; in harsh weather they are already filtered out.
+    bad_weather=weather is not None and weather.level!='ok'
     # No category term: filter_candidates already admits only requested categories.
     for c in candidates:
         parts={'semantic':scores.get(c.poi['id'],0)*weights['semantic'],
                'distance':math.exp(-c.travel_min/15)*weights['distance'],
                'open':weights['open'] if c.open_status.state=='open' and c.open_status.confidence=='high' else 0,
                'popularity':popularity(c.poi)*weights['popularity'],
+               # A tourist with little time is better served by notable sights than by an unnamed square.
+               'tourist':popularity(c.poi)*weights['tourist_notability'] if 'tourist' in intent.constraints else 0,
                'gold':weights['gold'] if c.poi.get('gold_reviewed') else 0,
-               'unknown':-weights['unknown_penalty'] if c.open_status.state=='unknown' else 0}
+               'unknown':-weights['unknown_penalty'] if c.open_status.state=='unknown' else 0,
+               'weather':-CONFIG['weather']['outdoor_penalty'] if bad_weather and c.shelter=='outdoor' else 0}
         c.score=sum(parts.values());c.score_parts={k:round(v,4) for k,v in parts.items()}
     return sorted(candidates,key=lambda c:(-c.score,c.distance_m,c.poi['id']))
 

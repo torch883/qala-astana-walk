@@ -35,12 +35,18 @@ def parse_rules(text,language=None,mode=None,group_size=1,accessible=False,max_t
     travel_match=re.search(r'(?:не (?:дальше|более)|в пути|within|max(?:imum)?|no more than)\s*(\d+)\s*(?:мин\w*|min\w*)',t)
     duration_text=t[:travel_match.start()]+t[travel_match.end():] if travel_match else t
     # Last value of a time range is the available budget, e.g. 30–60 minutes.
-    time_match=re.search(r'(\d+)\s*(?:[-–—]\s*(\d+))?\s*(час\w*|ч\b|hour\w*|сағат|min\w*|мин\w*|minutes?)',duration_text)
+    # «8-часовая пересадка» / «8-hour layover»: an optional hyphen may join the number and the unit.
+    time_match=re.search(r'(\d+)\s*(?:[-–—]\s*(\d+))?\s*-?\s*(час\w*|ч\b|hour\w*|сағат|min\w*|мин\w*|minutes?)',duration_text)
     if time_match:
         duration=int(time_match[2] or time_match[1])*(60 if re.match(r'час|ч\b|hour|сағат',time_match[3]) else 1)
         explicit_duration=True
     if contains(t,'полчаса','half an hour','жарты сағат'): duration=30;explicit_duration=True
-    if not explicit_duration: assumptions.append({'ru':'Бюджет времени: 60 минут.','en':'Time budget: 60 minutes.','kk':'Уақыт қоры: 60 минут.'}[lang])
+    # A layover is planned backwards from the departure; its length is not a walking budget.
+    layover=contains(t,'пересадк','стыковк','транзит','layover','stopover','ауысып')
+    layover_min=min(1440,duration) if layover and explicit_duration else None
+    clock=re.search(r'(?<![\d:.])([01]?\d|2[0-3])[:.]([0-5]\d)(?![\d:]|\.\d)',t) if layover else None
+    departure_clock=f'{int(clock[1]):02d}:{clock[2]}' if clock else None
+    if not explicit_duration and not layover: assumptions.append({'ru':'Бюджет времени: 60 минут.','en':'Time budget: 60 minutes.','kk':'Уақыт қоры: 60 минут.'}[lang])
     duration=max(5,min(480,duration))
     categories=[]
     if contains(t,'коф','кафе','coffee','cafe','кофе'): categories+=['cafe']
@@ -73,8 +79,9 @@ def parse_rules(text,language=None,mode=None,group_size=1,accessible=False,max_t
     if 'children' in constraints:
         categories=[c for c in categories if c not in {'bar','nightclub'}]
         if not categories: categories=['playground','park','museum','entertainment']
-    flight=contains(t,'вылет','рейс','flight','ұшу','ұшақ')
+    flight=contains(t,'вылет','рейс','flight','ұшу','ұшақ') and not layover
     flight_min=duration if flight and explicit_duration else (120 if flight else None)
+    if layover and 'tourist' not in constraints: constraints.append('tourist')
     selected_mode=mode or ('transport' if contains(t,'транспорт','такси','taxi','by car','көлік') else 'walk')
     travel_limit=CONFIG['default_max_travel_min'] if max_travel_min is None else max_travel_min
     m=travel_match
@@ -85,7 +92,7 @@ def parse_rules(text,language=None,mode=None,group_size=1,accessible=False,max_t
         categories=['park','attraction','viewpoint','gallery','museum']
         assumptions.append({'ru':'Для прогулки выбраны парки и достопримечательности.','en':'Parks and landmarks are preferred for a walk.','kk':'Серуенге саябақтар мен көрікті жерлер таңдалды.'}[lang])
     if 'night' in constraints and not categories: categories=['cafe','restaurant','bar','nightclub','cinema','theatre','entertainment']
-    return Interpretation(duration_min=duration,mode=selected_mode,max_travel_min=max(1,min(90,travel_limit)),categories=list(dict.fromkeys(categories)),tags=tags,constraints=list(dict.fromkeys(constraints)),assumptions=assumptions,language=lang,group_size=max(1,min(20,group_size)),flight_in_min=flight_min,route_requested=contains(t,'маршрут','route','бағыт'),parser='rules')
+    return Interpretation(intent='layover' if layover else 'discover',duration_min=duration,mode=selected_mode,max_travel_min=max(1,min(90,travel_limit)),categories=list(dict.fromkeys(categories)),tags=tags,constraints=list(dict.fromkeys(constraints)),assumptions=assumptions,language=lang,group_size=max(1,min(20,group_size)),flight_in_min=flight_min,layover_min=layover_min,departure_clock=departure_clock,route_requested=contains(t,'маршрут','route','бағыт'),parser='rules')
 
 def parse(text,**kwargs):
     baseline=parse_rules(text,**kwargs)
@@ -99,6 +106,9 @@ def parse(text,**kwargs):
         result.duration_min=min(result.duration_min,baseline.duration_min)
         result.constraints=list(dict.fromkeys(result.constraints+baseline.constraints))
         result.flight_in_min=baseline.flight_in_min
+        result.intent=baseline.intent
+        result.layover_min=baseline.layover_min
+        result.departure_clock=baseline.departure_clock
         result.group_size=baseline.group_size
         result.categories=baseline.categories
         result.assumptions=baseline.assumptions

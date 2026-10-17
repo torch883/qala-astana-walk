@@ -1,4 +1,4 @@
-.PHONY: run install collect enrich index test eval cache
+.PHONY: run install collect warm enrich index test eval cache
 PYTHON ?= python
 run:
 	$(PYTHON) -m streamlit run app.py
@@ -16,3 +16,5 @@ eval:
 	$(PYTHON) -m eval.run_eval
 cache:
 	$(PYTHON) -m eval.build_cache
+warm:
+	$(PYTHON) -m data.collect_warm

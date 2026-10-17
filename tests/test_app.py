@@ -2,10 +2,12 @@ from pathlib import Path
 from streamlit.testing.v1 import AppTest
 from core.settings import ROOT
 
-def test_app_and_five_scenarios():
+def test_app_and_demo_scenarios(monkeypatch):
+    # No live forecast in tests: demo buttons that need weather carry their own scenario preset.
+    monkeypatch.setenv('WEATHER','off')
     app=AppTest.from_file(str(ROOT/'app.py'),default_timeout=60).run()
     assert not app.exception
-    for i in range(5):
+    for i in range(7):
         app.button(key=f'demo_{i}').click().run(timeout=60)
         assert not app.exception
         answer=app.session_state['last_answer']
@@ -14,3 +16,5 @@ def test_app_and_five_scenarios():
             assert answer.response_type=='refusal' and not answer.recommendations
         else:
             assert answer.response_type=='recommendations' and answer.recommendations
+        if i==5:assert answer.layover is not None
+        if i==6:assert answer.weather.level=='harsh' and all(r.shelter=='indoor' for r in answer.recommendations)
