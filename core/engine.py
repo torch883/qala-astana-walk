@@ -25,17 +25,19 @@ class Engine:
         # Warm hubs and indoor/outdoor labels are computed once; they matter only when weather is passed in.
         self.env=Env(self.pois)
 
-    def answer(self,query,location,now=None,language=None,mode=None,group_size=1,accessible=False,max_travel_min=None,use_cache=True,weather=None):
+    def answer(self,query,location,now=None,language=None,mode=None,group_size=1,accessible=False,max_travel_min=None,use_cache=True,weather=None,parsed_intent=None,deadline=None,cache_enabled=None,transfer_floor=0):
         start=perf_counter();now=local_time(now or datetime.now().astimezone())
-        intent_parser=parse_rules if use_cache and os.getenv('DEMO_CACHE','0')=='1' else parse
-        intent=intent_parser(query,language=language,mode=mode,group_size=group_size,accessible=accessible,max_travel_min=max_travel_min)
+        cache_on=os.getenv('DEMO_CACHE','0')=='1' if cache_enabled is None else cache_enabled
+        intent_parser=parse_rules if use_cache and cache_on else parse
+        intent=parsed_intent.model_copy(deep=True) if parsed_intent is not None else intent_parser(query,language=language,mode=mode,group_size=group_size,accessible=accessible,max_travel_min=max_travel_min)
         debug={'total_pois':len(self.pois),'retrieval_backend':self.retriever.backend,'retrieval_warning':self.retriever.warning,'parser':intent.parser,'weather':weather.model_dump() if weather else None}
         def stop(key,kind='refusal',**values):
             debug['elapsed_ms']=round((perf_counter()-start)*1000,1)
             text=tr(intent.language,key).format(**values) if values else tr(intent.language,key)
             return Answer(interpretation=intent,recommendations=[],response_type=kind,message=text,clarifying_question=text if kind=='clarification' else None,retrieval_backend=self.retriever.backend,weather=weather),debug
         if harmful(query):return stop('harm')
-        if intent.intent=='layover':return self.layover(query,intent,location,now,weather,debug,stop,start)
+        if deadline is not None:deadline=local_time(deadline)
+        if intent.intent=='layover':return self.layover(query,intent,location,now,weather,debug,stop,start,transfer_floor,deadline)
         if location is None:return stop('location','clarification')
         try:location=round_location(*location)
         except (ValueError,TypeError):return stop('invalid','clarification')
@@ -50,7 +52,7 @@ class Engine:
         # The cache was recorded without weather, so it is skipped whenever weather changes the ranking.
         if use_cache and (weather is None or weather.level=='ok'):
             from core.cache import load_demo
-            cached=load_demo(query,location,now,intent,self.pois)
+            cached=load_demo(query,location,now,intent,self.pois,enabled=cache_on) if deadline is None else None
             if cached:
                 answer=cached
                 # Fresh filters + validator protect against stale cache and edited opening hours.
@@ -61,13 +63,17 @@ class Engine:
                     debug.update({'cache_hit':True,'accepted':len(accepted),'rejected_counts':dict(Counter(r['reason'] for r in rejected)),'elapsed_ms':round((perf_counter()-start)*1000,1)})
                     return answer,debug
                 except ValueError:pass
-        answer,_=self.recommend(query,intent,location,now,weather,debug,stop)
+        if deadline is not None:
+            remaining=int((deadline-now).total_seconds()//60)
+            if remaining<5:return stop('none')
+            intent.duration_min=min(intent.duration_min,remaining)
+        answer,_=self.recommend(query,intent,location,now,weather,debug,stop,deadline=deadline)
         debug['elapsed_ms']=round((perf_counter()-start)*1000,1)
         return answer,debug
 
-    def recommend(self,query,intent,location,now,weather,debug,stop,alternatives=True):
-        accepted,rejected=filter_candidates(self.pois,location,now,intent,weather,self.env)
-        debug.update({'accepted':len(accepted),'rejected_counts':dict(Counter(r['reason'] for r in rejected)),'rejections':sorted(rejected,key=lambda r:r['distance_m'])[:30]})
+    def recommend(self,query,intent,location,now,weather,debug,stop,alternatives=True,deadline=None):
+        accepted,rejected=filter_candidates(self.pois,location,now,intent,weather,self.env,deadline=deadline)
+        debug.update({'accepted':len(accepted),'rejected_counts':dict(Counter(r['reason'] for r in rejected)),'rejections':sorted(rejected,key=lambda r:(r['reason'] in {'category','travel_limit'},r['distance_m']))[:30]})
         if not accepted:
             # Harsh weather explains an empty answer better than a generic «nothing found».
             if weather is not None and weather.level=='harsh' and any(r['reason'].startswith('weather_') for r in rejected):
@@ -95,16 +101,16 @@ class Engine:
         debug['generation']=gen_debug
         return answer,debug
 
-    def layover(self,query,intent,location,now,weather,debug,stop,start):
+    def layover(self,query,intent,location,now,weather,debug,stop,start,transfer_floor=0,deadline=None):
         """«Астана за пересадку»: try each drop-off point inside a window derived backwards from the departure."""
         total=lay.layover_minutes(intent,now)
         if total is None:return stop('layover_need_time','clarification')
-        c=CONFIG['layover'];plans=lay.windows(total,now)
+        c=CONFIG['layover'];plans=lay.windows(total,now,transfer_floor,deadline)
         if not plans:return stop('layover_short',layover=total,min=c['min_city_min'],exit=c['exit_min'],reserve=c['return_reserve_min'])
         best=None
         for order,plan in enumerate(plans):
             sub=intent.model_copy(deep=True);sub.duration_min=max(5,min(480,plan.city_min));sub.mode='walk';sub.route_requested=True
-            found,found_debug=self.recommend(query,sub,(plan.anchor_lat,plan.anchor_lon),datetime.fromisoformat(plan.arrive_city),weather,{},stop,alternatives=False)
+            found,found_debug=self.recommend(query,sub,(plan.anchor_lat,plan.anchor_lon),datetime.fromisoformat(plan.arrive_city),weather,{},stop,alternatives=False,deadline=datetime.fromisoformat(plan.leave_city_by))
             if not found.recommendations:continue
             # More places first, then a complete mini-route, then the configured order of drop-off points.
             key=(-len(found.recommendations),found.route is None,order)

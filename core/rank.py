@@ -43,10 +43,12 @@ def weather_check(p,location,now,intent,env,t):
     if not warm:return 'weather_exposure',t,outdoor,None
     return '',max(t,warm.travel_min),warm.outdoor_total_min,warm
 
-def filter_candidates(pois,location,now,intent:Interpretation,weather=None,env=None):
+def filter_candidates(pois,location,now,intent:Interpretation,weather=None,env=None,deadline=None):
     accepted=[];rejected=[]
     night=local_time(now).hour>=22 or local_time(now).hour<6
     harsh=weather is not None and weather.level=='harsh' and env is not None
+    budget=intent.duration_min
+    if deadline is not None:budget=min(budget,int((local_time(deadline)-local_time(now)).total_seconds()//60))
     for p in pois:
         d=round(haversine(*location,p['lat'],p['lon']))
         w,t=travel(d,intent.mode);outdoor=warm=None
@@ -61,7 +63,7 @@ def filter_candidates(pois,location,now,intent:Interpretation,weather=None,env=N
             reason,t,outdoor,warm=weather_check(p,location,now,intent,env,t)
             if warm:w=t
             if not reason and t>intent.max_travel_min:reason='travel_limit'
-        visit=min(PREFERRED.get(p['category'],20),intent.duration_min-2*t)
+        visit=min(PREFERRED.get(p['category'],20),budget-2*t)
         if not reason and visit<MIN_VISIT.get(p['category'],10):reason='time_budget'
         for feature in ['socket','wifi','quiet']:
             confirmed=p.get(feature) in {'yes','wlan'} or p['tags'].get(feature)=='yes'
