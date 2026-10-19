@@ -1,4 +1,4 @@
-import {translations,presetNames} from './i18n.js';
+import {translations,presetNames} from './i18n.js?v=query-block';
 
 const $=id=>document.getElementById(id);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -71,7 +71,7 @@ function render(){
   if(state.view==='map')renderMap();
 }
 
-function setBusy(busy){state.busy=busy;$('apply').disabled=busy;document.querySelector('.send-button').disabled=busy;$('loading').hidden=!busy;$('planner').setAttribute('aria-busy',String(busy));render();}
+function setBusy(busy){state.busy=busy;$('apply').disabled=busy;document.querySelector('.send-button').disabled=busy;$('loading').hidden=!busy;$('planner').setAttribute('aria-busy',String(busy));$('query-block').setAttribute('aria-busy',String(busy));render();}
 function setView(view){state.view=view;for(const name of ['route','map'])$(name+'-tab').setAttribute('aria-selected',String(name===view));render();if(view==='map')renderMap();}
 function switchPage(page,keep=false){
   if(state.page!==page){++state.sequence;state.controller?.abort();setBusy(false);}

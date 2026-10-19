@@ -5,8 +5,8 @@
   <meta name="theme-color" content="#101B24"><meta name="description" content="QALA — прогулка по Астане в вашем темпе">
   <title>QALA — ваш час в Астане</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='14' fill='%23101B24'/%3E%3Ctext x='11' y='34' fill='%23CDE88A' font-size='32' font-family='sans-serif'%3EQ%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/styles.css">
-  <script defer src="/vendor/leaflet.js"></script><script type="module" src="/app.js"></script>
+  <link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/styles.css?v=query-block-inside">
+  <script defer src="/vendor/leaflet.js"></script><script type="module" src="/app.js?v=query-block"></script>
 </head>
 <body>
   <p class="page-caption" data-i18n="pageCaption">Тёмный экран, заметный дедлайн, режим пересадки.</p>
@@ -39,6 +39,11 @@
     <header class="status-bar" aria-hidden="true"><span>9:41</span><span class="status-icons"><svg viewBox="0 0 38 16"><path d="M2 13V10M7 13V7M12 13V4M17 13V1" stroke="currentColor" stroke-width="3"/><rect x="24" y="4" width="11" height="8" rx="2" fill="currentColor"/><path d="M37 6v4" stroke="currentColor"/></svg></span></header>
     <div class="screen">
       <div class="screen-content">
+        <section id="query-block" class="query-block" aria-labelledby="query-heading">
+          <h2 id="query-heading" data-i18n="queryTitle">Куда хотите сходить?</h2>
+          <p id="query-hint" class="query-hint" data-i18n="queryHint">Опишите пожелания или уточните маршрут — ответ появится ниже.</p>
+          <form id="chat-form" class="chat-form"><label class="sr-only" for="query" data-i18n="queryLabel">Пожелания к прогулке</label><input id="query" type="text" maxlength="500" placeholder="А можно потише и без кофе?" autocomplete="off" aria-describedby="query-hint"><button class="send-button" type="submit" data-i18n-aria="send" aria-label="Отправить запрос"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V3m-6 6 6-6 6 6"/></svg></button></form>
+        </section>
         <section id="planner" aria-label="Параметры прогулки">
           <form id="parameters">
             <div id="walk-controls" class="control-grid">
@@ -59,7 +64,6 @@
           <section id="route-view" role="tabpanel" aria-labelledby="route-tab" aria-live="polite"></section>
           <section id="map-view" role="tabpanel" aria-labelledby="map-tab" hidden><div id="map" aria-label="Карта маршрута"></div><p class="map-note" data-i18n="mapNote">Нажмите на карту, чтобы выбрать старт. Линия — оценка, не навигация. CARTO получает IP и область карты.</p><p class="map-note" id="tile-warning" hidden data-i18n="tilesUnavailable">Подложка недоступна. Точки и схема маршрута работают.</p></section>
           <div class="route-footer"><p id="disclaimer" class="disclaimer" data-i18n="disclaimer">Часы и доступность уточняются по источнику.</p><div class="footer-links"><button id="rag-link" class="text-button" data-i18n="transparency">Как это получилось</button><button id="save-route" class="text-button" hidden data-i18n="saveRoute">Сохранить маршрут</button></div></div>
-          <form id="chat-form" class="chat-form"><label class="sr-only" for="query" data-i18n="queryLabel">Пожелания к прогулке</label><input id="query" type="text" maxlength="500" placeholder="А можно потише и без кофе?" autocomplete="off"><button class="send-button" type="submit" data-i18n-aria="send" aria-label="Отправить запрос"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V3m-6 6 6-6 6 6"/></svg></button></form>
         </section>
         <section id="saved-view" hidden aria-live="polite"></section>
       </div>
