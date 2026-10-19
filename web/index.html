@@ -5,8 +5,8 @@
   <meta name="theme-color" content="#101B24"><meta name="description" content="QALA — прогулка по Астане в вашем темпе">
   <title>QALA — ваш час в Астане</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='14' fill='%23101B24'/%3E%3Ctext x='11' y='34' fill='%23CDE88A' font-size='32' font-family='sans-serif'%3EQ%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/styles.css?v=query-block-inside">
-  <script defer src="/vendor/leaflet.js"></script><script type="module" src="/app.js?v=query-block"></script>
+  <link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/styles.css?v=answer-first">
+  <script defer src="/vendor/leaflet.js"></script><script type="module" src="/app.js?v=answer-first"></script>
 </head>
 <body>
   <p class="page-caption" data-i18n="pageCaption">Тёмный экран, заметный дедлайн, режим пересадки.</p>
@@ -58,6 +58,7 @@
           </form>
           <div class="segments" role="tablist" aria-label="Вид маршрута"><button id="route-tab" role="tab" aria-selected="true" aria-controls="route-view" data-view="route" data-i18n="route">Маршрут</button><button id="map-tab" role="tab" aria-selected="false" aria-controls="map-view" data-view="map" data-i18n="map">Карта</button></div>
           <div id="deadline-banner" class="deadline-banner" hidden></div>
+          <div id="layover-facts" class="layover-facts" hidden></div>
           <div id="notice" class="notice" hidden role="status"></div>
           <div class="response-divider"></div>
           <div id="loading" class="skeleton" hidden role="status" aria-label="Строим маршрут"><div></div><div></div><div></div><div></div><span class="sr-only" data-i18n="loading">Собираем прогулку…</span></div>

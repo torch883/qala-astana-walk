@@ -1,9 +1,11 @@
-import {translations,presetNames} from './i18n.js?v=query-block';
+import {translations,presetNames} from './i18n.js?v=answer-first';
 
 const $=id=>document.getElementById(id);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const state={lang:'ru',page:'walk',view:'route',result:null,history:[],location:null,presets:[],scenarios:[],busy:false,sequence:0,publicCache:new Map(),map:null,mapLayer:null,customPoint:false,startedAt:Date.now(),savedResult:false,lastQuery:'',lastScenario:null};
 const t=key=>translations[state.lang][key]??translations.ru[key]??key;
+const fmt=(key,vars)=>t(key).replace(/\{(\w+)\}/g,(m,k)=>vars[k]??m);
+const narrow=()=>window.matchMedia('(max-width:599px)').matches;
 const hhmm=iso=>iso?String(iso).slice(11,16):'';
 const clock=minutes=>`${String(Math.floor(minutes/60)).padStart(2,'0')}:${String(minutes%60).padStart(2,'0')}`;
 const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Almaty',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
@@ -38,29 +40,45 @@ function statusText(rec){
 }
 function safeSource(url){try{const u=new URL(url);return u.protocol==='https:'&&u.hostname==='www.openstreetmap.org'?u.href:'#';}catch{return '#';}}
 function recHTML(rec,index,prefix='stop'){
-  const role=t('category')[rec.category]||t('walk');
-  return `<li class="stop"><button class="stop-toggle" data-stop="${index}" aria-expanded="false" aria-controls="${prefix}-${index}"><span class="stop-number">${index+1}</span><span class="stop-name">${esc(rec.name)}</span><span class="stop-role">${esc(role)}</span></button>
-  <div class="stop-details" id="${prefix}-${index}" hidden><p>${rec.distance_m} ${t('m')} · ≈ ${rec.travel_min} ${t('minute')} ${t('estimatedWalk')}</p><div class="badges"><span class="badge">${t('poiBadge')}</span><span class="badge">${t('ideaBadge')}</span></div>
+  const role=t('category')[rec.category]||t('walk'),w=rec.warm_route;
+  // The warm detour is shown on the closed card: in frost it matters more than the description.
+  const warm=w?`<span class="stop-warm">🧣 ${esc(fmt('warmRoute',{hub:w.hub_name,min:w.outdoor_total_min}))}</span>`:'';
+  return `<li class="stop"><button class="stop-toggle" data-stop="${index}" aria-expanded="false" aria-controls="${prefix}-${index}"><span class="stop-number">${index+1}</span><span class="stop-name">${esc(rec.name)}${warm}</span><span class="stop-role">${esc(role)}</span></button>
+  <div class="stop-details" id="${prefix}-${index}" hidden><p>${rec.distance_m} ${t('m')} · ≈ ${rec.travel_min} ${t('minute')} ${t('estimatedWalk')}</p>${w&&!w.hub_hours_confirmed?`<p class="unknown-status">${esc(fmt('hubHours',{hub:w.hub_name}))}</p>`:''}<div class="badges"><span class="badge">${t('poiBadge')}</span><span class="badge">${t('ideaBadge')}</span></div>
   <h3>${t('why')}</h3><p class="line-clamp">${esc(rec.why)}</p><h3>${t('plan')} · ${rec.visit_min} ${t('minute')}</h3><p class="line-clamp">${esc(rec.what_to_do)}</p><p class="${rec.open_status.state==='open'?'open-status':'unknown-status'}">${esc(statusText(rec))}</p>
   <details><summary>${t('caveats')}</summary><p>${esc(rec.caveats)}</p><p>${t('used')}: ${esc(rec.data_used.join(', '))}</p><p>${t('updated')}: ${esc(rec.collected_at.slice(0,10))}</p><a href="${esc(safeSource(rec.source_url))}" target="_blank" rel="noopener noreferrer">${t('source')} ↗</a></details>
   <div class="stop-actions"><button data-save-stop="${esc(rec.poi_id)}">${t('save')}</button><button data-report="${esc(rec.poi_id)}">${t('report')}</button></div></div></li>`;
 }
 function orderedRecs(){const a=state.result?.answer;if(!a)return [];return a.route?a.route.stops.map(s=>a.recommendations.find(r=>r.poi_id===s.poi_id)).filter(Boolean):a.recommendations;}
 function distanceText(m){return m>=1000?`${(m/1000).toLocaleString(state.lang==='kk'?'kk-KZ':state.lang,{maximumFractionDigits:1})} ${t('km')}`:`${m} ${t('m')}`;}
+const degrees=c=>`${c>0?'+':c<0?'−':''}${Math.abs(Math.round(c))} °C`;
+function weatherChip(w){
+  if(!w)return '';
+  // Demo presets must never read as a forecast; live data carries the Open-Meteo attribution.
+  const source=w.source==='manual'?esc(t('weatherDemo')):'<a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>';
+  return `<div class="weather-chip ${esc(w.level)}" role="note"><span class="weather-main">🌡 <b>${degrees(w.temperature_c)}</b> · ${t('feelsLike')} ${degrees(w.feels_like_c)} · ${t('wind')} ${Math.round(w.wind_ms)} ${t('mps')}</span><span class="weather-note">${esc(t('weatherLevel')[w.level]||w.level)} · ${source}</span></div>`;
+}
+function warning(text){const [head,...rest]=text.split(': ');return `<li><span><b>${esc(head)}:</b> ${esc(rest.join(': '))}</span></li>`;}
+function layoverFacts(L){
+  const times=[['layCity',L.arrive_city],['layLeave',L.leave_city_by],['layAirport',L.back_at_airport_by],['layDeparture',L.departure]];
+  return `<dl class="lay-times">${times.map(([key,at])=>`<div class="${key==='layLeave'?'lay-key':''}"><dt>${t(key)}</dt><dd>${hhmm(at)}</dd></div>`).join('')}</dl>
+  <ul class="lay-warnings">${warning(t('layoverVisa'))}${warning(t('layoverTaxi'))}</ul>
+  <p class="lay-dropoff">${esc(presetNames[state.lang][L.anchor]||L.anchor)} · ${t('transferBack')}: ${L.transfer_min} ${t('minute')} · ${t('reserve')}: ${L.reserve_min} ${t('minute')}</p>`;
+}
 
 function render(){
   if(state.page==='saved')return;
   $('route-view').hidden=state.view!=='route'||state.busy;$('map-view').hidden=state.view!=='map'||state.busy;
   $('save-route').hidden=!state.result?.answer.recommendations.length||state.savedResult;
+  const plan=state.result?.answer.layover;$('layover-facts').hidden=!plan;$('layover-facts').innerHTML=plan?layoverFacts(plan):'';
   if(!state.result){$('route-view').innerHTML=example();$('disclaimer').textContent=t('disclaimer');return;}
   const {answer:a,presentation:p}=state.result,recs=orderedRecs();
   let body=`<p class="eyebrow">${esc(t('answerLabel'))}</p><h1 class="route-title">${esc(p.title)}</h1>`;
   if(recs.length){
-    body+=`<div class="route-meta"><span>≈ ${distanceText(p.distance_m)}</span><span>${recs.length} ${t(recs.length===1?'oneStop':'stops')}</span><span>${t('upTo')} ${p.total_min} ${t('minute')}</span></div><ol class="stops">${recs.map((r,n)=>recHTML(r,n)).join('')}</ol>`;
+    body+=`<div class="route-meta"><span>≈ ${distanceText(p.distance_m)}</span><span>${recs.length} ${t(recs.length===1?'oneStop':'stops')}</span><span>${t('upTo')} ${p.total_min} ${t('minute')}</span></div>${weatherChip(a.weather)}<ol class="stops">${recs.map((r,n)=>recHTML(r,n)).join('')}</ol>`;
     body+=`<div class="return-row">${returnIcon}<span>${t('returnToStart')} · ${p.return_min} ${t('minute')}</span></div>`;
-    if(a.layover)body+=`<p class="small-text">${esc(presetNames[state.lang][a.layover.anchor]||a.layover.anchor)} · ${t('transferBack')}: ${a.layover.transfer_min} ${t('minute')}. ${t('reserve')}: ${a.layover.reserve_min} ${t('minute')}.</p>`;
-    if(a.weather)body+=`<p class="small-text">${t('weather')}: ${a.weather.feels_like_c} °C · ${esc(a.weather.source==='manual'?t('weatherFrost').split(' · ')[1]||'demo':'Open-Meteo')}</p>`;
   }else{
+    body+=weatherChip(a.weather);
     body+=`<p class="response-message">${esc(a.clarifying_question||a.message||t('emptyMessage'))}</p>`;
     if(a.alternative)body+=`<p class="small-text">${t('alternative')}: ${esc(a.alternative.name)} · ${a.alternative.travel_min} ${t('minute')}. ${esc(a.alternative.relaxed_constraint)}. ${esc(a.alternative.caveat)}</p>`;
     body+=`<div class="suggestions"><button data-suggest="${state.page==='layover'?'layover':'walk'}">${t(state.page==='layover'?'longLayover':'newWalk')}</button><button data-suggest="retry">${t('retry')}</button></div>`;
@@ -107,18 +125,29 @@ async function request(query,scenario=null){
     if(scenario&&state.publicCache.has(key)){state.result=state.publicCache.get(key);notice(t('cached'));}
     else{notice(t(error.message==='invalid'?'invalid':'networkError'));state.result=null;}
   }finally{clearTimeout(timer);if(token===state.sequence){setBusy(false);renderDeadline();}}
+  return token===state.sequence;
 }
+
+// On a phone the open demo panel sits above the planner, so a one-click scenario would answer
+// two screens below the finger. Fold the panel and bring the answer (deadline first) into view.
+function collapseJury(){if(narrow())$('jury-panel').open=false;}
+function revealAnswer(){
+  if(!narrow()||state.page==='saved')return;
+  const target=['deadline-banner','notice','route-view','loading'].map($).find(el=>!el.hidden);
+  target?.scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+}
+async function showAnswer(pending){revealAnswer();if(await pending)revealAnswer();}
 
 async function quickScenario(index){
   if(!state.scenarios[index]){notice(t('offlineData'));return;}
-  const c=state.scenarios[index];switchPage('walk');state.history=[];state.result=null;state.lastScenario=c.id;state.customPoint=false;state.location=null;
+  const c=state.scenarios[index];collapseJury();switchPage('walk');state.history=[];state.result=null;state.lastScenario=c.id;state.customPoint=false;state.location=null;
   $('start').value=c.preset;$('duration').value='60';$('demo-date').value=c.now.slice(0,10);$('demo-time').value=Number(c.now.slice(11,13))*60+Number(c.now.slice(14,16));$('time-output').textContent=hhmm(c.now);$('group').value='1';$('accessible').checked=false;$('weather').value='off';
   if(index===3){switchPage('layover');$('departure').value=hhmm(localISO(new Date(c.now).getTime()+120*60000));$('transfer').value='45';}
-  setView('route');await request(c.query,c.id);
+  setView('route');await showAnswer(request(c.query,c.id));
 }
 async function longLayover(){
-  switchPage('layover');state.history=[];$('demo-date').value=today();$('demo-time').value='600';$('time-output').textContent='10:00';$('departure').value='18:00';$('transfer').value='45';$('weather').value='off';$('start').value='Аэропорт';
-  await request({ru:'Что посмотреть в городе?',en:'What can I see in the city?',kk:'Қалада не көруге болады?'}[state.lang]);
+  collapseJury();switchPage('layover');state.history=[];$('demo-date').value=today();$('demo-time').value='600';$('time-output').textContent='10:00';$('departure').value='18:00';$('transfer').value='45';$('weather').value='off';$('start').value='Аэропорт';
+  await showAnswer(request({ru:'Что посмотреть в городе?',en:'What can I see in the city?',kk:'Қалада не көруге болады?'}[state.lang]));
 }
 
 function renderDeadline(){
