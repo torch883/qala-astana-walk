@@ -104,3 +104,45 @@ def test_static_shell_and_local_leaflet(client):
     assert client.get('/').status_code==200
     assert client.get('/vendor/leaflet.js').status_code==200
     assert client.get('/api/presets').json()['quality']['count']>500
+
+@pytest.mark.parametrize('query,expected,travel',[
+    ('Есть полчаса на прогулку',30,20),('Walk for half an hour',30,20),
+    ('Жарты сағат серуен',30,20),('Прогулка 30 min',30,20),
+    ('Прогулка 1 ч',60,20),('Прогулка 30—45 минут',45,20),
+    ('Кофе не дальше 10 минут',90,10),('Coffee within 10 minutes for 30 minutes',30,10),
+])
+def test_ui_keeps_explicit_time_separate_from_travel(query,expected,travel):
+    req=RecommendRequest(query=query,duration_min=90,demo_cache=True)
+    intent,_=resolve_intent(req,query)
+    assert intent.duration_min==expected and intent.max_travel_min==travel
+
+def test_half_hour_api_route_fits_the_request(client):
+    answer=Answer.model_validate(client.post('/api/recommend',json={
+        'query':'Есть полчаса на прогулку','preset':'Байтерек','now':AT}).json())
+    assert answer.interpretation.duration_min==30
+    assert not answer.route or answer.route.total_min<=30
+
+def test_cache_does_not_hide_selected_mild_weather(client):
+    scenario=PUBLIC_SCENARIOS[0]
+    req={k:scenario[k] for k in ['query','preset','now','language']}
+    req.update(scenario_id=scenario['id'],demo_cache=True,weather='mild')
+    data=client.post('/api/recommend?details=true',json=req).json()
+    assert data['answer']['weather']['source']=='manual'
+    assert data['answer']['weather']['level']=='ok'
+    assert not data['debug'].get('cache_hit')
+
+def test_health_exposes_actual_fallback_without_secrets(client,monkeypatch):
+    monkeypatch.setattr(app.state.engine.retriever,'backend','lexical')
+    monkeypatch.setattr(app.state.engine.retriever,'warning','Model unavailable')
+    status=client.get('/api/health')
+    assert status.status_code==200 and status.headers['cache-control']=='no-store'
+    data=status.json()
+    assert data['ready'] and data['retrieval_backend']=='lexical'
+    assert data['retrieval_warning']=='Model unavailable'
+    assert client.get('/api/presets').json()['runtime']==data
+    assert not any('key' in k or 'token' in k for k in data)
+
+def test_history_item_is_bounded_and_never_echoed(client):
+    secret='DO_NOT_ECHO_PRIVATE_HISTORY'*100
+    response=client.post('/api/recommend',json={'history':[secret]})
+    assert response.status_code==422 and secret not in response.text

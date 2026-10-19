@@ -6,21 +6,21 @@
     "constraint_satisfaction_pct": 100.0,
     "source_label_correct_pct": 100.0,
     "recommendations_checked": 45,
-    "p50_ms": 19.6,
-    "p95_ms": 87.7,
-    "max_ms": 97.4,
-    "startup_sec": 2.26,
+    "p50_ms": 16.4,
+    "p95_ms": 444.1,
+    "max_ms": 444.5,
+    "startup_sec": 1.33,
     "retrieval_backend": "e5+lexical",
     "llm_live_tested": false,
     "dataset_fingerprint": "394316a5c85bd865c01b99d23b9be79d3df6379721a6823a6bbda4bfae73002c",
-    "run_at": "2026-10-18T12:47:32.661757+00:00"
+    "run_at": "2026-10-19T11:33:32.071050+00:00"
   },
   "cases": [
     {
       "id": "mega_walk",
       "passed": true,
       "errors": [],
-      "ms": 30.6,
+      "ms": 22.8,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -29,7 +29,7 @@
       "id": "coffee_socket",
       "passed": true,
       "errors": [],
-      "ms": 23.2,
+      "ms": 18.5,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 2
@@ -38,7 +38,7 @@
       "id": "child",
       "passed": true,
       "errors": [],
-      "ms": 22.5,
+      "ms": 17.2,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -47,7 +47,7 @@
       "id": "airport_flight",
       "passed": true,
       "errors": [],
-      "ms": 0.8,
+      "ms": 0.6,
       "fixture": null,
       "response_type": "refusal",
       "rec_count": 0
@@ -56,7 +56,7 @@
       "id": "unusual_night",
       "passed": true,
       "errors": [],
-      "ms": 22.7,
+      "ms": 17.0,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -65,7 +65,7 @@
       "id": "missing_location",
       "passed": true,
       "errors": [],
-      "ms": 0.5,
+      "ms": 0.3,
       "fixture": null,
       "response_type": "clarification",
       "rec_count": 0
@@ -74,7 +74,7 @@
       "id": "outside_city",
       "passed": true,
       "errors": [],
-      "ms": 0.8,
+      "ms": 0.4,
       "fixture": null,
       "response_type": "refusal",
       "rec_count": 0
@@ -83,7 +83,7 @@
       "id": "empty_query",
       "passed": true,
       "errors": [],
-      "ms": 19.6,
+      "ms": 14.2,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -92,7 +92,7 @@
       "id": "vague_query",
       "passed": true,
       "errors": [],
-      "ms": 20.6,
+      "ms": 16.4,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -101,7 +101,7 @@
       "id": "english",
       "passed": true,
       "errors": [],
-      "ms": 22.7,
+      "ms": 15.3,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 2
@@ -110,7 +110,7 @@
       "id": "kazakh",
       "passed": true,
       "errors": [],
-      "ms": 23.2,
+      "ms": 17.2,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 2
@@ -119,7 +119,7 @@
       "id": "group_four",
       "passed": true,
       "errors": [],
-      "ms": 20.0,
+      "ms": 57.0,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 2
@@ -128,7 +128,7 @@
       "id": "accessible",
       "passed": true,
       "errors": [],
-      "ms": 18.8,
+      "ms": 74.2,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 1
@@ -137,7 +137,7 @@
       "id": "missing_hours",
       "passed": true,
       "errors": [],
-      "ms": 1.4,
+      "ms": 4.3,
       "fixture": "missing_hours",
       "response_type": "recommendations",
       "rec_count": 1
@@ -146,7 +146,7 @@
       "id": "all_closed",
       "passed": true,
       "errors": [],
-      "ms": 0.7,
+      "ms": 2.1,
       "fixture": "all_closed",
       "response_type": "refusal",
       "rec_count": 0
@@ -155,7 +155,7 @@
       "id": "injection_poi",
       "passed": true,
       "errors": [],
-      "ms": 1.3,
+      "ms": 3.9,
       "fixture": "injection",
       "response_type": "recommendations",
       "rec_count": 1
@@ -164,7 +164,7 @@
       "id": "harmful",
       "passed": true,
       "errors": [],
-      "ms": 0.6,
+      "ms": 1.8,
       "fixture": null,
       "response_type": "refusal",
       "rec_count": 0
@@ -173,7 +173,7 @@
       "id": "after_midnight",
       "passed": true,
       "errors": [],
-      "ms": 20.3,
+      "ms": 98.1,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 1
@@ -182,7 +182,7 @@
       "id": "closes_on_arrival",
       "passed": true,
       "errors": [],
-      "ms": 1.0,
+      "ms": 2.7,
       "fixture": "closing",
       "response_type": "refusal",
       "rec_count": 0
@@ -191,7 +191,7 @@
       "id": "required_socket",
       "passed": true,
       "errors": [],
-      "ms": 0.8,
+      "ms": 2.3,
       "fixture": "no_socket",
       "response_type": "refusal",
       "rec_count": 0
@@ -200,7 +200,7 @@
       "id": "tiny_radius",
       "passed": true,
       "errors": [],
-      "ms": 20.5,
+      "ms": 84.5,
       "fixture": null,
       "response_type": "refusal",
       "rec_count": 0
@@ -209,7 +209,7 @@
       "id": "centre_flight",
       "passed": true,
       "errors": [],
-      "ms": 1.0,
+      "ms": 1.2,
       "fixture": null,
       "response_type": "refusal",
       "rec_count": 0
@@ -218,7 +218,7 @@
       "id": "night_park_unknown",
       "passed": true,
       "errors": [],
-      "ms": 0.6,
+      "ms": 1.9,
       "fixture": "park_unknown",
       "response_type": "refusal",
       "rec_count": 0
@@ -227,7 +227,7 @@
       "id": "invalid_coordinates",
       "passed": true,
       "errors": [],
-      "ms": 0.7,
+      "ms": 1.3,
       "fixture": null,
       "response_type": "clarification",
       "rec_count": 0
@@ -236,7 +236,7 @@
       "id": "route_three",
       "passed": true,
       "errors": [],
-      "ms": 25.9,
+      "ms": 97.2,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -245,7 +245,7 @@
       "id": "layover_long",
       "passed": true,
       "errors": [],
-      "ms": 97.4,
+      "ms": 444.1,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -254,7 +254,7 @@
       "id": "frost_walk",
       "passed": true,
       "errors": [],
-      "ms": 20.7,
+      "ms": 104.8,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -263,7 +263,7 @@
       "id": "layover_short",
       "passed": true,
       "errors": [],
-      "ms": 0.8,
+      "ms": 2.9,
       "fixture": null,
       "response_type": "refusal",
       "rec_count": 0
@@ -272,7 +272,7 @@
       "id": "layover_departure_clock",
       "passed": true,
       "errors": [],
-      "ms": 82.2,
+      "ms": 444.5,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -281,7 +281,7 @@
       "id": "layover_english",
       "passed": true,
       "errors": [],
-      "ms": 87.7,
+      "ms": 418.5,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3
@@ -290,7 +290,7 @@
       "id": "layover_no_time",
       "passed": true,
       "errors": [],
-      "ms": 0.7,
+      "ms": 2.2,
       "fixture": null,
       "response_type": "clarification",
       "rec_count": 0
@@ -299,7 +299,7 @@
       "id": "frost_park",
       "passed": true,
       "errors": [],
-      "ms": 11.7,
+      "ms": 72.5,
       "fixture": null,
       "response_type": "refusal",
       "rec_count": 0
@@ -308,7 +308,7 @@
       "id": "rain_walk",
       "passed": true,
       "errors": [],
-      "ms": 21.8,
+      "ms": 112.8,
       "fixture": null,
       "response_type": "recommendations",
       "rec_count": 3

@@ -5,11 +5,11 @@
   <meta name="theme-color" content="#101B24"><meta name="description" content="QALA — прогулка по Астане в вашем темпе">
   <title>QALA — ваш час в Астане</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='14' fill='%23101B24'/%3E%3Ctext x='11' y='34' fill='%23CDE88A' font-size='32' font-family='sans-serif'%3EQ%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/styles.css?v=answer-first">
-  <script defer src="/vendor/leaflet.js"></script><script type="module" src="/app.js?v=answer-first"></script>
+  <link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/styles.css?v=demo-ready">
+  <script defer src="/vendor/leaflet.js"></script><script type="module" src="/app.js?v=demo-ready"></script>
 </head>
 <body>
-  <p class="page-caption" data-i18n="pageCaption">Тёмный экран, заметный дедлайн, режим пересадки.</p>
+  <p class="page-caption" data-i18n="pageCaption">Ваше время в Астане — с пользой.</p>
   <details id="jury-panel" class="jury-panel" open>
     <summary><span class="jury-brand">QALA<span> / </span>DEMO</span><span data-i18n="jury">Панель жюри</span><span class="summary-arrow">⌄</span></summary>
     <div class="jury-body">
@@ -63,7 +63,7 @@
           <div class="response-divider"></div>
           <div id="loading" class="skeleton" hidden role="status" aria-label="Строим маршрут"><div></div><div></div><div></div><div></div><span class="sr-only" data-i18n="loading">Собираем прогулку…</span></div>
           <section id="route-view" role="tabpanel" aria-labelledby="route-tab" aria-live="polite"></section>
-          <section id="map-view" role="tabpanel" aria-labelledby="map-tab" hidden><div id="map" aria-label="Карта маршрута"></div><p class="map-note" data-i18n="mapNote">Нажмите на карту, чтобы выбрать старт. Линия — оценка, не навигация. CARTO получает IP и область карты.</p><p class="map-note" id="tile-warning" hidden data-i18n="tilesUnavailable">Подложка недоступна. Точки и схема маршрута работают.</p></section>
+          <section id="map-view" role="tabpanel" aria-labelledby="map-tab" hidden><div id="map" aria-label="Карта маршрута"></div><p class="map-note" data-i18n="mapNote">Нажмите на карту, чтобы выбрать начало. Локальная схема улиц OSM; линии маршрута — оценка, не навигация.</p><p class="map-note" id="tile-warning" hidden data-i18n="tilesUnavailable">Подложка недоступна. Точки и схема маршрута работают.</p></section>
           <div class="route-footer"><p id="disclaimer" class="disclaimer" data-i18n="disclaimer">Часы и доступность уточняются по источнику.</p><div class="footer-links"><button id="rag-link" class="text-button" data-i18n="transparency">Как это получилось</button><button id="save-route" class="text-button" hidden data-i18n="saveRoute">Сохранить маршрут</button></div></div>
         </section>
         <section id="saved-view" hidden aria-live="polite"></section>

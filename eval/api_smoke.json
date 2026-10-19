@@ -1,0 +1,126 @@
+{
+  "run_at": "2026-10-19T11:36:16.660313+00:00",
+  "health": {
+    "ready": true,
+    "poi_count": 3556,
+    "retrieval_backend": "e5+lexical",
+    "retrieval_warning": "",
+    "generation_mode": "local_templates"
+  },
+  "passed": 12,
+  "cases": [
+    {
+      "id": "mega_walk",
+      "passed": true,
+      "ms": 160.7,
+      "response_type": "recommendations",
+      "places": [
+        "25-ти летие Независимости"
+      ],
+      "route_min": 46
+    },
+    {
+      "id": "coffee_socket",
+      "passed": true,
+      "ms": 160.8,
+      "response_type": "recommendations",
+      "places": [
+        "CrepeCafe"
+      ],
+      "route_min": 31
+    },
+    {
+      "id": "child",
+      "passed": true,
+      "ms": 158.0,
+      "response_type": "recommendations",
+      "places": [
+        "Военно-исторический музей"
+      ],
+      "route_min": 60
+    },
+    {
+      "id": "airport_flight",
+      "passed": true,
+      "ms": 32.5,
+      "response_type": "refusal",
+      "places": [],
+      "route_min": null
+    },
+    {
+      "id": "unusual_night",
+      "passed": true,
+      "ms": 156.6,
+      "response_type": "recommendations",
+      "places": [
+        "CrepeCafe"
+      ],
+      "route_min": 31
+    },
+    {
+      "id": "half_hour",
+      "passed": true,
+      "ms": 339.2,
+      "response_type": "recommendations",
+      "places": [
+        "Байтерек"
+      ],
+      "route_min": 22
+    },
+    {
+      "id": "weather_frost",
+      "passed": true,
+      "ms": 249.1,
+      "response_type": "recommendations",
+      "places": [
+        "Байтерек"
+      ],
+      "route_min": 22
+    },
+    {
+      "id": "layover_8_hours",
+      "passed": true,
+      "ms": 383.6,
+      "response_type": "recommendations",
+      "places": [
+        "Байтерек",
+        "Парк Жетысу",
+        "Сквер (без названия в OSM)"
+      ],
+      "route_min": 117
+    },
+    {
+      "id": "layover_2_hours",
+      "passed": true,
+      "ms": 15.9,
+      "response_type": "refusal",
+      "places": [],
+      "route_min": null
+    },
+    {
+      "id": "missing_location",
+      "passed": true,
+      "ms": 31.9,
+      "response_type": "clarification",
+      "places": [],
+      "route_min": null
+    },
+    {
+      "id": "outside_city",
+      "passed": true,
+      "ms": 30.5,
+      "response_type": "refusal",
+      "places": [],
+      "route_min": null
+    },
+    {
+      "id": "required_socket",
+      "passed": true,
+      "ms": 224.8,
+      "response_type": "refusal",
+      "places": [],
+      "route_min": null
+    }
+  ],
+  "note": "Local HTTP, warmed engine, public fixed scenarios; not a load test."
+}
