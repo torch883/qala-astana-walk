@@ -9,11 +9,37 @@ airport_reserve_min: 120
 weights:
   semantic: 0.40
   distance: 0.25
-  category: 0.15
   open: 0.12
-  popularity: 0.03
+  # Rating when present, otherwise a Wikidata/Wikipedia link in OSM.
+  popularity: 0.05
+  # Extra weight on the same signal for tourist requests and layovers.
+  tourist_notability: 0.15
   gold: 0.05
   unknown_penalty: 0.12
+weather:
+  # Feels-like temperature (wind chill) and wind decide the level; harsh hides outdoor places.
+  harsh_feels_like_c: -20
+  caution_feels_like_c: -10
+  harsh_heat_c: 35
+  caution_heat_c: 30
+  harsh_wind_ms: 12
+  harsh_gust_ms: 18
+  caution_wind_ms: 8
+  harsh_precip_mm: 1.0
+  caution_precip_mm: 0.2
+  # In harsh weather no single stretch outside on foot may be longer than this.
+  harsh_outdoor_leg_min: 8
+  outdoor_penalty: 0.10
+layover:
+  # Planned backwards from the departure; every number is a conservative estimate, not an airport rule.
+  exit_min: 45
+  return_reserve_min: 120
+  transfer_m_per_min: 600
+  traffic_buffer: 1.25
+  transfer_overhead_min: 10
+  min_city_min: 45
+  max_city_min: 240
+  anchors: [Байтерек, Хан Шатыр, Экспо, Mega Silk Way]
 presets:
   Mega Silk Way: [51.0895, 71.4072]
   Экспо: [51.0905, 71.4180]

@@ -188,3 +188,62 @@ scenarios:
     language: ru
     expected: recommendations
     checks: [exists, budget, hours, fields, language, source, route]
+  - id: layover_long
+    query: У меня пересадка 7 часов в Астане, что успею посмотреть?
+    preset: Аэропорт
+    now: '2026-10-17T10:00:00+05:00'
+    language: ru
+    expected: recommendations
+    checks: [exists, budget, hours, fields, language, source, layover]
+  - id: frost_walk
+    query: Хочу прогуляться 60 минут
+    preset: Байтерек
+    now: '2026-01-15T15:00:00+05:00'
+    weather: frost
+    language: ru
+    expected: recommendations
+    checks: [exists, budget, hours, fields, language, source, weather_indoor, warm_cap, warm_route]
+  - id: layover_short
+    query: Пересадка 4 часа, успею выйти в город?
+    preset: Аэропорт
+    now: '2026-10-17T10:00:00+05:00'
+    language: ru
+    expected: refusal
+    checks: [empty, layover_reserve]
+  - id: layover_departure_clock
+    query: Транзит через Астану, вылет в 22:30. Куда сходить?
+    preset: Аэропорт
+    now: '2026-10-17T13:00:00+05:00'
+    language: ru
+    expected: recommendations
+    checks: [exists, budget, hours, fields, language, source, layover]
+  - id: layover_english
+    query: 8-hour layover in Astana, what can I see?
+    preset: Аэропорт
+    now: '2026-10-17T10:00:00+05:00'
+    language: en
+    expected: recommendations
+    checks: [exists, budget, hours, fields, language, source, layover]
+  - id: layover_no_time
+    query: У меня пересадка в Астане, куда сходить?
+    preset: Аэропорт
+    now: '2026-10-17T10:00:00+05:00'
+    language: ru
+    expected: clarification
+    checks: [one_question, empty]
+  - id: frost_park
+    query: Хочу в парк на 60 минут
+    preset: Байтерек
+    now: '2026-01-15T15:00:00+05:00'
+    weather: frost
+    language: ru
+    expected: refusal
+    checks: [empty, weather_message]
+  - id: rain_walk
+    query: Хочу прогуляться 60 минут
+    preset: Байтерек
+    now: '2026-10-17T15:00:00+05:00'
+    weather: rain
+    language: ru
+    expected: recommendations
+    checks: [exists, budget, hours, fields, language, source, weather_caveat]

@@ -22,7 +22,7 @@ class Enrichment(Strict):
     socket: Literal['unknown']='unknown'
     wifi: Literal['unknown']='unknown'
 
-TYPICAL={'cafe':25,'restaurant':45,'museum':60,'gallery':40,'park':30,'playground':30,'viewpoint':15,'attraction':20,'cinema':100,'theatre':90,'library':40,'shopping':30,'bar':40,'nightclub':60}
+TYPICAL={'cafe':25,'restaurant':45,'museum':60,'gallery':40,'park':30,'playground':30,'viewpoint':15,'attraction':20,'cinema':100,'theatre':90,'library':40,'shopping':30,'bar':40,'nightclub':60,'entertainment':60,'sport':60,'culture':60}
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--limit',type=int,default=0);ap.add_argument('--templates',action='store_true');args=ap.parse_args()

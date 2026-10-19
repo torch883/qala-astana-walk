@@ -2,8 +2,19 @@ from collections import Counter
 import re
 from core.schemas import Answer
 from core.security import safe_text
+from core.settings import CONFIG
 
-def validate_answer(answer:Answer,candidates,intent):
+def validate_weather(r,c,intent,weather):
+    if r.shelter!=c.shelter or r.warm_route!=c.warm or r.outdoor_min!=c.outdoor_min:raise ValueError('weather_mismatch')
+    if weather is None or weather.level!='harsh':return
+    if r.shelter!='indoor':raise ValueError('weather_outdoor')
+    if intent.mode=='walk':
+        cap=CONFIG['weather']['harsh_outdoor_leg_min']
+        legs=r.warm_route.outdoor_legs_min if r.warm_route else [r.outdoor_min]
+        if any(x is None or x>cap for x in legs):raise ValueError('weather_exposure')
+        if r.warm_route and r.travel_min<r.warm_route.travel_min:raise ValueError('weather_travel')
+
+def validate_answer(answer:Answer,candidates,intent,weather=None):
     if answer.response_type!='recommendations':
         if answer.recommendations:raise ValueError('non_recommendation_has_pois')
         return True
@@ -29,5 +40,6 @@ def validate_answer(answer:Answer,candidates,intent):
             if r.field_sources.get(field)!=expected:raise ValueError('field_source')
         if r.lat!=p['lat'] or r.lon!=p['lon'] or r.category!=p['category']:raise ValueError('fact_mismatch')
         if not all([r.why,r.what_to_do,r.data_used]):raise ValueError('missing_fields')
+        validate_weather(r,c,intent,weather)
     if max(counts.values())>2:raise ValueError('diversity')
     return True

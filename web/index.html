@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101B24"><meta name="description" content="QALA — прогулка по Астане в вашем темпе">
+  <title>QALA — ваш час в Астане</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='14' fill='%23101B24'/%3E%3Ctext x='11' y='34' fill='%23CDE88A' font-size='32' font-family='sans-serif'%3EQ%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/styles.css?v=answer-first">
+  <script defer src="/vendor/leaflet.js"></script><script type="module" src="/app.js?v=answer-first"></script>
+</head>
+<body>
+  <p class="page-caption" data-i18n="pageCaption">Тёмный экран, заметный дедлайн, режим пересадки.</p>
+  <details id="jury-panel" class="jury-panel" open>
+    <summary><span class="jury-brand">QALA<span> / </span>DEMO</span><span data-i18n="jury">Панель жюри</span><span class="summary-arrow">⌄</span></summary>
+    <div class="jury-body">
+      <p class="jury-lede" data-i18n="juryHint">Один сценарий — один клик. Всё остальное уже настроено.</p>
+      <label for="demo-date" data-i18n="date">Дата в Астане</label><input type="date" id="demo-date">
+      <div class="label-row"><label for="demo-time" data-i18n="now">Сейчас · UTC+5</label><output id="time-output" for="demo-time">15:00</output></div>
+      <input id="demo-time" type="range" min="0" max="1425" step="15" value="900">
+      <div class="jury-pair"><div><label for="language" data-i18n="language">Язык</label><select id="language"><option value="ru">Русский</option><option value="en">English</option><option value="kk">Қазақша</option></select></div><div><label for="group" data-i18n="group">Человек</label><input id="group" type="number" min="1" max="20" value="1"></div></div>
+      <label for="weather" data-i18n="weather">Погода</label><select id="weather"><option value="off" data-i18n="weatherOff">Не учитывать</option><option value="live" data-i18n="weatherLive">Прогноз Open-Meteo</option><option value="frost" data-i18n="weatherFrost">Мороз −32° · демо</option><option value="blizzard" data-i18n="weatherBlizzard">Метель · демо</option><option value="rain" data-i18n="weatherRain">Дождь · демо</option><option value="heat" data-i18n="weatherHeat">Жара · демо</option><option value="mild" data-i18n="weatherMild">+18° · демо</option></select>
+      <label class="switch-row"><span data-i18n="accessibility">Безбарьерный доступ</span><input id="accessible" type="checkbox" role="switch"></label>
+      <label class="switch-row"><span data-i18n="cache">Резервный кэш</span><input id="demo-cache" type="checkbox" role="switch"></label>
+      <p class="jury-section" data-i18n="scenarios">ПЯТЬ СИТУАЦИЙ</p>
+      <div class="scenario-buttons">
+        <button data-scenario="0"><span>01</span><span data-i18n="mega">Прогулка у Mega</span><b>↗</b></button>
+        <button data-scenario="1"><span>02</span><span data-i18n="coffee">Кофе и розетка</span><b>↗</b></button>
+        <button data-scenario="2"><span>03</span><span data-i18n="child">С ребёнком</span><b>↗</b></button>
+        <button data-scenario="3"><span>04</span><span data-i18n="flight">Два часа до вылета</span><b>↗</b></button>
+        <button data-scenario="4"><span>05</span><span data-i18n="night">Ночная Астана</span><b>↗</b></button>
+      </div>
+      <button id="long-layover" class="secondary-button" data-i18n="longLayover">Пересадка 8 часов ↗</button>
+      <p class="jury-foot" id="data-status" data-i18n="connecting">Подключаем город…</p>
+      <button id="clear-session" class="text-button" data-i18n="clearSession">Очистить диалог</button>
+    </div>
+  </details>
+  <main class="phone" aria-label="QALA">
+    <div class="privacy-row"><span data-i18n="privacy">⌑ Координаты округляются до ~100 м и не сохраняются</span><button class="info-button" id="info-button" data-i18n-aria="transparency" aria-label="Как это получилось">i</button></div>
+    <header class="status-bar" aria-hidden="true"><span>9:41</span><span class="status-icons"><svg viewBox="0 0 38 16"><path d="M2 13V10M7 13V7M12 13V4M17 13V1" stroke="currentColor" stroke-width="3"/><rect x="24" y="4" width="11" height="8" rx="2" fill="currentColor"/><path d="M37 6v4" stroke="currentColor"/></svg></span></header>
+    <div class="screen">
+      <div class="screen-content">
+        <section id="query-block" class="query-block" aria-labelledby="query-heading">
+          <h2 id="query-heading" data-i18n="queryTitle">Куда хотите сходить?</h2>
+          <p id="query-hint" class="query-hint" data-i18n="queryHint">Опишите пожелания или уточните маршрут — ответ появится ниже.</p>
+          <form id="chat-form" class="chat-form"><label class="sr-only" for="query" data-i18n="queryLabel">Пожелания к прогулке</label><input id="query" type="text" maxlength="500" placeholder="А можно потише и без кофе?" autocomplete="off" aria-describedby="query-hint"><button class="send-button" type="submit" data-i18n-aria="send" aria-label="Отправить запрос"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V3m-6 6 6-6 6 6"/></svg></button></form>
+        </section>
+        <section id="planner" aria-label="Параметры прогулки">
+          <form id="parameters">
+            <div id="walk-controls" class="control-grid">
+              <div class="field"><label for="start" data-i18n="start">НАЧАЛО</label><div class="select-wrap"><select id="start"><option value="Байтерек">Бәйтерек</option><option value="Mega Silk Way">Mega Silk Way</option><option value="Экспо">Экспо</option><option value="Хан Шатыр">Хан Шатыр</option><option value="Центральный парк">Центральный парк</option><option value="Аэропорт">Аэропорт</option><option value="map" data-i18n="myPoint">Моя точка на карте</option></select></div></div>
+              <div class="field"><label for="duration" data-i18n="timeAvailable">ЕСТЬ ВРЕМЯ</label><div class="select-wrap"><select id="duration"><option value="30">30 минут</option><option value="60" selected>60 минут</option><option value="90">90 минут</option><option value="120">120 минут</option></select></div></div>
+            </div>
+            <div id="layover-controls" hidden>
+              <div class="control-grid"><div class="field"><label for="departure" data-i18n="departure">РЕЙС / ВЫЛЕТ В</label><input type="time" id="departure" value="23:00" required></div><div class="field"><label for="transfer" data-i18n="transfer">ДО АЭРОПОРТА ЗА</label><div class="select-wrap"><select id="transfer"><option value="30">30 минут</option><option value="45" selected>45 минут</option><option value="60">60 минут</option></select></div></div></div>
+              <p class="small-text" data-i18n="layoverHint">Из аэропорта и обратно. Запас перед вылетом — 120 минут.</p>
+            </div>
+            <button id="apply" class="primary-button" type="submit"><span data-i18n="apply">Применить параметры</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 20 4M9 4h11v11"/></svg></button>
+          </form>
+          <div class="segments" role="tablist" aria-label="Вид маршрута"><button id="route-tab" role="tab" aria-selected="true" aria-controls="route-view" data-view="route" data-i18n="route">Маршрут</button><button id="map-tab" role="tab" aria-selected="false" aria-controls="map-view" data-view="map" data-i18n="map">Карта</button></div>
+          <div id="deadline-banner" class="deadline-banner" hidden></div>
+          <div id="layover-facts" class="layover-facts" hidden></div>
+          <div id="notice" class="notice" hidden role="status"></div>
+          <div class="response-divider"></div>
+          <div id="loading" class="skeleton" hidden role="status" aria-label="Строим маршрут"><div></div><div></div><div></div><div></div><span class="sr-only" data-i18n="loading">Собираем прогулку…</span></div>
+          <section id="route-view" role="tabpanel" aria-labelledby="route-tab" aria-live="polite"></section>
+          <section id="map-view" role="tabpanel" aria-labelledby="map-tab" hidden><div id="map" aria-label="Карта маршрута"></div><p class="map-note" data-i18n="mapNote">Нажмите на карту, чтобы выбрать старт. Линия — оценка, не навигация. CARTO получает IP и область карты.</p><p class="map-note" id="tile-warning" hidden data-i18n="tilesUnavailable">Подложка недоступна. Точки и схема маршрута работают.</p></section>
+          <div class="route-footer"><p id="disclaimer" class="disclaimer" data-i18n="disclaimer">Часы и доступность уточняются по источнику.</p><div class="footer-links"><button id="rag-link" class="text-button" data-i18n="transparency">Как это получилось</button><button id="save-route" class="text-button" hidden data-i18n="saveRoute">Сохранить маршрут</button></div></div>
+        </section>
+        <section id="saved-view" hidden aria-live="polite"></section>
+      </div>
+      <nav class="bottom-nav" aria-label="Разделы QALA">
+        <button data-page="walk" aria-current="page"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="m3 24 7-9 6 4L25 4m-8 0h8v8M11 13l4-5"/></svg><span data-i18n="walk">Прогулка</span></button>
+        <button data-page="layover"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="9" y="3" width="10" height="22" rx="1"/><path d="M5 8h4m10 0h4M5 20h4m10 0h4m-9-12h2m-2 4h2m-2 4h2m-2 4h2"/></svg><span data-i18n="layover">Пересадка</span></button>
+        <button data-page="saved"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M6 3h16v23l-8-7-8 7z"/></svg><span data-i18n="saved">Сохранённое</span></button>
+      </nav>
+    </div>
+  </main>
+  <dialog id="rag-dialog"><div class="dialog-header"><h2 data-i18n="transparency">Как это получилось</h2><button class="close-button" id="close-rag" data-i18n-aria="close" aria-label="Закрыть">×</button></div><div id="rag-content"></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

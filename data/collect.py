@@ -52,19 +52,27 @@ def boundary_from_relation(element):
         raise ValueError('No valid administrative polygon; refusing bbox-only collection')
     return poly
 
+ENTERTAINMENT = {'theme_park','water_park','aquarium','zoo','bowling_alley','escape_game','trampoline_park','miniature_golf'}
+SPORT = {'sports_centre','fitness_centre','fitness_station','stadium','sports_hall','pitch','track','swimming_pool','ice_rink','dance','sauna'}
+
 def category(tags):
     a, t, l, s = (tags.get(k, '') for k in ('amenity','tourism','leisure','shop'))
     if a in {'cafe','restaurant','bar','nightclub','theatre','cinema','library'}: return a
     if a in {'fast_food','food_court','pub'}: return {'pub':'bar'}.get(a,'restaurant')
     if t in {'museum','gallery','viewpoint','attraction'}: return t
-    if l in {'park','garden','nature_reserve'}: return 'park'
+    if t=='artwork': return 'attraction'
+    if t in ENTERTAINMENT or l in ENTERTAINMENT: return 'entertainment'
+    if l in {'park','garden','nature_reserve','common','beach_resort'} or t=='picnic_site': return 'park'
     if l in {'playground','amusement_arcade','indoor_play'}: return 'playground'
     if s: return 'shopping'
     if tags.get('historic') or tags.get('man_made')=='tower': return 'attraction'
     if tags.get('building')=='museum': return 'museum'
     if a=='planetarium': return 'museum'
-    if a=='arts_centre': return 'leisure'
+    # Concert halls, a circus and art studios: a venue to visit, not a museum or a gym.
+    if a=='arts_centre': return 'culture'
+    if l in SPORT: return 'sport'
     if l: return 'leisure'
+    # Hotels, hostels and apartments stay here: they are not walking destinations.
     if t: return 'tourism'
     return 'unknown'
 
@@ -75,24 +83,42 @@ CATEGORY_TEXT = {
     'viewpoint':'Смотровая точка / viewpoint', 'attraction':'Достопримечательность / landmark',
     'theatre':'Театр / theatre', 'cinema':'Кинотеатр / cinema', 'library':'Библиотека / library / кітапхана',
     'shopping':'Магазин или торговый центр / shopping', 'bar':'Бар / bar', 'nightclub':'Ночной клуб / nightclub',
+    'entertainment':'Развлечения: аттракционы, аквапарк, океанариум, боулинг, квест / entertainment / ойын-сауық',
+    'sport':'Спорт и оздоровление: фитнес, бассейн, каток, сауна / sport / спорт',
+    'culture':'Культурный центр, концертный зал, цирк / arts centre / мәдениет орталығы',
     'leisure':'Досуг / leisure', 'tourism':'Туристический объект / tourism', 'unknown':'unknown'}
+
+# Unnamed parks and playgrounds are real destinations; the label says honestly that OSM has no name.
+UNNAMED_LABELS = {
+    'playground':{'ru':'Детская площадка (без названия в OSM)','en':'Playground (unnamed in OSM)','kk':'Балалар алаңы (OSM-да атауы жоқ)'},
+    'park':{'ru':'Парк (без названия в OSM)','en':'Park (unnamed in OSM)','kk':'Саябақ (OSM-да атауы жоқ)'},
+    'garden':{'ru':'Сквер (без названия в OSM)','en':'Public garden (unnamed in OSM)','kk':'Сквер (OSM-да атауы жоқ)'}}
+
+def unnamed_labels(tags):
+    labels = UNNAMED_LABELS.get(tags.get('leisure'))
+    if not labels: return None
+    street = (tags.get('addr:street') or '').strip()
+    return {lang:label+(' · '+street if street else '') for lang,label in labels.items()}
 
 def clean(elements, boundary, collected_at):
     rows, seen = [], set()
-    counts = {'raw':len(elements),'unnamed':0,'outside':0,'duplicates':0}
+    counts = {'raw':len(elements),'unnamed':0,'unnamed_labeled':0,'outside':0,'duplicates':0}
     for e in elements:
         tags = e.get('tags', {})
         name = tags.get('name:ru') or tags.get('name') or tags.get('name:kk') or tags.get('name:en')
+        labels = None if name and name.strip() else unnamed_labels(tags)
+        if labels: name = labels['ru']
         if not name or not name.strip(): counts['unnamed'] += 1; continue
         pt = e.get('center', e)
         lat, lon = pt.get('lat'), pt.get('lon')
         if lat is None or lon is None or not boundary.covers(Point(lon,lat)):
             counts['outside'] += 1; continue
         cat = category(tags)
-        # Same named object represented as both a way and a node within 60 m.
-        normalized = re.sub(r'[^\w]', '', name.casefold())
-        duplicate = next((r for r in rows if r['_normalized']==normalized and r['category']==cat and math.hypot((r['lat']-lat)*111000,(r['lon']-lon)*70000)<60),None)
         ident = f"{e['type']}/{e['id']}"
+        # Same named object represented as both a way and a node within 60 m.
+        # A generated label is shared by many distinct places, so it never merges them.
+        normalized = ident if labels else re.sub(r'[^\w]', '', name.casefold())
+        duplicate = next((r for r in rows if r['_normalized']==normalized and r['category']==cat and math.hypot((r['lat']-lat)*111000,(r['lon']-lon)*70000)<60),None)
         if ident in seen or duplicate:
             counts['duplicates'] += 1
             if duplicate:
@@ -102,7 +128,9 @@ def clean(elements, boundary, collected_at):
                     if not duplicate.get(key): duplicate[key]=next((tags[k] for k in aliases if tags.get(k)),None)
             continue
         seen.add(ident)
-        rows.append(dict(id=ident, name=name.strip(), name_ru=tags.get('name:ru'), name_kk=tags.get('name:kk'), name_en=tags.get('name:en'), lat=lat, lon=lon, category=cat, tags=tags, description=tags.get('description:ru') or tags.get('description') or '', search_tags=[cat, CATEGORY_TEXT[cat]], opening_hours=tags.get('opening_hours'), phone=tags.get('contact:phone') or tags.get('phone'), website=tags.get('contact:website') or tags.get('website'), rating=None, popularity=None, wheelchair=tags.get('wheelchair','unknown'), socket=tags.get('socket','unknown'), wifi=tags.get('internet_access','unknown'), source=f'https://www.openstreetmap.org/{ident}', collected_at=collected_at, duplicate_osm_ids=[], gold_reviewed=False, _normalized=normalized))
+        if labels: counts['unnamed_labeled'] += 1
+        names = labels or {'ru':tags.get('name:ru'),'kk':tags.get('name:kk'),'en':tags.get('name:en')}
+        rows.append(dict(id=ident, name=name.strip(), name_ru=names['ru'], name_kk=names['kk'], name_en=names['en'], name_generated=bool(labels), lat=lat, lon=lon, category=cat, tags=tags, description=tags.get('description:ru') or tags.get('description') or '', search_tags=[cat, CATEGORY_TEXT[cat]], opening_hours=tags.get('opening_hours'), phone=tags.get('contact:phone') or tags.get('phone'), website=tags.get('contact:website') or tags.get('website'), rating=None, popularity=None, wheelchair=tags.get('wheelchair','unknown'), socket=tags.get('socket','unknown'), wifi=tags.get('internet_access','unknown'), source=f'https://www.openstreetmap.org/{ident}', collected_at=collected_at, duplicate_osm_ids=[], gold_reviewed=False, _normalized=normalized))
     for r in rows: r.pop('_normalized')
     return rows, counts
 

@@ -1,7 +1,7 @@
 {
-  "fingerprint": "d0134d1a6dbb5080130a4b973e077e964bb84945293826d357b21884c2c9ae03",
+  "fingerprint": "07cfb0d272c850b076b26586974ab22d4f2230f4432ddec49771815fe53718a1",
   "responses": {
-    "fa26bb3480aa43721a756c6baec927778ae74976149ed843c69a896c0da8991e": {
+    "187445cd8e66067bbf11ec2943ae66845e38c89e9298b9e7d0fa83518a3675b6": {
       "interpretation": {
         "intent": "discover",
         "duration_min": 60,
@@ -23,6 +23,8 @@
         "language": "ru",
         "group_size": 1,
         "flight_in_min": null,
+        "layover_min": null,
+        "departure_clock": null,
         "route_requested": false,
         "parser": "rules"
       },
@@ -64,7 +66,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
           "lat": 51.0934524,
-          "lon": 71.4175645
+          "lon": 71.4175645,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         },
         {
           "poi_id": "way/1456208624",
@@ -103,7 +108,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
           "lat": 51.0938123,
-          "lon": 71.4169498
+          "lon": 71.4169498,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         },
         {
           "poi_id": "way/1467797207",
@@ -142,7 +150,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом.",
           "lat": 51.0872699,
-          "lon": 71.3994394
+          "lon": 71.3994394,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         }
       ],
       "route": null,
@@ -151,9 +162,11 @@
       "alternative": null,
       "response_type": "recommendations",
       "generation_backend": "template",
-      "retrieval_backend": "e5+lexical"
+      "retrieval_backend": "e5+lexical",
+      "weather": null,
+      "layover": null
     },
-    "cbb30ad34e3c5c3c6aed7b863f3044b704f3e4896f86e8d4c9fefd67436648b1": {
+    "42f2b555d70b47c0ec40c12097782213973b44ba9f2dab4b96e924b7c8803150": {
       "interpretation": {
         "intent": "discover",
         "duration_min": 60,
@@ -177,6 +190,8 @@
         "language": "ru",
         "group_size": 1,
         "flight_in_min": null,
+        "layover_min": null,
+        "departure_clock": null,
         "route_requested": false,
         "parser": "rules"
       },
@@ -218,7 +233,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Розетки: unknown — в данных OSM подтверждения нет. Тишина: unknown — зависит от посетителей; уточните у места.",
           "lat": 51.1293821,
-          "lon": 71.4285934
+          "lon": 71.4285934,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         },
         {
           "poi_id": "node/10564988185",
@@ -257,7 +275,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Розетки: unknown — в данных OSM подтверждения нет. Тишина: unknown — зависит от посетителей; уточните у места.",
           "lat": 51.1285659,
-          "lon": 71.4333254
+          "lon": 71.4333254,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         }
       ],
       "route": null,
@@ -266,9 +287,11 @@
       "alternative": null,
       "response_type": "recommendations",
       "generation_backend": "template",
-      "retrieval_backend": "e5+lexical"
+      "retrieval_backend": "e5+lexical",
+      "weather": null,
+      "layover": null
     },
-    "d5326319932ab4e3cb73ed5a0ceb72a584b1f2413c058cc6a13f52dbc7a49090": {
+    "72d3a0681eecc2396b4ee29fa72d8b20baf5c883c9a88fff6ec6fe19bec08c6f": {
       "interpretation": {
         "intent": "discover",
         "duration_min": 60,
@@ -290,6 +313,8 @@
         "language": "ru",
         "group_size": 1,
         "flight_in_min": null,
+        "layover_min": null,
+        "departure_clock": null,
         "route_requested": false,
         "parser": "rules"
       },
@@ -331,7 +356,52 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
           "lat": 51.1554984,
-          "lon": 71.4319723
+          "lon": 71.4319723,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
+        },
+        {
+          "poi_id": "way/1131138292",
+          "name": "Детская площадка (без названия в OSM)",
+          "category": "playground",
+          "distance_m": 258,
+          "walk_min": 5,
+          "travel_min": 5,
+          "why": "Подходит по запрошенному типу места для прогулки с ребёнком. Путь займёт около 5 мин; на месте — 30 мин.",
+          "visit_min": 30,
+          "what_to_do": "Выберите подходящую по возрасту игру и оставайтесь рядом с ребёнком.",
+          "open_status": {
+            "state": "unknown",
+            "confidence": "low",
+            "basis": "missing_opening_hours",
+            "next_change": null
+          },
+          "source": "poi_data",
+          "idea_source": "generated_idea",
+          "field_sources": {
+            "name": "poi_data",
+            "open_status": "poi_data",
+            "distance_m": "calculated",
+            "travel_min": "calculated",
+            "visit_min": "generated_idea",
+            "what_to_do": "generated_idea",
+            "why": "generated_idea"
+          },
+          "source_url": "https://www.openstreetmap.org/way/1131138292",
+          "collected_at": "2026-10-17T16:30:31.002378+00:00",
+          "data_used": [
+            "примерная локация",
+            "время Астаны",
+            "категория OSM: playground",
+            "часы OSM"
+          ],
+          "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. У объекта нет названия в OSM; подпись составлена по типу места. Часы работы не подтверждены: уточните перед выходом. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
+          "lat": 51.1541436,
+          "lon": 71.423445,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         },
         {
           "poi_id": "way/1460700597",
@@ -370,7 +440,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Часы работы не подтверждены: уточните перед выходом. Возрастные ограничения и интерактивы не подтверждены; проверьте перед визитом.",
           "lat": 51.1492984,
-          "lon": 71.4180805
+          "lon": 71.4180805,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         }
       ],
       "route": null,
@@ -379,9 +452,11 @@
       "alternative": null,
       "response_type": "recommendations",
       "generation_backend": "template",
-      "retrieval_backend": "e5+lexical"
+      "retrieval_backend": "e5+lexical",
+      "weather": null,
+      "layover": null
     },
-    "ff06c33b968bd67f6bc9212980ebede437bc87d9e5ba269125e4208f9ae34d39": {
+    "26d46509959ef914ae33b2996a8952521671fd57b44afc6052bb9860679e1652": {
       "interpretation": {
         "intent": "discover",
         "duration_min": 120,
@@ -407,6 +482,8 @@
         "language": "ru",
         "group_size": 1,
         "flight_in_min": 120,
+        "layover_min": null,
+        "departure_clock": null,
         "route_requested": false,
         "parser": "rules"
       },
@@ -417,9 +494,11 @@
       "alternative": null,
       "response_type": "refusal",
       "generation_backend": "template",
-      "retrieval_backend": "e5+lexical"
+      "retrieval_backend": "e5+lexical",
+      "weather": null,
+      "layover": null
     },
-    "b3b5a8a873de67aba128494de75a7b8d6f265e7ad446e6851394e2e9c131a46f": {
+    "fc33c0b64b82ef7dc7a312b592a9135508152eeb5712bef42f8f9fbaf8c67a6a": {
       "interpretation": {
         "intent": "discover",
         "duration_min": 60,
@@ -431,7 +510,8 @@
           "bar",
           "nightclub",
           "cinema",
-          "theatre"
+          "theatre",
+          "entertainment"
         ],
         "tags": [
           "night",
@@ -447,6 +527,8 @@
         "language": "ru",
         "group_size": 1,
         "flight_in_min": null,
+        "layover_min": null,
+        "departure_clock": null,
         "route_requested": false,
         "parser": "rules"
       },
@@ -488,7 +570,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
           "lat": 51.1293821,
-          "lon": 71.4285934
+          "lon": 71.4285934,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         },
         {
           "poi_id": "node/10564988185",
@@ -527,7 +612,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
           "lat": 51.1285659,
-          "lon": 71.4333254
+          "lon": 71.4333254,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         },
         {
           "poi_id": "node/2826184438",
@@ -566,7 +654,10 @@
           ],
           "caveats": "Путь оценён по прямой с коэффициентом 1,3; входы, переходы и доступность тротуаров не проверены. Ночью выбирайте освещённый путь и заранее продумайте возвращение.",
           "lat": 51.1296521,
-          "lon": 71.4339722
+          "lon": 71.4339722,
+          "shelter": null,
+          "outdoor_min": null,
+          "warm_route": null
         }
       ],
       "route": null,
@@ -575,7 +666,9 @@
       "alternative": null,
       "response_type": "recommendations",
       "generation_backend": "template",
-      "retrieval_backend": "e5+lexical"
+      "retrieval_backend": "e5+lexical",
+      "weather": null,
+      "layover": null
     }
   },
   "notice": "Only five public demo scenarios. Not user history."

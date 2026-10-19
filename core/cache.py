@@ -11,8 +11,8 @@ def data_fingerprint(pois):
 def signature(query,location,now,intent):
     return hashlib.sha256(json.dumps([query,list(location),now.isoformat(),intent.model_dump(exclude={'parser','assumptions'})],sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
-def load_demo(query,location,now,intent,pois):
-    if os.getenv('DEMO_CACHE','0')!='1':return None
+def load_demo(query,location,now,intent,pois,enabled=None):
+    if not (os.getenv('DEMO_CACHE','0')=='1' if enabled is None else enabled):return None
     path=DATA/'demo_cache.json'
     if not path.exists():return None
     try:
