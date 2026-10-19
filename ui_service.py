@@ -2,13 +2,13 @@
 from datetime import datetime, timedelta
 from itertools import combinations
 import math, re, os
-from typing import Literal
+from typing import Annotated, Literal
 from pydantic import Field
 from core.schemas import Strict, Answer, Route, RouteStop
 from core.settings import CONFIG
 from core.hours import local_time
 from core.geo import round_location, haversine
-from core.parse import parse, parse_rules
+from core.parse import parse, parse_rules, requested_duration
 from core.route import build_route, leg_min
 from core import weather as wx, llm
 from core.security import safe_text
@@ -25,7 +25,7 @@ class RecommendRequest(Strict):
     group_size: int = Field(default=1, ge=1, le=20)
     accessible: bool = False
     max_travel_min: int = Field(default=20, ge=1, le=90)
-    history: list[str] = Field(default_factory=list, max_length=6)
+    history: list[Annotated[str, Field(max_length=1500)]] = Field(default_factory=list, max_length=6)
     demo_cache: bool = Field(default_factory=lambda:os.getenv('DEMO_CACHE','0')=='1')
     scenario_id: str | None = None
     weather: Literal['off', 'live', 'mild', 'frost', 'blizzard', 'rain', 'heat'] = 'off'
@@ -73,8 +73,11 @@ def resolve_intent(req, query):
         intent.constraints=list(dict.fromkeys(intent.constraints+['quiet']))
         intent.tags=list(dict.fromkeys(intent.tags+['quiet']))
     if excluded:intent.assumptions.append(COPY[req.language]['excluded']+', '.join(sorted(excluded)))
-    explicit_minutes=re.search(r'\d+\s*(?:[-–]\s*\d+\s*)?(?:мин|minute|hour|час|сағат)',query,re.I)
+    explicit_minutes=requested_duration(query) is not None
     intent.duration_min=min(req.duration_min,current.duration_min) if explicit_minutes and current.intent!='layover' else req.duration_min
+    # A selected UI budget supersedes the parser's 60-minute default assumption.
+    default_budget={'ru':'Бюджет времени:','en':'Time budget:','kk':'Уақыт қоры:'}[req.language]
+    intent.assumptions=[a for a in intent.assumptions if not a.startswith(default_budget)]
     intent.route_requested=True
     return intent,text
 

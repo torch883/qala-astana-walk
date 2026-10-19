@@ -26,21 +26,26 @@ def wants_bar(text,t):
         return True
     return bool(CLUB.search(t))
 
+TRAVEL_TIME=re.compile(r'(?:не (?:дальше|более)|в пути|within|max(?:imum)?|no more than)\s*(\d+)\s*(?:мин\w*|min\w*)')
+
+def requested_duration(text):
+    """Explicit visit budget, excluding the separate one-way travel limit."""
+    t=TRAVEL_TIME.sub('',text.casefold())
+    if contains(t,'полчаса','half an hour','жарты сағат'):return 30
+    match=re.search(r'(\d+)\s*(?:[-–—]\s*(\d+))?\s*-?\s*(час\w*|ч\b|hour\w*|сағат|min\w*|мин\w*|minutes?)',t)
+    if match:
+        return int(match[2] or match[1])*(60 if re.match(r'час|ч\b|hour|сағат',match[3]) else 1)
+    return None
+
 def parse_rules(text,language=None,mode=None,group_size=1,accessible=False,max_travel_min=None):
     t=text.casefold()
     lang=language or detect_language(text)
     duration=CONFIG['default_duration_min']
     assumptions=[]
-    explicit_duration=False
-    travel_match=re.search(r'(?:не (?:дальше|более)|в пути|within|max(?:imum)?|no more than)\s*(\d+)\s*(?:мин\w*|min\w*)',t)
-    duration_text=t[:travel_match.start()]+t[travel_match.end():] if travel_match else t
-    # Last value of a time range is the available budget, e.g. 30–60 minutes.
-    # «8-часовая пересадка» / «8-hour layover»: an optional hyphen may join the number and the unit.
-    time_match=re.search(r'(\d+)\s*(?:[-–—]\s*(\d+))?\s*-?\s*(час\w*|ч\b|hour\w*|сағат|min\w*|мин\w*|minutes?)',duration_text)
-    if time_match:
-        duration=int(time_match[2] or time_match[1])*(60 if re.match(r'час|ч\b|hour|сағат',time_match[3]) else 1)
-        explicit_duration=True
-    if contains(t,'полчаса','half an hour','жарты сағат'): duration=30;explicit_duration=True
+    travel_match=TRAVEL_TIME.search(t)
+    supplied_duration=requested_duration(t)
+    explicit_duration=supplied_duration is not None
+    if explicit_duration:duration=supplied_duration
     # A layover is planned backwards from the departure; its length is not a walking budget.
     layover=contains(t,'пересадк','стыковк','транзит','layover','stopover','ауысып')
     layover_min=min(1440,duration) if layover and explicit_duration else None

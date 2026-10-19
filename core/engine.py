@@ -49,8 +49,8 @@ class Engine:
             if remaining<20:return stop('flight')
             intent.duration_min=min(intent.duration_min,remaining)
         # Exact pre-recorded public demo scenarios only, never persistent user-query caching.
-        # The cache was recorded without weather, so it is skipped whenever weather changes the ranking.
-        if use_cache and (weather is None or weather.level=='ok'):
+        # Recorded answers have no weather context; even mild weather must remain visible.
+        if use_cache and weather is None:
             from core.cache import load_demo
             cached=load_demo(query,location,now,intent,self.pois,enabled=cache_on) if deadline is None else None
             if cached:

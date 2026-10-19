@@ -1,4 +1,5 @@
-import {translations,presetNames} from './i18n.js?v=answer-first';
+import {translations,presetNames} from './i18n.js?v=demo-ready';
+import {cleanSaved,readSaved,SAVED_KEY} from './saved.mjs';
 
 const $=id=>document.getElementById(id);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -151,10 +152,12 @@ async function longLayover(){
 }
 
 function renderDeadline(){
-  const banner=$('deadline-banner');banner.hidden=state.page!=='layover'&&!state.result?.presentation.deadline;
+  const banner=$('deadline-banner');
+  const refused=state.result&&!state.result.answer.recommendations.length&&!state.result.answer.layover;
+  banner.hidden=!!refused||(state.page!=='layover'&&!state.result?.presentation.deadline);
   if(banner.hidden)return;
   const p=state.result?.presentation,plan=state.result?.answer.layover;
-  const deadline=p?.deadline||localISO(new Date(departureISO()).getTime()-(120+Number($('transfer').value))*60000);
+  const deadline=p?.deadline||localISO(new Date(departureISO()).getTime()-((state.reserve??120)+Number($('transfer').value))*60000);
   const base=p?.now||nowISO(),elapsed=p?Date.now()-state.startedAt:0;
   const left=Math.max(0,Math.floor((new Date(deadline).getTime()-new Date(base).getTime()-elapsed)/1000));
   const remaining=`${String(Math.floor(left/3600)).padStart(2,'0')}:${String(Math.floor(left%3600/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}`;
@@ -169,12 +172,11 @@ async function renderMap(){
   const origin=state.savedResult?null:state.result?.presentation.origin||($('start').value==='map'?state.location:state.presets.find(p=>p.id===$('start').value)?.location)||[51.128,71.43];
   if(!state.map){
     state.map=L.map('map',{zoomControl:true,scrollWheelZoom:false}).setView(origin||[51.128,71.43],14);
-    // CARTO's raster endpoint returned "API KEY REQUIRED" tiles during QA.
-    // The checked-in OSM street/river snapshot is an honest offline dark basemap.
+    // The checked-in OSM street/river snapshot works without external tile services.
     state.map.attributionControl.addAttribution('© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>');
     state.map.createPane('context');state.map.getPane('context').style.zIndex=200;state.map.getPane('context').setAttribute('aria-hidden','true');
     state.mapLayer=L.layerGroup().addTo(state.map);
-    state.map.on('click',event=>{state.location=rounded([event.latlng.lat,event.latlng.lng]);state.customPoint=true;$('start').value='map';state.result=null;state.history=[];notice(t('pointSelected'));renderMap();});
+    state.map.on('click',event=>{state.location=rounded([event.latlng.lat,event.latlng.lng]);state.customPoint=true;$('start').value='map';state.result=null;state.history=[];notice(t('pointSelected'));render();renderDeadline();});
     try{const response=await fetch('/api/map-context');if(!response.ok)throw new Error();const geo=await response.json();L.geoJSON(geo,{pane:'context',style:f=>({color:f.properties?.kind==='river'?'#305364':'#43535b',weight:f.properties?.kind==='river'?9:2,opacity:.8}),onEachFeature:(f,layer)=>{if(f.properties?.name)layer.bindTooltip(document.createTextNode(f.properties.name),{sticky:true});}}).addTo(state.map);}catch{$('tile-warning').hidden=false;}
   }
   state.map.invalidateSize();state.mapLayer.clearLayers();
@@ -186,19 +188,19 @@ async function renderMap(){
   else if(origin)state.map.setView(origin,14);
 }
 
-function savedItems(){try{const parsed=JSON.parse(localStorage.getItem('qala:saved:v1')||'[]');return Array.isArray(parsed)?parsed.slice(0,30):[];}catch{return [];}}
-function writeSaved(items){try{localStorage.setItem('qala:saved:v1',JSON.stringify(items.slice(0,30)));toast(t('savedToast'));return true;}catch{toast(t('saveFailed'));return false;}}
+function savedItems(){try{return readSaved(localStorage);}catch{return [];}}
+function writeSaved(items){try{localStorage.setItem(SAVED_KEY,JSON.stringify(cleanSaved(items)));toast(t('savedToast'));return true;}catch{toast(t('saveFailed'));return false;}}
 function saveItem(poiId=null){
   if(!state.result)return;
   const recs=poiId?state.result.answer.recommendations.filter(r=>r.poi_id===poiId):orderedRecs();if(!recs.length)return;
   // Persist only explicitly saved public POI data. Never store origin, query, history, debug or deadline.
-  const item={id:poiId||'route:'+recs.map(r=>r.poi_id).join('|'),kind:poiId?'place':'route',title:poiId?recs[0].name:state.result.presentation.title,recommendations:recs};
+  const [item]=cleanSaved([{kind:poiId?'place':'route',recommendations:recs}]);if(!item)return;
   writeSaved([item,...savedItems().filter(x=>x.id!==item.id)]);
 }
 function renderSaved(){
   const items=savedItems();
   if(!items.length){$('saved-view').innerHTML=`<div class="saved-empty"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M6 3h16v23l-8-7-8 7z"/></svg><h1>${t('savedEmpty')}</h1><p>${t('savedHint')}</p><button class="outline-button" data-suggest="walk">${t('newWalk')}</button></div>`;return;}
-  $('saved-view').innerHTML=`<h1 class="saved-heading">${t('savedTitle')}</h1><p class="small-text">${t('savedLocal')}</p>${items.map((item,n)=>`<article class="saved-item"><h3>${esc(item.title)}</h3><p>${(item.recommendations||[]).map(r=>esc(r.name)).join(' · ')}</p><button class="outline-button" data-saved-show="${n}">${t('view')}</button><button class="outline-button" data-saved-remove="${n}">${t('remove')}</button><div id="saved-detail-${n}" hidden><ol class="stops">${(item.recommendations||[]).map((r,i)=>recHTML(r,i,'saved-'+n)).join('')}</ol></div></article>`).join('')}`;
+  $('saved-view').innerHTML=`<h1 class="saved-heading">${t('savedTitle')}</h1><p class="small-text">${t('savedLocal')}</p>${items.map((item,n)=>`<article class="saved-item"><h3>${esc(item.title)}</h3><button class="outline-button" data-saved-show="${n}" aria-expanded="false" aria-controls="saved-detail-${n}">${t('view')}</button><button class="outline-button" data-saved-remove="${n}">${t('remove')}</button><div id="saved-detail-${n}" hidden><p class="unknown-status">${esc(t('savedResult'))}</p>${item.recommendations.map(r=>`<div class="stop-details"><h3>${esc(r.name)}</h3><p>${esc(t('category')[r.category]||r.category)} · ${t('updated')}: ${esc(r.collected_at.slice(0,10))}</p><a href="${esc(safeSource(r.source_url))}" target="_blank" rel="noopener noreferrer">${t('source')} ↗</a></div>`).join('')}</div></article>`).join('')}`;
 }
 
 function showRAG(){
@@ -209,10 +211,11 @@ function showRAG(){
   $('rag-content').innerHTML=`<h3>${t('constraints')}</h3><pre>${esc(JSON.stringify(interpreted,null,2))}</pre><h3>${t('pipeline')}</h3><p>${t('total')}: ${d.total_pois??'—'} · ${t('accepted')}: ${d.accepted??0}<br>${esc(d.retrieval_backend||a.retrieval_backend)} · ${d.elapsed_ms??0} ms</p><p>${t('generation')}: ${esc(t(a.generation_backend))}<br>${t('titleSource')}: ${esc(t(state.result.presentation.title_source))}<br>${t('history')}: ${d.history_turns||0}</p>
   <h3>${t('candidates')}</h3><table><thead><tr><th>${t('place')}</th><th>${t('score')}</th></tr></thead><tbody>${(d.candidates||[]).map(c=>`<tr><td>${esc(c.name)}<br><small>${c.travel_min} ${t('minute')} · ${esc(t('category')[c.category]||c.category)}</small></td><td>${c.score}</td></tr>`).join('')}</tbody></table>
   <h3>${t('rejections')}</h3><p>${Object.entries(d.rejected_counts||{}).map(([k,v])=>`${esc(reason(k))}: ${v}`).join(' · ')}</p><table>${(d.rejections||[]).slice(0,15).map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(reason(r.reason))}</td></tr>`).join('')}</table><h3>${t('dataUsed')}</h3><p>${esc([...new Set(a.recommendations.flatMap(r=>r.data_used))].join(' · ')||t('now'))}</p>${a.message?`<p>${esc(a.message)}</p>`:''}${d.weather_warning?`<p>${esc(d.weather_warning)}</p>`:''}`;
+  if(d.retrieval_warning){const p=document.createElement('p');p.className='unknown-status';p.textContent=t('lexicalFallback');$('rag-content').append(p);}
   $('rag-dialog').showModal();
 }
 async function report(poiId){try{const response=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({poi_id:poiId,reason:'other'})});if(!response.ok)throw new Error();toast(t('feedback'));}catch{toast(t('networkError'));}}
-function updateDataStatus(){if(state.quality)$('data-status').textContent=`${state.quality.count.toLocaleString(state.lang)} ${t('total')} · OSM · ${state.quality.collected_at.slice(0,10)} · E5 / FAISS`;}
+function updateDataStatus(){if(state.quality){const semantic=state.runtime?.retrieval_backend==='e5+lexical';$('data-status').textContent=`${state.quality.count.toLocaleString(state.lang)} ${t('total')} · OSM · ${state.quality.collected_at.slice(0,10)} · ${semantic?'E5 / FAISS + TF-IDF':t('lexicalFallback')}`;}}
 
 document.addEventListener('click',event=>{
   const el=event.target.closest('button');if(!el)return;
@@ -223,13 +226,13 @@ document.addEventListener('click',event=>{
   if(el.dataset.saveStop)saveItem(el.dataset.saveStop);
   if(el.dataset.report)report(el.dataset.report);
   if(el.dataset.savedRemove!==undefined){const items=savedItems();items.splice(Number(el.dataset.savedRemove),1);writeSaved(items);renderSaved();toast(t('removed'));}
-  if(el.dataset.savedShow!==undefined){const panel=$('saved-detail-'+el.dataset.savedShow);panel.hidden=!panel.hidden;}
+  if(el.dataset.savedShow!==undefined){const panel=$('saved-detail-'+el.dataset.savedShow);panel.hidden=!panel.hidden;el.setAttribute('aria-expanded',String(!panel.hidden));}
   if(el.dataset.suggest==='layover')longLayover();
   if(el.dataset.suggest==='walk')quickScenario(0);
   if(el.dataset.suggest==='retry')request(state.lastQuery||t('walk'),state.lastScenario);
 });
-$('parameters').addEventListener('submit',event=>{event.preventDefault();request(state.lastQuery||t('walk'));});
-$('chat-form').addEventListener('submit',event=>{event.preventDefault();const query=$('query').value.trim();if(query){$('query').value='';request(query);}});
+$('parameters').addEventListener('submit',event=>{event.preventDefault();showAnswer(request(state.lastQuery||t('walk')));});
+$('chat-form').addEventListener('submit',event=>{event.preventDefault();const query=$('query').value.trim();if(query){$('query').value='';showAnswer(request(query));}});
 $('language').addEventListener('change',()=>{const hadResult=!!state.result;setLanguage($('language').value);if(hadResult&&state.page!=='saved'){state.history=[];request(state.lastQuery||t('walk'));}});
 $('demo-time').addEventListener('input',()=>{$('time-output').textContent=clock(Number($('demo-time').value));renderDeadline();});
 for(const id of ['demo-date','demo-time','group','weather','accessible','demo-cache','start','duration','departure','transfer'])$(id).addEventListener('change',()=>{if(id==='start'){state.location=null;state.customPoint=false;if($('start').value==='map'){setView('map');notice(t('pickPoint'));return;}}notice(t('dirty'));renderDeadline();});
@@ -242,4 +245,4 @@ document.querySelector('.segments').addEventListener('keydown',event=>{if(['Arro
 setInterval(renderDeadline,1000);
 $('demo-date').value=today();$('jury-panel').open=window.matchMedia('(min-width:900px)').matches;
 setLanguage('ru');
-try{const response=await fetch('/api/presets');if(!response.ok)throw new Error();const data=await response.json();state.presets=data.presets;state.scenarios=data.scenarios;state.quality=data.quality;$('demo-cache').checked=data.demo_cache;updateDataStatus();}catch{notice(t('offlineData'));}
+try{const response=await fetch('/api/presets');if(!response.ok)throw new Error();const data=await response.json();state.presets=data.presets;state.scenarios=data.scenarios;state.quality=data.quality;state.runtime=data.runtime;state.reserve=data.airport_reserve_min;$('demo-cache').checked=data.demo_cache;updateDataStatus();}catch{notice(t('offlineData'));}

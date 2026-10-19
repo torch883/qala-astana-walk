@@ -14,6 +14,7 @@ from core.engine import Engine
 from core.schemas import Answer, Strict
 from core.settings import ROOT, DATA, CONFIG
 from core.hours import TZ
+from core import llm
 from eval.run_eval import scenarios
 from ui_service import RecommendRequest, UIResponse, recommend
 
@@ -42,12 +43,22 @@ async def validation_error(request,error):
     # Do not echo locations or query contents in error bodies/logs.
     return JSONResponse(status_code=422,content={'detail':'invalid_request','fields':['.'.join(str(p) for p in e['loc']) for e in error.errors()]})
 
+def runtime_status(engine):
+    return {'ready':True,'poi_count':len(engine.pois),
+            'retrieval_backend':engine.retriever.backend,'retrieval_warning':engine.retriever.warning,
+            'generation_mode':'gemini_configured' if llm.enabled() else 'local_templates'}
+
+@app.get('/api/health')
+def health(request:Request):
+    return runtime_status(request.app.state.engine)
+
 @app.get('/api/presets')
-def presets():
+def presets(request:Request):
     return {'presets':[{'id':name,'location':value} for name,value in CONFIG['presets'].items()],
             'scenarios':[{k:c[k] for k in ['id','query','preset','now','language']} for c in PUBLIC_SCENARIOS],
             'now':datetime.now(TZ).isoformat(),'quality':json.loads((DATA/'quality.json').read_text(encoding='utf-8')),
-            'airport_reserve_min':CONFIG['layover']['return_reserve_min'],'demo_cache':os.getenv('DEMO_CACHE','0')=='1'}
+            'airport_reserve_min':CONFIG['layover']['return_reserve_min'],'demo_cache':os.getenv('DEMO_CACHE','0')=='1',
+            'runtime':runtime_status(request.app.state.engine)}
 
 @app.post('/api/recommend',response_model=Answer|UIResponse)
 def recommendations(body:RecommendRequest,request:Request,details:bool=False):
